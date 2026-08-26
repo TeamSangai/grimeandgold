@@ -1,0 +1,13 @@
+// 26.2	-999999999-01-01T00:00:00	GrimeAndGold/Model Definitions
+664fb309f285484c42cd045fc0a958dadf7869f8 assets/grimeandgold/blockstates/grime.json
+a78c48c027f7559088c2137c7f19d851f618ae03 assets/grimeandgold/blockstates/paydirt.json
+ba1c617526621d63555643f74c84f734f2f03061 assets/grimeandgold/items/copper_sift.json
+e2d6e491969d99a907ef3d4c216a4d9ef3000287 assets/grimeandgold/items/copper_sift_filled_grime.json
+7195d0d3432fc5f291f59ccc963904581facda0a assets/grimeandgold/items/diamond_shard.json
+0902222da84a077ba6371e02fb1d8d17fd8eafac assets/grimeandgold/items/grime.json
+17c43b2b12f91399f67f7375b6400aa4d59c167a assets/grimeandgold/items/paydirt.json
+ab41dcc6336cf647246901fbb96c1ca8b79b17eb assets/grimeandgold/models/block/grime.json
+0eb203f2ae977d5880c28061e136d632d33cafa8 assets/grimeandgold/models/block/paydirt.json
+6654b7692824a46c0257d45650ad878b40748316 assets/grimeandgold/models/item/copper_sift.json
+3ca83c58a66dad942a2b7042b0a807b323b8e22c assets/grimeandgold/models/item/copper_sift_filled_grime.json
+eb0d9689099eb960ccef40435bd128850ce7a793 assets/grimeandgold/models/item/diamond_shard.json

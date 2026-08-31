@@ -26,7 +26,7 @@ public class EmptyCopperSiftItem extends Item {
             // We are on the Server!
 
             level.setBlockAndUpdate(context.getClickedPos(), Blocks.AIR.defaultBlockState());
-            level.playSound(context.getPlayer(), context.getClickedPos(), SoundEvents.MUD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+            level.playSound(null, context.getClickedPos(), SoundEvents.MUD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
             assert context.getPlayer() != null;
             context.getItemInHand().consume(1, context.getPlayer());
             context.getPlayer().addItem(ModItems.COPPER_SIFT_FULL_GRIME.getDefaultInstance());

@@ -1,0 +1,92 @@
+{
+  "type": "generic",
+  "functions": [{
+
+  }],
+  "pools": [{
+    "rolls": 3,
+    "bonus_rolls": 1.0,
+    "entries": [{
+      "type": "minecraft:item",
+      "functions": [{
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 3.0,
+            "min": 1.0
+          },
+          "function": "minecraft:set_count"
+        }],
+      "name": "minecraft:iron_nugget",
+      "weight": 2
+      },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 2.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:copper_nugget",
+      "weight": 6
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": 1,
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:dirt",
+      "weight": 16
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:wheat_seeds",
+      "weight": 25
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:beetroot_seeds",
+      "weight": 25
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:melon_seeds",
+      "weight": 25
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:pumpkin_seeds",
+      "weight": 25
+    }]
+  }],
+  "random_sequence": "grimeandgold:sifting/grime"
+}

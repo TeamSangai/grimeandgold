@@ -7,6 +7,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
 
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,4 @@ public class GrimeAndGold implements ModInitializer {
 		ModBlocks.registerModBlocks();
 	}
 
-	public static Identifier id(String path) {
-		return Identifier.fromNamespaceAndPath(MOD_ID, path);
-	}
 }

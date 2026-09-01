@@ -6,12 +6,14 @@ import geoves.grimeandgold.items.ModItems;
 import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -33,6 +35,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import org.apache.logging.log4j.core.config.builder.api.Component;
 import org.jspecify.annotations.NonNull;
 
 import java.util.List;
@@ -84,7 +87,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
                     level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, placedState));
                     assert player != null;
                     itemStack.consume(1, player);
-                    player.addItem(ModItems.COPPER_SIFT_EMPTY.getDefaultInstance());
+                    if (!player.isCreative()) {player.addItem(ModItems.COPPER_SIFT_EMPTY.getDefaultInstance());}
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -115,9 +118,9 @@ public class CopperSiftFullGrimeItem extends BlockItem {
             for(ItemStack loot : items) {
                 player.addItem(loot);
             }
-            itemStack.consume(1, player);
-            player.addItem(ModItems.COPPER_SIFT_EMPTY.getDefaultInstance());
-            return itemStack;
+            ItemStack newsift = new ItemStack(ModItems.COPPER_SIFT_EMPTY);
+            newsift.hurtAndBreak(1 + itemStack.getDamageValue(), player, player.getUsedItemHand());;
+            return newsift;
         }
         return itemStack;
     }

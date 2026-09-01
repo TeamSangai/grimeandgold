@@ -5,9 +5,6 @@ import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.resources.Identifier;
-
-import net.minecraft.world.level.storage.loot.LootTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

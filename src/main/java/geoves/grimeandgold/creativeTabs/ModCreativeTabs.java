@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class ModCreativeTabs {
     public static final CreativeModeTab GRIMEANDGOLD_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
-            Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "fluorite_blocks"),
+            Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "grimeandgold"),
             FabricCreativeModeTab.builder().icon(() -> new ItemStack(ModItems.COPPER_SIFT_FULL_GRIME))
                     .title(Component.translatable("creativemodetab.grimeandgold.grimeandgold"))
                     .displayItems((parameters, output) -> {

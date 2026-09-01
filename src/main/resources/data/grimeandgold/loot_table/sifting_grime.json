@@ -1,8 +1,5 @@
 {
   "type": "generic",
-  "functions": [{
-
-  }],
   "pools": [{
     "rolls": 3,
     "bonus_rolls": 1.0,
@@ -88,5 +85,5 @@
       "weight": 25
     }]
   }],
-  "random_sequence": "grimeandgold:sifting/grime"
+  "random_sequence": "grimeandgold:sifting_grime"
 }

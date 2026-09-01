@@ -2,10 +2,13 @@ package geoves.grimeandgold.items.custom;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.items.ModItems;
-import geoves.grimeandgold.loot_table.ModLootTables;
+
 import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +16,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -35,7 +38,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 
 public class CopperSiftFullGrimeItem extends BlockItem {
-    public static final Identifier GRIME_LOOT = Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "sift/grime_loot");
+    public static final ResourceKey<LootTable> GRIME_LOOT = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "sifting_grime"));
 
     public CopperSiftFullGrimeItem(Block block, Properties properties) {
         super(block, properties);
@@ -107,7 +110,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
     public ItemStack finishUsingItem(final ItemStack itemStack, final @NonNull Level level, final @NonNull LivingEntity entity) {
         if (entity instanceof Player player && !level.isClientSide()) {
             LootParams params = (new LootParams.Builder((ServerLevel) level).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).withLuck(entity.getLuck()).create(LootContextParamSets.COMMAND));
-            LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(ModLootTables.SIFTING_GRIME);
+            LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(GRIME_LOOT);
             List<ItemStack> items = lootTable.getRandomItems(params, level.getRandom());
             for(ItemStack loot : items) {
                 player.addItem(loot);

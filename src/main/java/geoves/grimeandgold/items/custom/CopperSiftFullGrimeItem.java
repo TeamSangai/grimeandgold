@@ -106,13 +106,12 @@ public class CopperSiftFullGrimeItem extends BlockItem {
     @Override
     public ItemStack finishUsingItem(final ItemStack itemStack, final @NonNull Level level, final @NonNull LivingEntity entity) {
         if (entity instanceof Player player && !level.isClientSide()) {
-            //LootParams params = (new LootParams.Builder((ServerLevel) level).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).withLuck(entity.getLuck()).create(LootContextParamSets.COMMAND));
-            //LootTable lootTable = level.getServer().reloadableRegistries().getLootTable( //{ResourceKey}// );
-            //List<ItemStack> items = lootTable.getRandomItems(params);
-            //for(ItemStack loot : items) {
-            //    ItemEntity loot_entity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), loot);
-            //    player.level().addFreshEntity(loot_entity);
-            //}
+            LootParams params = (new LootParams.Builder((ServerLevel) level).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.THIS_ENTITY, entity).withLuck(entity.getLuck()).create(LootContextParamSets.COMMAND));
+            LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(ModLootTables.SIFTING_GRIME);
+            List<ItemStack> items = lootTable.getRandomItems(params, level.getRandom());
+            for(ItemStack loot : items) {
+                player.addItem(loot);
+            }
             itemStack.consume(1, player);
             player.addItem(ModItems.COPPER_SIFT_EMPTY.getDefaultInstance());
             return itemStack;

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "": [{
+      "model": "grimeandgold:block/goldrust"
+    },{
+      "model": "grimeandgold:block/goldrust",
+      "y": 90
+    },{
+      "model": "grimeandgold:block/goldrust",
+      "y": 180
+    },{
+      "model": "grimeandgold:block/goldrust",
+      "y": 270
+    }]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "generic",
+  "pools": [{
+    "rolls": 3,
+    "bonus_rolls": 1.0,
+    "entries": [{
+      "type": "minecraft:item",
+      "functions": [{
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 5.0,
+            "min": 1.0
+          },
+          "function": "minecraft:set_count"
+        }],
+      "name": "minecraft:iron_nugget",
+      "weight": 16
+      },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": 1,
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:raw_iron",
+      "weight": 2
+    }]
+  }],
+  "random_sequence": "grimeandgold:sifting_grime"
+}

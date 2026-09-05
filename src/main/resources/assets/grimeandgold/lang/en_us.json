@@ -1,9 +1,11 @@
 {
   "item.grimeandgold.diamond_shard": "Diamond Shard",
   "item.grimeandgold.copper_sift": "Copper Sift", "item.grimeandgold.copper_sift_filled_grime": "Grime Filled Copper Sift",
+  "item.grimeandgold.copper_sift_filled_ferrisoil": "Ferrisoil Filled Copper Sift", "item.grimeandgold.copper_sift_filled_goldrust": "Goldrust Filled Copper Sift",
 
 
   "block.grimeandgold.grime": "Grime", "block.grimeandgold.paydirt": "Paydirt",
+  "block.grimeandgold.goldrust": "Goldrust", "block.grimeandgold.ferrisoil": "Ferrisoil",
 
   "creativemodetab.grimeandgold.grimeandgold": "Grime And Gold"
 }

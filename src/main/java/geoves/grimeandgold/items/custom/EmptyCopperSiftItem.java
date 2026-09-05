@@ -1,23 +1,17 @@
 package geoves.grimeandgold.items.custom;
 
 
+import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.interfaces.SiftPickup;
 import geoves.grimeandgold.items.ModItems;
-import geoves.grimeandgold.tags.ModTags;
-import net.minecraft.advancements.triggers.CriteriaTriggers;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
+import org.jspecify.annotations.NonNull;
 
 public class EmptyCopperSiftItem extends Item {
 
@@ -25,26 +19,26 @@ public class EmptyCopperSiftItem extends Item {
         super(properties);
     }
 
+
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public @NonNull InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
-        Block clickedBlock = level.getBlockState(context.getClickedPos()).getBlock();
-        if (clickedBlock.defaultBlockState().is(ModTags.Blocks.SIFTABLE_GRIME) && !level.isClientSide()) {
-            BlockState blockState = level.getBlockState(context.getClickedPos());
-            Block var13 = blockState.getBlock();
-            if (var13 instanceof SiftPickup) {
-                SiftPickup siftPickupBlock = (SiftPickup) var13;
-                ItemStack taken = siftPickupBlock.pickupBlock(context.getPlayer(), level, context.getClickedPos(), blockState);
-                if (!taken.isEmpty()) {
-                    assert context.getPlayer() != null;
-                    siftPickupBlock.getPickupSound().ifPresent((soundEvent) -> context.getPlayer().playSound(soundEvent, 1.0F, 1.0F));
-                    level.gameEvent(context.getPlayer(), GameEvent.FLUID_PICKUP, context.getClickedPos());
-                    ItemStack result = ItemUtils.createFilledResult(context.getItemInHand(), context.getPlayer(), taken);
-                    return InteractionResult.SUCCESS.heldItemTransformedTo(result);
-                }
+        if (!level.isClientSide()) {
+        BlockState blockState = level.getBlockState(context.getClickedPos());
+        Block var13 = blockState.getBlock();
+        if (var13 instanceof SiftPickup siftPickupBlock) {
+            ItemStack taken = siftPickupBlock.pickupBlock(context.getPlayer(), level, context.getClickedPos(), blockState);
+            if (!taken.isEmpty()) {
+                assert context.getPlayer() != null;
+                ItemStack product = ItemUtils.createFilledResult(context.getItemInHand(), context.getPlayer(), taken);
+                GrimeAndGold.LOGGER.info(product.toString());
+                return InteractionResult.SUCCESS.heldItemTransformedTo(product);
+            }
+            else {
+                return InteractionResult.FAIL;
             }
         }
-        else {return InteractionResult.FAIL;};
+        return InteractionResult.PASS;}
         return InteractionResult.PASS;
     }
 }

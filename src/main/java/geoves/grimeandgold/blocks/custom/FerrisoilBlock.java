@@ -1,19 +1,17 @@
 package geoves.grimeandgold.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
-import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.interfaces.SiftPickup;
 import geoves.grimeandgold.items.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MudBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -23,15 +21,15 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
-public class GrimeBlock extends Block implements SiftPickup {
+public class FerrisoilBlock extends Block implements SiftPickup {
     public static final MapCodec<MudBlock> CODEC = simpleCodec(MudBlock::new);
-    private static final VoxelShape SHAPE = Block.column((double)16.0F, (double)0.0F, (double)14.0F);
+    private static final VoxelShape SHAPE = Block.column((double)16.0F, (double)0.0F, (double)16.0F);
 
     public MapCodec<MudBlock> codec() {
         return CODEC;
     }
 
-    public GrimeBlock(final BlockBehaviour.Properties properties) {
+    public FerrisoilBlock(final Properties properties) {
         super(properties);
     }
 
@@ -57,13 +55,11 @@ public class GrimeBlock extends Block implements SiftPickup {
 
     @Override
     public ItemStack pickupBlock(@Nullable LivingEntity user, LevelAccessor level, BlockPos pos, BlockState state) {
-        GrimeAndGold.LOGGER.info("pickup sent");
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
         if (!level.isClientSide()) {
             level.levelEvent(2001, pos, Block.getId(state));
         }
-        assert user != null;
-        return new ItemStack(ModItems.COPPER_SIFT_FULL_GRIME);
+        return new ItemStack(ModItems.COPPER_SIFT_FULL_FERRISOIL);
     }
 
     @Override

@@ -19,6 +19,8 @@ public class ModCreativeTabs {
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.COPPER_SIFT_EMPTY);
                         output.accept(ModItems.COPPER_SIFT_FULL_GRIME);
+                        output.accept(ModItems.COPPER_SIFT_FULL_FERRISOIL);
+                        output.accept(ModItems.COPPER_SIFT_FULL_GOLDRUST);
                         output.accept(ModBlocks.PAYDIRT);
                         output.accept(ModItems.DIAMOND_SHARD);
 

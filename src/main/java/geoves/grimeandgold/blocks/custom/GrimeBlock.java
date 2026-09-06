@@ -57,7 +57,6 @@ public class GrimeBlock extends Block implements SiftPickup {
 
     @Override
     public ItemStack pickupBlock(@Nullable LivingEntity user, LevelAccessor level, BlockPos pos, BlockState state) {
-        GrimeAndGold.LOGGER.info("pickup sent");
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
         if (!level.isClientSide()) {
             level.levelEvent(2001, pos, Block.getId(state));

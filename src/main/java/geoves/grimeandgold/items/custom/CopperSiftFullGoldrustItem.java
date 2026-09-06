@@ -49,6 +49,12 @@ public class CopperSiftFullGoldrustItem extends BlockItem {
         assert player != null;
         return (!player.isInFluid(FluidTags.WATER) && !this.mustSurvive() || !player.isInFluid(FluidTags.WATER) && stateForPlacement.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(stateForPlacement, context.getClickedPos(), CollisionContext.placementContext(player));
     }
+
+    public static ItemStack getEmptySuccessItem(final ItemStack itemStack, final Player player) {
+        return !player.hasInfiniteMaterials() ? new ItemStack(ModItems.COPPER_SIFT_EMPTY) : itemStack;
+    }
+
+
     @Override
     public InteractionResult place(final BlockPlaceContext placeContext) {
         if (!this.getBlock().isEnabled(placeContext.getLevel().enabledFeatures())) {
@@ -78,13 +84,13 @@ public class CopperSiftFullGoldrustItem extends BlockItem {
                             CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos, itemStack);
                         }
                     }
-
+                    int durability = itemStack.getDamageValue();
                     SoundType soundType = placedState.getSoundType();
                     level.playSound(null, pos, this.getPlaceSound(placedState), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
                     level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, placedState));
                     assert player != null;
-                    itemStack.consume(1, player);
-                    if (!player.isCreative()) {player.addItem(ModItems.COPPER_SIFT_EMPTY.getDefaultInstance());}
+                    player.setItemInHand(player.getUsedItemHand(), getEmptySuccessItem(itemStack, player));
+                    player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
                     return InteractionResult.SUCCESS;
                 }
             }

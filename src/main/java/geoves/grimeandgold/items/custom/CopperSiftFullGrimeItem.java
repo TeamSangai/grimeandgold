@@ -1,6 +1,7 @@
 package geoves.grimeandgold.items.custom;
 
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.blocks.custom.GrimeBlock;
 import geoves.grimeandgold.items.ModItems;
 
 import net.minecraft.advancements.triggers.CriteriaTriggers;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -46,12 +48,18 @@ public class CopperSiftFullGrimeItem extends BlockItem {
     public CopperSiftFullGrimeItem(Block block, Properties properties) {
         super(block, properties);
     }
+
     @Override
     protected boolean canPlace(final BlockPlaceContext context, final BlockState stateForPlacement) {
         Player player = context.getPlayer();
         assert player != null;
         return (!player.isInFluid(FluidTags.WATER) && !this.mustSurvive() || !player.isInFluid(FluidTags.WATER) && stateForPlacement.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(stateForPlacement, context.getClickedPos(), CollisionContext.placementContext(player));
     }
+
+    public static ItemStack getEmptySuccessItem(final ItemStack itemStack, final Player player) {
+        return !player.hasInfiniteMaterials() ? new ItemStack(ModItems.COPPER_SIFT_EMPTY) : itemStack;
+    }
+
     @Override
     public InteractionResult place(final BlockPlaceContext placeContext) {
         if (!this.getBlock().isEnabled(placeContext.getLevel().enabledFeatures())) {
@@ -82,12 +90,13 @@ public class CopperSiftFullGrimeItem extends BlockItem {
                         }
                     }
 
+                    int durability = itemStack.getDamageValue();
                     SoundType soundType = placedState.getSoundType();
                     level.playSound(null, pos, this.getPlaceSound(placedState), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
                     level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, placedState));
                     assert player != null;
-                    itemStack.consume(1, player);
-                    if (!player.isCreative()) {player.addItem(ModItems.COPPER_SIFT_EMPTY.getDefaultInstance());}
+                    player.setItemInHand(player.getUsedItemHand(), getEmptySuccessItem(itemStack, player));
+                    player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
                     return InteractionResult.SUCCESS;
                 }
             }

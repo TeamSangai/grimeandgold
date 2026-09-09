@@ -1,7 +1,9 @@
 package geoves.grimeandgold;
 
 import geoves.grimeandgold.blocks.ModBlocks;
+import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
+import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -20,8 +22,11 @@ public class GrimeAndGold implements ModInitializer {
 	public void onInitialize() {
 		ModCreativeTabs.registerModCreativeModeTabs();
 
+		ModEntityTypes.registerModEntityTypes();
+		ModEntityTypes.registerAttributes();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModBlockEntities.registerBlockEntities();
 	}
 
 }

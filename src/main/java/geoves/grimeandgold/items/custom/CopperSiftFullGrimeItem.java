@@ -107,7 +107,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
 
     @Override
     public int getUseDuration(final ItemStack itemStack, final LivingEntity user) {
-        return 175;
+        return 75;
     }
 
     @Override

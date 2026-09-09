@@ -5,7 +5,9 @@ import geoves.grimeandgold.tags.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.Identifier;
 
 
 import java.util.Objects;
@@ -18,7 +20,5 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
-        builder(ModTags.Blocks.SIFTABLE_GRIME)
-                .add(Objects.requireNonNull(ModBlocks.GRIME.properties().blockId()));
     }
 }

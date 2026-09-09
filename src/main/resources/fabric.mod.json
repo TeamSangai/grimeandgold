@@ -18,6 +18,9 @@
 		"main": [
 			"geoves.grimeandgold.GrimeAndGold"
 		],
+		"client":[
+			"geoves.grimeandgold.GrimeAndGoldClient"
+		],
 		"fabric-datagen": [
 			"geoves.grimeandgold.GrimeAndGoldDataGenerator"
 		]

@@ -1,33 +1,38 @@
 package geoves.grimeandgold.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
-import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.interfaces.SiftPickup;
 import geoves.grimeandgold.items.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
 public class GrimeBlock extends Block implements SiftPickup {
-    public static final MapCodec<MudBlock> CODEC = simpleCodec(MudBlock::new);
-    private static final VoxelShape SHAPE = Block.column((double)16.0F, (double)0.0F, (double)14.0F);
+    public static final MapCodec<GrimeBlock> CODEC = simpleCodec(GrimeBlock::new);
+    private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 14.0F);
 
-    public MapCodec<MudBlock> codec() {
+    public MapCodec<GrimeBlock> codec() {
         return CODEC;
     }
 
@@ -37,6 +42,16 @@ public class GrimeBlock extends Block implements SiftPickup {
 
     protected VoxelShape getCollisionShape(final BlockState state, final BlockGetter level, final BlockPos pos, final CollisionContext context) {
         return SHAPE;
+    }
+
+    @Override
+    protected @NonNull InteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (itemStack.is(ItemTags.SHOVELS)) {
+            assert !level.isClientSide();
+            level.setBlock(pos, ModBlocks.GRIMEBARREL.defaultBlockState(), 11);
+            return InteractionResult.SUCCESS;
+        }
+        return super.useItemOn(itemStack, state, level, pos, player, hand, hitResult);
     }
 
     protected VoxelShape getBlockSupportShape(final BlockState state, final BlockGetter level, final BlockPos pos) {

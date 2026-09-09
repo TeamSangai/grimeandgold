@@ -17,11 +17,13 @@ public class ModCreativeTabs {
             FabricCreativeModeTab.builder().icon(() -> new ItemStack(ModItems.COPPER_SIFT_FULL_GRIME))
                     .title(Component.translatable("creativemodetab.grimeandgold.grimeandgold"))
                     .displayItems((parameters, output) -> {
+                        output.accept(ModBlocks.BIOMASS);
+                        output.accept(ModBlocks.DECOMPOSTER);
                         output.accept(ModItems.COPPER_SIFT_EMPTY);
                         output.accept(ModItems.COPPER_SIFT_FULL_GRIME);
                         output.accept(ModItems.COPPER_SIFT_FULL_FERRISOIL);
                         output.accept(ModItems.COPPER_SIFT_FULL_GOLDRUST);
-                        output.accept(ModBlocks.PAYDIRT);
+                        output.accept(ModItems.COPPER_SIFT_FULL_PAYDIRT);
                         output.accept(ModItems.DIAMOND_SHARD);
 
 

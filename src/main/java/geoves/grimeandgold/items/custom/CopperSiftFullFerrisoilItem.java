@@ -40,7 +40,7 @@ import java.util.List;
 import static geoves.grimeandgold.items.custom.CopperSiftFullGrimeItem.getEmptySuccessItem;
 
 public class CopperSiftFullFerrisoilItem extends BlockItem {
-    public static final ResourceKey<LootTable> FERRISIOL_LOOT = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "sifting_ferrisiol"));
+    public static final ResourceKey<LootTable> FERRISIOL_LOOT = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "sifting_ferrisoil"));
 
     public CopperSiftFullFerrisoilItem(Block block, Properties properties) {
         super(block, properties);
@@ -98,7 +98,7 @@ public class CopperSiftFullFerrisoilItem extends BlockItem {
 
     @Override
     public int getUseDuration(final ItemStack itemStack, final LivingEntity user) {
-        return 175;
+        return 75;
     }
 
     @Override

@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "grimeandgold:block/grimebarrel",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "grimeandgold:block/grimebarrel"
+    },
+    "facing=south": {
+      "model": "grimeandgold:block/grimebarrel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "grimeandgold:block/grimebarrel",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "grimeandgold:block/grimebarrel_up"
+    },
+    "facing=down": {
+      "model": "grimeandgold:block/grimebarrel_up",
+      "x": 180
+    }
+  }
+}

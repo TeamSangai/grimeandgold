@@ -1,0 +1,13 @@
+
+{
+  "parent": "minecraft:block/cube_directional",
+  "textures": {
+    "down": "grimeandgold:block/grime",
+    "east": "grimeandgold:block/grime",
+    "north": "grimeandgold:block/grime_barrel",
+    "particle": "grimeandgold:block/grime",
+    "south": "grimeandgold:block/grime",
+    "up": "grimeandgold:block/grime",
+    "west": "grimeandgold:block/grime"
+  }
+}

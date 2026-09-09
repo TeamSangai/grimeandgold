@@ -11,7 +11,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.MudBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -22,10 +21,10 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 public class GoldrustBlock extends Block implements SiftPickup {
-    public static final MapCodec<MudBlock> CODEC = simpleCodec(MudBlock::new);
+    public static final MapCodec<GoldrustBlock> CODEC = simpleCodec(GoldrustBlock::new);
     private static final VoxelShape SHAPE = Block.column((double)16.0F, (double)0.0F, (double)16.0F);
 
-    public MapCodec<MudBlock> codec() {
+    public MapCodec<GoldrustBlock> codec() {
         return CODEC;
     }
 

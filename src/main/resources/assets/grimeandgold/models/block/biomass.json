@@ -1,0 +1,13 @@
+
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "grimeandgold:block/biomass_bottom",
+    "east": "grimeandgold:block/biomass",
+    "north": "grimeandgold:block/biomass",
+    "particle": "grimeandgold:block/biomass",
+    "south": "grimeandgold:block/biomass",
+    "up": "grimeandgold:block/biomass_top",
+    "west": "grimeandgold:block/biomass"
+  }
+}

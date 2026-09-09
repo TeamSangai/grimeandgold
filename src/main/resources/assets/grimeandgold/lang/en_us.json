@@ -2,10 +2,13 @@
   "item.grimeandgold.diamond_shard": "Diamond Shard",
   "item.grimeandgold.copper_sift": "Copper Sift", "item.grimeandgold.copper_sift_filled_grime": "Grime Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_ferrisoil": "Ferrisoil Filled Copper Sift", "item.grimeandgold.copper_sift_filled_goldrust": "Goldrust Filled Copper Sift",
-
+  "item.grimeandgold.copper_sift_filled_paydirt": "Paydirt Filled Copper Sift",
 
   "block.grimeandgold.grime": "Grime", "block.grimeandgold.paydirt": "Paydirt",
   "block.grimeandgold.goldrust": "Goldrust", "block.grimeandgold.ferrisoil": "Ferrisoil",
+  "block.grimeandgold.decomposter": "Decomposter", "block.grimeandgold.biomass": "Biomass",
+  "block.grimeandgold.grimebarrel": "Grime Burrow",
 
-  "creativemodetab.grimeandgold.grimeandgold": "Grime And Gold"
+  "creativemodetab.grimeandgold.grimeandgold": "Grime And Gold",
+  "container.grimeandgold.grimebarrel": "Grime Burrow"
 }

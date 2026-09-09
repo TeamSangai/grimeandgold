@@ -22,10 +22,10 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 public class FerrisoilBlock extends Block implements SiftPickup {
-    public static final MapCodec<MudBlock> CODEC = simpleCodec(MudBlock::new);
+    public static final MapCodec<FerrisoilBlock> CODEC = simpleCodec(FerrisoilBlock::new);
     private static final VoxelShape SHAPE = Block.column((double)16.0F, (double)0.0F, (double)16.0F);
 
-    public MapCodec<MudBlock> codec() {
+    public MapCodec<FerrisoilBlock> codec() {
         return CODEC;
     }
 

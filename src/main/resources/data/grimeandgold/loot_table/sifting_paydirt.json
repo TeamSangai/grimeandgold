@@ -1,0 +1,81 @@
+{
+  "type": "generic",
+  "pools": [{
+    "rolls": 5,
+    "bonus_rolls": 2.0,
+    "entries": [{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:iron_nugget",
+      "weight": 24
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": 1,
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:raw_iron",
+      "weight": 12
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:copper_nugget",
+      "weight": 30
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": 1,
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:raw_copper",
+      "weight": 15
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:gold_nugget",
+      "weight": 28
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": 1,
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:raw_gold",
+      "weight": 14
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "grimeandgold:diamond_shard",
+      "weight": 5
+    }]
+  }],
+  "random_sequence": "grimeandgold:sifting_paydirt"
+}

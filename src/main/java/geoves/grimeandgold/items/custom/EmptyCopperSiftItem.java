@@ -44,8 +44,11 @@ public class EmptyCopperSiftItem extends Item {
                     if (var13 instanceof SiftPickup siftPickupBlock) {
                         ItemStack taken = siftPickupBlock.pickupBlock(player, level, pos, blockState);
                         if (!taken.isEmpty()) {
-                            player.setItemInHand(player.getUsedItemHand(), taken);
-                            player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
+                            if (!player.isCreative()) {
+                                player.setItemInHand(player.getUsedItemHand(), taken);
+                                player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
+                                return InteractionResult.SUCCESS;
+                            }
                             return InteractionResult.SUCCESS;
                         }
                         else {

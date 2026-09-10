@@ -38,16 +38,7 @@ public class FlynestBlock extends BaseEntityBlock {
 
     }
 
-    public void playerDestroy(final Level level, final Player player, final BlockPos pos, final BlockState state, final @Nullable BlockEntity blockEntity, final ItemStack destroyedWith) {
-        super.playerDestroy(level, player, pos, state, blockEntity, destroyedWith);
-        if (!level.isClientSide() && blockEntity instanceof FlynestBlockEntity flynestBlockEntity) {
-            if (!EnchantmentHelper.hasTag(destroyedWith, EnchantmentTags.PREVENTS_BEE_SPAWNS_WHEN_MINING)) {
-                flynestBlockEntity.emptyAllLivingFromHive(player, state, FlynestBlockEntity.FlyReleaseStatus.EMERGENCY);
-                Containers.updateNeighboursAfterDestroy(state, level, pos);
-            }
-        }
 
-    }
 
     protected boolean hasAnalogOutputSignal(final BlockState state) {
         return true;
@@ -59,6 +50,6 @@ public class FlynestBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos worldPosition, BlockState blockState) {
-        return new FlynestBlockEntity(worldPosition, blockState);
+        return null;
     }
 }

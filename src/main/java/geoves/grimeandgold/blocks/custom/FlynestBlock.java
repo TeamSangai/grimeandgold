@@ -1,7 +1,6 @@
 package geoves.grimeandgold.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
-import geoves.grimeandgold.blocks.entities.FlynestBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.EnchantmentTags;
@@ -23,7 +22,6 @@ public class FlynestBlock extends BaseEntityBlock {
     public static final MapCodec<FlynestBlock> CODEC = simpleCodec(FlynestBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty HONEY_LEVEL = BlockStateProperties.LEVEL_HONEY;
-    public static final IntegerProperty AMOUNT_OF_FLIES = IntegerProperty.create("fly amount", 0, 2);;
     public static final int MAX_HONEY_LEVELS = 5;
 
 
@@ -36,7 +34,7 @@ public class FlynestBlock extends BaseEntityBlock {
 
     protected FlynestBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(HONEY_LEVEL, 0).setValue(FACING, Direction.NORTH).setValue(AMOUNT_OF_FLIES, 0));
+        this.registerDefaultState(this.defaultBlockState().setValue(HONEY_LEVEL, 0).setValue(FACING, Direction.NORTH));
 
     }
 

@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Function;
 
@@ -25,6 +27,7 @@ public class ModBlocks {
     public static final Block DECOMPOSTER = registerBlock("decomposter", properties -> new DecomposterBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
     public static final Block GRIMEBARREL = registerBlock("grimebarrel", properties -> new GrimeBarrelBlock(properties.sound(SoundType.MUD).strength(0.6f, 0.75f)));
     public static final Block FLY_NEST = registerBlock("fly_nest", properties -> new FlynestBlock(properties.sound(SoundType.PACKED_MUD).strength(0.6f, 0.75f)));
+    public static final Block FLY_LARVA_EGG = registerBlock("sift_larva_egg", properties -> new SiftLarvaEggBlock(properties.mapColor(MapColor.WATER).instabreak().noOcclusion().sound(SoundType.FROGSPAWN).pushReaction(PushReaction.DESTROY)));
 
 
     private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {

@@ -1,0 +1,8 @@
+{
+  "fly_ambient": {
+    "sounds": [
+      "grimeandgold:fly_ambient_1"
+    ],
+    "subtitle": "sounds.grimeandgold.fly_ambient"
+  }
+}

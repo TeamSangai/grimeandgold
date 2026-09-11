@@ -11,6 +11,8 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> SIFTABLE_GRIME = createTag("siftable_grime");
         public static final TagKey<Block> SIFTABLE_PAYDIRT = createTag("siftable_paydirt");
+        public static final TagKey<Block> SUPPORTS_SIFT_LARVA_EGGS = createTag("supports_sift_larva_eggs");
+
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));

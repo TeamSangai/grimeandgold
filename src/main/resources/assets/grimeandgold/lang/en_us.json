@@ -13,5 +13,6 @@
   "block.grimeandgold.grimebarrel": "Grime Burrow","block.grimeandgold.fly_nest": "Sift-Fly Nest",
 
   "creativemodetab.grimeandgold.grimeandgold": "Grime And Gold",
-  "container.grimeandgold.grimebarrel": "Grime Burrow"
+  "container.grimeandgold.grimebarrel": "Grime Burrow",
+  "sounds.grimeandgold.fly_ambient": "Fly Buzzes"
 }

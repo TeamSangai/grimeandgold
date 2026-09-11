@@ -4,9 +4,11 @@ import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.entities.ModEntityTypes;
+import geoves.grimeandgold.entities.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +29,9 @@ public class GrimeAndGold implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
+
+		// Idk why the warning
+		FabricDefaultAttributeRegistry.register(ModEntityTypes.SIFT_FLY, SiftFlyEntity.createAttributes());
 	}
 
 	// Yooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo do you see this?

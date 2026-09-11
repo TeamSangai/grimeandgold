@@ -27,7 +27,7 @@ public class ModCreativeTabs {
                         output.accept(ModItems.COPPER_SIFT_FULL_GOLDRUST);
                         output.accept(ModItems.COPPER_SIFT_FULL_PAYDIRT);
                         output.accept(ModItems.DIAMOND_SHARD);
-
+                        output.accept(ModItems.SIFT_FLY_SPAWN_EGG);
 
                     }).build());
 

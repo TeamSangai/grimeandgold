@@ -4,7 +4,7 @@ import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.entities.ModEntityTypes;
-import geoves.grimeandgold.entities.SiftFlyEntity;
+import geoves.grimeandgold.entities.custom.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 

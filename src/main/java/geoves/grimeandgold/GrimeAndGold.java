@@ -29,5 +29,5 @@ public class GrimeAndGold implements ModInitializer {
 		ModBlockEntities.registerBlockEntities();
 	}
 
-	// Yooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo do you see this?
+	// Yooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo do you see this?
 }

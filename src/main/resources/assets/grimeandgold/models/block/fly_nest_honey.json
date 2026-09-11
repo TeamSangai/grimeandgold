@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "grimeandgold:block/full_flyhive_front",
+    "side": "grimeandgold:block/flyhive_side",
+    "top": "grimeandgold:block/flyhive_side"
+  }
+}

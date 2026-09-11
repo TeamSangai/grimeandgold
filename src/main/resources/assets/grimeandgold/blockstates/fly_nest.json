@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=east,fly_honey=0": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 90
+    },
+    "facing=east,fly_honey=1": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 90
+    },
+    "facing=east,fly_honey=2": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 90
+    },
+    "facing=east,fly_honey=3": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 90
+    },
+    "facing=east,fly_honey=4": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 90
+    },
+    "facing=east,fly_honey=5": {
+      "model": "grimeandgold:block/fly_nest_honey",
+      "y": 90
+    },
+    "facing=north,fly_honey=0": {
+      "model": "grimeandgold:block/fly_nest_empty"
+    },
+    "facing=north,fly_honey=1": {
+      "model": "grimeandgold:block/fly_nest_empty"
+    },
+    "facing=north,fly_honey=2": {
+      "model": "grimeandgold:block/fly_nest_empty"
+    },
+    "facing=north,fly_honey=3": {
+      "model": "grimeandgold:block/fly_nest_empty"
+    },
+    "facing=north,fly_honey=4": {
+      "model": "grimeandgold:block/fly_nest_empty"
+    },
+    "facing=north,fly_honey=5": {
+      "model": "grimeandgold:block/fly_nest_honey"
+    },
+    "facing=south,fly_honey=0": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 180
+    },
+    "facing=south,fly_honey=1": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 180
+    },
+    "facing=south,fly_honey=2": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 180
+    },
+    "facing=south,fly_honey=3": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 180
+    },
+    "facing=south,fly_honey=4": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 180
+    },
+    "facing=south,fly_honey=5": {
+      "model": "grimeandgold:block/fly_nest_honey",
+      "y": 180
+    },
+    "facing=west,fly_honey=0": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 270
+    },
+    "facing=west,fly_honey=1": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 270
+    },
+    "facing=west,fly_honey=2": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 270
+    },
+    "facing=west,fly_honey=3": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 270
+    },
+    "facing=west,fly_honey=4": {
+      "model": "grimeandgold:block/fly_nest_empty",
+      "y": 270
+    },
+    "facing=west,fly_honey=5": {
+      "model": "grimeandgold:block/fly_nest_honey",
+      "y": 270
+    }
+  }
+}

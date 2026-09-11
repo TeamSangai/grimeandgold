@@ -19,6 +19,8 @@ public class ModCreativeTabs {
                     .displayItems((parameters, output) -> {
                         output.accept(ModBlocks.BIOMASS);
                         output.accept(ModBlocks.DECOMPOSTER);
+                        output.accept(ModBlocks.GRIMEBARREL);
+                        output.accept(ModBlocks.FLY_NEST);
                         output.accept(ModItems.COPPER_SIFT_EMPTY);
                         output.accept(ModItems.COPPER_SIFT_FULL_GRIME);
                         output.accept(ModItems.COPPER_SIFT_FULL_FERRISOIL);

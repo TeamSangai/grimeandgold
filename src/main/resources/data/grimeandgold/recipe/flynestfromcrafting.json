@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "grimeandgold:biomass",
+    "B": "minecraft:mud",
+    "C": "minecraft:honeycomb"
+
+  },
+  "pattern": [
+    "BAB",
+    "CCC",
+    "BAB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "grimeandgold:fly_nest"
+  }
+}

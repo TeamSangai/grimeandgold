@@ -4,7 +4,7 @@ import geoves.grimeandgold.client.ModelLayers;
 import geoves.grimeandgold.client.Textures;
 import geoves.grimeandgold.client.models.SiftFlyModel;
 import geoves.grimeandgold.client.renderstates.SiftFlyRenderState;
-import geoves.grimeandgold.entities.custom.SiftFlyEntity;
+import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

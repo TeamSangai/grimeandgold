@@ -1,7 +1,7 @@
 package geoves.grimeandgold.client.models;
 
 import geoves.grimeandgold.client.renderstates.SiftFlyRenderState;
-import geoves.grimeandgold.entities.custom.animations.SiftFlyAnimation;
+import geoves.grimeandgold.client.animations.SiftFlyAnimation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.animation.KeyframeAnimation;
@@ -40,7 +40,7 @@ public class SiftFlyModel extends EntityModel<SiftFlyRenderState>  {
                 .texOffs(6, 25).addBox(-3.0F, -6.25F, -7.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(14, 23).addBox(-1.5F, -4.0F, -7.0F, 3.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))
                 .texOffs(23, 25).addBox(-6.0F, -10.0F, -6.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.0F))
-                .texOffs(23, 29).mirror().addBox(2.0F, -10.0F, -6.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 20.0F, 0.0F));
+                .texOffs(23, 29).mirror().addBox(2.0F, -10.0F, -6.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 23.0F, 2.0F));
 
         PartDefinition legs_right = Main.addOrReplaceChild("legs_right", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 

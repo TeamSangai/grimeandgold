@@ -2,6 +2,7 @@ package geoves.grimeandgold.entities.custom.siftfly;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import geoves.grimeandgold.entities.ModEntityTypes;
 import net.minecraft.util.RandomSource;
@@ -30,7 +31,8 @@ public class SiftFlyAi {
                 ImmutableList.of(
                         new AnimalPanic<>(2.0F, 5),
                         new LookAtTargetSink(45, 90),
-                        new MoveToTargetSink()
+                        new MoveToTargetSink(),
+                        new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
                 )
         );
     }
@@ -51,6 +53,9 @@ public class SiftFlyAi {
                                         )
                                 )
                         )
+                ),
+                ImmutableSet.of(
+                        Pair.of(MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_ABSENT)
                 )
         );
     }

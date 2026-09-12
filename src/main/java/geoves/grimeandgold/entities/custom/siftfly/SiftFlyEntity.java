@@ -2,6 +2,7 @@ package geoves.grimeandgold.entities.custom.siftfly;
 
 import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.sounds.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.profiling.Profiler;
@@ -12,12 +13,14 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import org.jspecify.annotations.Nullable;
 
@@ -33,6 +36,7 @@ public class SiftFlyEntity extends Animal {
         super(type, level);
         this.moveControl = new FlyingMoveControl<>(this, 20, true);
         this.setPathfindingMalus(PathType.WATER, 0.0F);
+        this.navigation = new FlyingPathNavigation(this, level);
         this.navigation.setCanFloat(false);
     }
 
@@ -86,5 +90,9 @@ public class SiftFlyEntity extends Animal {
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
         return ModSounds.FLY_AMBIENT;
+    }
+
+    @Override
+    protected void checkFallDamage(final double ya, final boolean onGround, final BlockState onState, final BlockPos pos) {
     }
 }

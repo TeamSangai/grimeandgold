@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "front": "grimeandgold:block/decomposter_active",
+    "front": "grimeandgold:block/decomposter_done_grime",
     "side": "grimeandgold:block/decomposter_side",
     "top": "grimeandgold:block/decomposter_side"
   }

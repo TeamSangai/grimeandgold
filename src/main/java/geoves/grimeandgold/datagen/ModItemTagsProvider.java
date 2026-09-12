@@ -21,7 +21,6 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
     protected void addTags(HolderLookup.Provider registries) {
         tag(ModTags.Items.DECOMPOSTABLE_CALCIUM_LOW).add(ItemIds.BONE_MEAL);
         tag(ModTags.Items.DECOMPOSTABLE_FLESH_LOW).add(ItemIds.ROTTEN_FLESH);
-        tag(ModTags.Items.DECOMPOSTABLE_VEG_LOW).add(BlockItemIds.WHEAT_CROP.item());
 
         tag(ModTags.Items.DECOMPOSTABLE_VEG_AVERAGE).add(BlockItemIds.CARROT_CROP.item());
         tag(ModTags.Items.DECOMPOSTABLE_CALCIUM_AVERAGE).add(ItemIds.BONE);

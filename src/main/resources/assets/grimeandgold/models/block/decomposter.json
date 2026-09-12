@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "all": "grimeandgold:block/decomposter"
+    "front": "grimeandgold:block/decomposter_front",
+    "side": "grimeandgold:block/decomposter_side",
+    "top": "grimeandgold:block/decomposter_side"
   }
 }

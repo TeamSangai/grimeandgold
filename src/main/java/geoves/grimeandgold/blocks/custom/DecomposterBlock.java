@@ -2,8 +2,10 @@ package geoves.grimeandgold.blocks.custom;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.ModBlocks;
+import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.tags.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -14,13 +16,16 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -34,18 +39,24 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
     public static final IntegerProperty VEGETATION = IntegerProperty.create("vegetation", 0, 10);
     public static final IntegerProperty FLESH = IntegerProperty.create("flesh", 0, 10);
     public static final IntegerProperty CALCIUM = IntegerProperty.create("calcium", 0, 10);
-    public static final IntegerProperty PROGRESS = IntegerProperty.create("progress", 0, 2);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+    public static final BooleanProperty DONE = BooleanProperty.create("done");
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public DecomposterBlock(Properties properties) {
         super(properties);
         registerDefaultState(this.defaultBlockState().setValue(VEGETATION, 0).setValue(FLESH, 0)
-                .setValue(CALCIUM, 0).setValue(PROGRESS, 0).setValue(ACTIVE, false));
+                .setValue(CALCIUM, 0).setValue(DONE, false).setValue(ACTIVE, false).setValue(FACING, Direction.NORTH));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(VEGETATION, FLESH, CALCIUM, PROGRESS, ACTIVE);
+        builder.add(VEGETATION, FLESH, CALCIUM, DONE, ACTIVE, FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(final BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
@@ -56,30 +67,54 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         assert !level.isClientSide();
-        if (state.getValue(ACTIVE) && state.getValue(PROGRESS) < 2) {
-            level.scheduleTick(pos, this, 600);
-            int currentProgress = state.getValue(PROGRESS);
-            GrimeAndGold.LOGGER.info("Decomposter tick");
-            level.setBlockAndUpdate(pos, state.setValue(PROGRESS,currentProgress + 1));
-        } else if (state.getValue(PROGRESS) == 2){
+        if (state.getValue(ACTIVE) && !state.getValue(DONE)) {
+            level.scheduleTick(pos, this, 1200);
+            level.setBlockAndUpdate(pos, state.setValue(DONE, true));
             level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
         }
     }
 
     public void ResetValues(Level level, BlockState state, BlockPos pos) {
         level.setBlockAndUpdate(pos, state.setValue(VEGETATION, 0).setValue(FLESH, 0)
-                .setValue(CALCIUM, 0).setValue(PROGRESS, 0));
+                .setValue(CALCIUM, 0).setValue(DONE, false));
     }
 
+    public void MakeOutPut(Level level, ItemStack itemStack, Integer count, BlockPos pos){
+        Vec3 itemPos = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandomXZ(level.getRandom(), 0.7F);
+        itemStack.setCount(count);
+        ItemEntity entity = new ItemEntity(level, itemPos.x(), itemPos.y(), itemPos.z(), itemStack);
+        entity.setDefaultPickUpDelay();
+        level.addFreshEntity(entity);
+    }
 
     @Override
     protected @NonNull InteractionResult useItemOn(@NonNull ItemStack itemStack, BlockState state, Level level,
                                                    BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        int VegValue = state.getValue(VEGETATION);
+        int fleshValue = state.getValue(FLESH);
+        int calciumValue = state.getValue(CALCIUM);
+        if (state.getValue(DONE) && VegValue == 10 && fleshValue == 10 && calciumValue == 0){
+            if (itemStack.is(ModItems.COPPER_SIFT_EMPTY)){
+                int durability = itemStack.getDamageValue();
+                player.setItemInHand(player.getUsedItemHand(), new ItemStack(ModItems.COPPER_SIFT_FULL_GRIME));
+                player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
+                this.ResetValues(level,state,pos);
+                return InteractionResult.SUCCESS;
+            }
+        }
+
         if (!state.getValue(ACTIVE) && state.getValue(VEGETATION) != 10) {
             if (itemStack.is(ModTags.Items.DECOMPOSTABLE_VEG_AVERAGE)) {
                 if (!level.isClientSide()) {
                     int CurrentVegetation = state.getValue(VEGETATION);
                     level.setBlockAndUpdate(pos, state.setValue(VEGETATION, min(10, CurrentVegetation + 2)));
+                }
+                if (!player.isCreative()) {itemStack.consume(1, player);}
+                return InteractionResult.SUCCESS;
+            }if (itemStack.is(ModTags.Items.DECOMPOSTABLE_VEG_LOW)) {
+                if (!level.isClientSide()) {
+                    int CurrentVegetation = state.getValue(VEGETATION);
+                    level.setBlockAndUpdate(pos, state.setValue(VEGETATION, min(10, CurrentVegetation + 1)));
                 }
                 if (!player.isCreative()) {itemStack.consume(1, player);}
                 return InteractionResult.SUCCESS;
@@ -135,13 +170,7 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         return super.useItemOn(itemStack, state, level, pos, player, hand, hitResult);
     }
 
-    public void MakeOutPut(Level level, ItemStack itemStack, Integer count, BlockPos pos){
-        Vec3 itemPos = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandomXZ(level.getRandom(), 0.7F);
-        itemStack.setCount(count);
-        ItemEntity entity = new ItemEntity(level, itemPos.x(), itemPos.y(), itemPos.z(), itemStack);
-        entity.setDefaultPickUpDelay();
-        level.addFreshEntity(entity);
-    }
+
 
 
     @Override
@@ -149,12 +178,20 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         int VegValue = state.getValue(VEGETATION);
         int fleshValue = state.getValue(FLESH);
         int calciumValue = state.getValue(CALCIUM);
-        int progressValue = state.getValue(PROGRESS);
+
+        if (!state.getValue(ACTIVE) && VegValue == 5 && fleshValue == 5 && calciumValue == 5) {
+            assert !level.isClientSide();
+            if (!state.getValue(DONE)) {
+                level.scheduleTick(pos, this, 1200);
+                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
+                return InteractionResult.SUCCESS;
+            }
+        }
 
         if (!state.getValue(ACTIVE) && VegValue == 10 && fleshValue == 10 && calciumValue == 0) {
             assert !level.isClientSide();
-            if (progressValue != 2) {
-                level.scheduleTick(pos, this, 600);
+            if (!state.getValue(DONE)) {
+                level.scheduleTick(pos, this, 1200);
                 level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
                 return InteractionResult.SUCCESS;
             } else {
@@ -165,8 +202,8 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         }
         if (!state.getValue(ACTIVE) && VegValue == 10 && fleshValue == 0 && calciumValue == 0) {
             assert !level.isClientSide();
-            if (progressValue != 2) {
-                level.scheduleTick(pos, this, 600);
+            if (!state.getValue(DONE)) {
+                level.scheduleTick(pos, this, 1200);
                 level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
                 return InteractionResult.SUCCESS;
             } else {
@@ -177,8 +214,8 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         }
         if (!state.getValue(ACTIVE) && calciumValue == 10 && fleshValue == 0 && VegValue == 0) {
             assert !level.isClientSide();
-            if (progressValue != 2) {
-                level.scheduleTick(pos, this, 600);
+            if (!state.getValue(DONE)) {
+                level.scheduleTick(pos, this, 1200);
                 level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
                 return InteractionResult.SUCCESS;
             } else {
@@ -189,8 +226,8 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         }
         if (!state.getValue(ACTIVE) && fleshValue == 10 && calciumValue == 0 && VegValue == 0) {
             assert !level.isClientSide();
-            if (progressValue != 2) {
-                level.scheduleTick(pos, this, 600);
+            if (!state.getValue(DONE)) {
+                level.scheduleTick(pos, this, 1200);
                 level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true));
                 return InteractionResult.SUCCESS;
             } else {

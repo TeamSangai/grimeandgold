@@ -1,22 +1,5 @@
 {
   "variants": {
-    "active=false,progress=2": {
-      "model": "grimeandgold:block/decomposter_done"
-    },
-    "active=false,progress=1": {
-      "model": "grimeandgold:block/decomposter"
-    },
-    "active=false,progress=0": {
-      "model": "grimeandgold:block/decomposter"
-    },
-    "active=true,progress=0": {
-      "model": "grimeandgold:block/decomposter_active"
-    },
-    "active=true,progress=1": {
-      "model": "grimeandgold:block/decomposter_active"
-    },
-    "active=true,progress=2": {
-      "model": "grimeandgold:block/decomposter_active"
-    }
+
   }
 }

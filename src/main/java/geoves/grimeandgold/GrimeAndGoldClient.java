@@ -2,6 +2,7 @@ package geoves.grimeandgold;
 
 import geoves.grimeandgold.client.ModelLayers;
 import geoves.grimeandgold.client.renderers.SiftFlyRenderer;
+import geoves.grimeandgold.client.renderers.SiftGrubRenderer;
 import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.menu.GrimeBarrelScreen;
 import geoves.grimeandgold.menu.ModMenuTypes;
@@ -20,5 +21,6 @@ public class GrimeAndGoldClient implements ClientModInitializer {
 
     private void registerEntityRenderers() {
         EntityRenderers.register(ModEntityTypes.SIFT_FLY, SiftFlyRenderer::new);
+        EntityRenderers.register(ModEntityTypes.SIFT_GRUB, SiftGrubRenderer::new);
     }
 }

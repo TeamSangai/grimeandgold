@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 
 public class ModEntityTypeIds {
     public static final ResourceKey<EntityType<?>> SIFT_FLY = create("sift_fly");
+    public static final ResourceKey<EntityType<?>> SIFT_GRUB = create("sift_grub");
 
     private static ResourceKey<EntityType<?>> create(final String name) {
         return ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));

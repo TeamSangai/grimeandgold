@@ -1,11 +1,13 @@
 {
   "entity.grimeandgold.sift_fly": "Sift Fly",
+  "entity.grimeandgold.sift_grub": "Sift Grub",
 
   "item.grimeandgold.diamond_shard": "Diamond Shard",
   "item.grimeandgold.copper_sift": "Copper Sift", "item.grimeandgold.copper_sift_filled_grime": "Grime Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_ferrisoil": "Ferrisoil Filled Copper Sift", "item.grimeandgold.copper_sift_filled_goldrust": "Goldrust Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_paydirt": "Paydirt Filled Copper Sift",
   "item.grimeandgold.sift_fly_spawn_egg": "Sift Fly Spawn Egg",
+  "item.grimeandgold.sift_grub_spawn_egg": "Sift Grub Spawn Egg",
 
   "block.grimeandgold.grime": "Grime", "block.grimeandgold.paydirt": "Paydirt",
   "block.grimeandgold.goldrust": "Goldrust", "block.grimeandgold.ferrisoil": "Ferrisoil",

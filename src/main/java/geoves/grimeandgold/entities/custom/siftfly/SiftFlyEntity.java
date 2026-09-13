@@ -5,6 +5,7 @@ import geoves.grimeandgold.sounds.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Unit;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
@@ -77,8 +79,19 @@ public class SiftFlyEntity extends Animal {
     }
 
     @Override
+    protected boolean canBeABaby() {
+        return false;
+    }
+
+    @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
         return ModEntityTypes.SIFT_FLY.create(level, EntitySpawnReason.BREEDING);
+    }
+
+    @Override
+    public void spawnChildFromBreeding(final ServerLevel level, final Animal partner) {
+        this.finalizeSpawnChildFromBreeding(level, partner, null);
+        this.getBrain().setMemory(MemoryModuleType.IS_PREGNANT, Unit.INSTANCE);
     }
 
     @Override

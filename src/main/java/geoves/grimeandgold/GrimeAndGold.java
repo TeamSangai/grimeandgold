@@ -4,6 +4,7 @@ import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.entities.ModEntityTypes;
+import geoves.grimeandgold.entities.custom.SiftGrubEntity;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.sounds.ModSounds;
@@ -32,10 +33,16 @@ public class GrimeAndGold implements ModInitializer {
 		ModBlockEntities.registerBlockEntities();
 		ModSounds.registerSounds();
 
+		this.registerModEntities();
+	}
+
+	private void registerModEntities() {
 		// Idk why the warning
 		FabricDefaultAttributeRegistry.register(ModEntityTypes.SIFT_FLY, SiftFlyEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntityTypes.SIFT_GRUB, SiftGrubEntity.createAttributes());
 	}
 
 	// M: Yooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo do you see this?
 	// G: Yes, but did you?
+	// M: :eyes:
 }

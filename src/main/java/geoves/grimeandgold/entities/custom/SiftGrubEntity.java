@@ -1,5 +1,6 @@
 package geoves.grimeandgold.entities.custom;
 
+import geoves.grimeandgold.entities.ModEntityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,6 +13,8 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +24,11 @@ import net.tslat.smartbrainlib.api.core.behaviour.base.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.base.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.BreedWithPartner;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FollowTemptation;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.Panic;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
@@ -30,8 +36,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTar
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
-import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
-import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
+import net.tslat.smartbrainlib.api.core.sensor.vanilla.*;
 import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
 import org.jspecify.annotations.Nullable;
 
@@ -70,14 +75,16 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     public List<? extends ExtendedSensor<?>> getSensors(SiftGrubEntity siftGrubEntity) {
         return ObjectArrayList.of(
                 new NearbyLivingEntitySensor<>(),
-                new HurtBySensor<>()
+                new NearbyPlayersSensor<>(),
+                new HurtBySensor<>(),
+                new InWaterSensor<>()
         );
     }
 
     @Override
     public List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(SiftGrubEntity owner) {
         return List.of(
-                new LookAtTarget<>(),
+                new LookAtTarget<>().runFor(45, 90),
                 new MoveToWalkTarget<>()
         );
     }
@@ -85,15 +92,14 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     @Override
     public List<? extends BehaviorControl<?>> getIdleBehaviours(SiftGrubEntity owner) {
         return List.of(
-                new FirstApplicableBehaviour<SiftGrubEntity>(
-                        new TargetOrRetaliate<>(),
-                        new SetPlayerLookTarget<>(),
-                        new SetRandomLookTarget<>()
+                new FirstApplicableBehaviour<>(
+                        new Panic<>().speedModifier(2).setRadius(5, 5),
+                        new OneRandomBehaviour<>(
+                                new SetRandomWalkTarget<>(),
+                                new Idle<>().runFor(e -> e.getRandom().nextInt(30, 60))
+                        )
                 ),
-                new OneRandomBehaviour<>(
-                        new SetRandomWalkTarget<>(),
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 60))
-                )
+                new SetRandomLookTarget<>()
         );
     }
 

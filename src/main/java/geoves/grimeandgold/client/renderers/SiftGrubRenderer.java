@@ -14,7 +14,7 @@ import net.minecraft.resources.Identifier;
 @Environment(EnvType.CLIENT)
 public class SiftGrubRenderer extends MobRenderer<SiftGrubEntity, SiftGrubRenderState, SiftGrubModel> {
     public SiftGrubRenderer(EntityRendererProvider.Context context) {
-        super(context, new SiftGrubModel(context.bakeLayer(ModelLayers.SIFT_GRUB)), 0.4F);
+        super(context, new SiftGrubModel(context.bakeLayer(ModelLayers.SIFT_GRUB)), 0.3F);
     }
 
     @Override

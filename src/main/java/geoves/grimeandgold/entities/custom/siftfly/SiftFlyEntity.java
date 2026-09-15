@@ -16,6 +16,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.sensing.TemptingSensor;
 import net.minecraft.world.entity.animal.Animal;
@@ -25,12 +26,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
+import net.tslat.smartbrainlib.api.core.behaviour.base.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.base.OneRandomBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.base.SequentialBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.BreedWithPartner;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FollowTemptation;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.Panic;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomFlyTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.*;
 import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
@@ -51,7 +58,7 @@ public class SiftFlyEntity extends Animal implements SmartBrainOwner {
         // Feel free to mess with these whenever you want. Might add more attributes later
         return Animal.createAnimalAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.FLYING_SPEED, 0.6F)
+                .add(Attributes.FLYING_SPEED, 0.96F)
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
                 .add(Attributes.OXYGEN_BONUS, 3.0F);  // Idk how much this affects it
     }
@@ -70,32 +77,37 @@ public class SiftFlyEntity extends Animal implements SmartBrainOwner {
     public List<? extends ExtendedSensor<?>> getSensors(LivingEntity livingEntity) {
         return ObjectArrayList.of(
                 new NearbyLivingEntitySensor<>(),
+                new NearbyPlayersSensor<>(),
                 new HurtBySensor<>(),
                 new InWaterSensor<>(),
-                new ItemTemptingSensor<>()  // idk
+                new ItemTemptingSensor<>()
         );
     }
 
     @Override
     public List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(LivingEntity owner) {
         return List.of(
-                new AnimalPanic<>(2, 5),
                 new LookAtTarget<>().runFor(45, 90),
-                new MoveToWalkTarget<>()
-//                new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
-//                new countdow sturff
+                new MoveToWalkTarget<>(),
+                new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         );
     }
 
     @Override
     public List<? extends BehaviorControl<?>> getIdleBehaviours(LivingEntity owner) {
         return List.of(
-                new FollowTemptation<>().speedModifier(1.25F),
-                new BreedWithPartner<>().validPartners(ModEntityTypes.SIFT_FLY),
-                new OneRandomBehaviour<SiftFlyEntity>(
-                        new MoveToWalkTarget<>(),
-                        new SetRandomFlyTarget<>()
-                )
+                new FirstApplicableBehaviour<>(
+                        new Panic<>().speedModifier(2).setRadius(5, 5),
+                        new BreedWithPartner<>().validPartners(ModEntityTypes.SIFT_FLY),
+                        new FollowTemptation<>().speedModifier(1.25F),
+                        new OneRandomBehaviour<>(
+                                new SetRandomFlyTarget<>().setRadius(6),
+                                new Idle<>()
+                                        .runFor(e -> e.getRandom().nextInt(0, 30))
+                                        .startCondition(e -> e.getRandom().nextFloat() > 0.96F)
+                        )
+                ),
+                new SetRandomLookTarget<>()
         );
     }
 

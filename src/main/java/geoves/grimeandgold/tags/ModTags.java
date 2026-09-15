@@ -9,9 +9,10 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     public static class Blocks {
-        public static final TagKey<Block> SIFTABLE_GRIME = createTag("siftable_grime");
-        public static final TagKey<Block> SIFTABLE_PAYDIRT = createTag("siftable_paydirt");
         public static final TagKey<Block> SUPPORTS_SIFT_LARVA_EGGS = createTag("supports_sift_larva_eggs");
+        public static final TagKey<Block> SIFT_LARVA_DESIRED = createTag("sift_larva_desired");
+        public static final TagKey<Block> SIFT_LARVA_DISLIKED = createTag("sift_larva_disliked");
+        public static final TagKey<Block> SUPPORTS_AQUATIC_FLOWERS = createTag("supports_aquatic_flowers");
 
 
         private static TagKey<Block> createTag(String name) {
@@ -20,6 +21,8 @@ public class ModTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> AQUATIC_FLOWERS = createTag("aquatic_flowers");
+        public static final TagKey<Item> TALL_AQUATIC_FLOWERS = createTag("tall_aquatic_flowers");
         public static final TagKey<Item> DECOMPOSTABLE_VEG_LOW = createTag("decompostable_veg_low");
         public static final TagKey<Item> DECOMPOSTABLE_VEG_AVERAGE = createTag("decompostable_veg_average");
         public static final TagKey<Item> DECOMPOSTABLE_VEG_HIGH = createTag("decompostable_veg_high");

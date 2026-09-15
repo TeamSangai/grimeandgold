@@ -1,0 +1,3 @@
+classTweaker  v1  official
+# Transitive Access Widening directives
+accessible method  net/minecraft/client/data/models/blockstates/PropertyDispatch getDefinedProperties ()Ljava/util/List;

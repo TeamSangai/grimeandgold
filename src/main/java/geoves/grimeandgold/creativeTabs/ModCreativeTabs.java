@@ -21,6 +21,9 @@ public class ModCreativeTabs {
                         output.accept(ModBlocks.DECOMPOSTER);
                         output.accept(ModBlocks.GRIMEBARREL);
                         output.accept(ModBlocks.FLY_NEST);
+                        output.accept(ModBlocks.AQUATIC_SPIN_ROSE);
+                        output.accept(ModBlocks.ANCHOR_BLOSSOM);
+                        output.accept(ModBlocks.SPIRAL_DAFFODIL);
                         output.accept(ModItems.COPPER_SIFT_EMPTY);
                         output.accept(ModItems.COPPER_SIFT_FULL_GRIME);
                         output.accept(ModItems.COPPER_SIFT_FULL_FERRISOIL);

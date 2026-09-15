@@ -35,7 +35,7 @@ public class SiftLarvaEggBlock extends Block implements LiquidBlockContainer {
     private static final int MAX_TADPOLES_SPAWN = 2;
     private static final int DEFAULT_MIN_HATCH_TICK_DELAY = 3600;
     private static final int DEFAULT_MAX_HATCH_TICK_DELAY = 12000;
-    private static final VoxelShape SHAPE = Block.column(4.0F, 4.0F, 4.0F);
+    private static final VoxelShape SHAPE = Block.column(4.0F, 0.0F, 4.0F);
     private static int minHatchTickDelay = 3600;
     private static int maxHatchTickDelay = 12000;
 

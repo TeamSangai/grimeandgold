@@ -30,7 +30,7 @@ import java.util.Optional;
 
 public class GrimeBlock extends Block implements SiftPickup {
     public static final MapCodec<GrimeBlock> CODEC = simpleCodec(GrimeBlock::new);
-    private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 14.0F);
+    private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(16.0F, 0.0F, 14.0F);
 
     public MapCodec<GrimeBlock> codec() {
         return CODEC;
@@ -74,7 +74,7 @@ public class GrimeBlock extends Block implements SiftPickup {
     public ItemStack pickupBlock(@Nullable LivingEntity user, LevelAccessor level, BlockPos pos, BlockState state) {
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11);
         if (!level.isClientSide()) {
-            level.levelEvent(2001, pos, Block.getId(state));
+            level.levelEvent(2001, pos, DoubleAquaticFlowerBlock.getId(state));
         }
         assert user != null;
         return new ItemStack(ModItems.COPPER_SIFT_FULL_GRIME);

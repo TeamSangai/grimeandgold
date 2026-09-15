@@ -2,6 +2,7 @@ package geoves.grimeandgold.items;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.ModBlocks;
+import geoves.grimeandgold.entities.ModEntityTypeIds;
 import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.items.custom.CopperSiftFullFerrisoilItem;
 import geoves.grimeandgold.items.custom.CopperSiftFullGoldrustItem;
@@ -9,15 +10,16 @@ import geoves.grimeandgold.items.custom.EmptyCopperSiftItem;
 import geoves.grimeandgold.items.custom.CopperSiftFullGrimeItem;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.function.Function;
 
@@ -28,6 +30,7 @@ public class ModItems {
     public static final Item COPPER_SIFT_FULL_FERRISOIL = registerItem("copper_sift_filled_ferrisoil", properties -> new CopperSiftFullFerrisoilItem(ModBlocks.FERRISOIL, properties.stacksTo(1).durability(8)));
     public static final Item COPPER_SIFT_FULL_GOLDRUST = registerItem("copper_sift_filled_goldrust", properties -> new CopperSiftFullGoldrustItem(ModBlocks.GOLDRUST, properties.stacksTo(1).durability(8)));
     public static final Item COPPER_SIFT_FULL_PAYDIRT = registerItem("copper_sift_filled_paydirt", properties -> new CopperSiftFullGoldrustItem(ModBlocks.PAYDIRT, properties.stacksTo(1).durability(8)));
+    public static final Item SIFT_GRUB_BUCKET = registerItem("sift_grub_bucket", properties -> new MobBucketItem(ModEntityTypes.SIFT_GRUB, Fluids.WATER, SoundEvents.BUCKET_EMPTY_TADPOLE, properties.stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
 
     public static final Item SIFT_FLY_SPAWN_EGG = registerSpawnEgg(ModItemIds.SIFT_FLY_SPAWN_EGG, ModEntityTypes.SIFT_FLY);
     public static final Item SIFT_GRUB_SPAWN_EGG = registerSpawnEgg(ModItemIds.SIFT_GRUB_SPAWN_EGG, ModEntityTypes.SIFT_GRUB);

@@ -112,7 +112,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
 
     @Override
     public InteractionResult use(final Level level, final Player player, final InteractionHand hand) {
-            if (player.isInFluid(FluidTags.WATER)) {
+            if (player.isInFluid(FluidTags.WATER) && player.isCrouching()) {
                 player.startUsingItem(hand);
                 return InteractionResult.SUCCESS;
             }

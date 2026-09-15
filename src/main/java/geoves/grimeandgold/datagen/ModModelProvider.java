@@ -2,15 +2,18 @@ package geoves.grimeandgold.datagen;
 
 import geoves.grimeandgold.blocks.ModBlocks;
 
+import geoves.grimeandgold.blocks.custom.DecomposterBlock;
+import geoves.grimeandgold.datagen.util.C6;
 import geoves.grimeandgold.items.ModItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
 
 
 public class ModModelProvider extends FabricModelProvider {
@@ -20,7 +23,22 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
-
+     //   blockModelGenerators.blockStateOutput.accept(
+      //          MultiVariantGenerator.dispatch(ModBlocks.DECOMPOSTER).with(
+       //                 C6.initial(
+       //                         DecomposterBlock.FACING,
+        //                        DecomposterBlock.ACTIVE,
+       //                         DecomposterBlock.DONE,
+         //                       DecomposterBlock.VEGETATION,
+         //                       DecomposterBlock.CALCIUM,
+         //                       DecomposterBlock.FLESH
+         //               ).generate((facing, active, done, veg, calc, flesh) -> BlockModelGenerators.plainVariant(TexturedModel.ORIENTABLE.createWithSuffix(
+         //                       ModBlocks.DECOMPOSTER,
+         //                       "_" + (active ? "active" : "inactive") + "_" + (done ? "complete" : "incomplete") + "_" + veg + "_" + calc + "_" + flesh,
+         //                       blockModelGenerators.modelOutput
+         //               )))
+        //        )
+       // );
     }
 
     @Override
@@ -31,7 +49,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_FULL_GOLDRUST, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_FULL_PAYDIRT, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_EMPTY, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModBlocks.AQUATIC_SPIN_ROSE.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_FLY_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.SIFT_GRUB_BUCKET, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_GRUB_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
     }
 }

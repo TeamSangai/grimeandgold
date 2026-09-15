@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "grimeandgold:block/aquatic_spin_rose"
+  }
+}

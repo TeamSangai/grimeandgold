@@ -7,12 +7,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -28,7 +30,10 @@ public class ModBlocks {
     public static final Block GRIMEBARREL = registerBlock("grimebarrel", properties -> new GrimeBarrelBlock(properties.sound(SoundType.MUD).strength(0.6f, 0.75f)));
     public static final Block FLY_NEST = registerBlock("fly_nest", properties -> new FlynestBlock(properties.sound(SoundType.PACKED_MUD).strength(0.6f, 0.75f)));
     public static final Block FLY_LARVA_EGG = registerBlock("sift_larva_egg", properties -> new SiftLarvaEggBlock(properties.mapColor(MapColor.WATER).instabreak().noOcclusion().sound(SoundType.FROGSPAWN).pushReaction(PushReaction.DESTROY)));
-
+    public static final Block AQUATIC_SPIN_ROSE = registerBlock("aquatic_spin_rose", properties -> new AquaticFlowerBlock(MobEffects.DOLPHINS_GRACE, 4.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));;
+    public static final Block ANCHOR_BLOSSOM = registerBlock("anchor_blossom", properties -> new DoubleAquaticFlowerBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
+    public static final Block SPIRAL_DAFFODIL = registerBlock("spiral_daffodil", properties -> new SpiralDafodilBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
+    public static final Block BENTHIC_LOG = registerBlock("benthic_log", properties -> new RotatedPillarBlock(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
 
     private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name))));

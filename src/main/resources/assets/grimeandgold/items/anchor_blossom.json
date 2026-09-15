@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "grimeandgold:block/decomposter"
+    "model": "grimeandgold:item/anchor_blossom"
   }
 }

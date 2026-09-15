@@ -2,7 +2,7 @@
   "entity.grimeandgold.sift_fly": "Sift Fly",
   "entity.grimeandgold.sift_grub": "Sift Grub",
 
-  "item.grimeandgold.diamond_shard": "Diamond Shard",
+  "item.grimeandgold.diamond_shard": "Diamond Shard", "item.grimeandgold.sift_grub_bucket": "Bucket Of Sift-Grub Maggot",
   "item.grimeandgold.copper_sift": "Copper Sift", "item.grimeandgold.copper_sift_filled_grime": "Grime Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_ferrisoil": "Ferrisoil Filled Copper Sift", "item.grimeandgold.copper_sift_filled_goldrust": "Goldrust Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_paydirt": "Paydirt Filled Copper Sift",
@@ -13,6 +13,10 @@
   "block.grimeandgold.goldrust": "Goldrust", "block.grimeandgold.ferrisoil": "Ferrisoil",
   "block.grimeandgold.decomposter": "Decomposter", "block.grimeandgold.biomass": "Biomass",
   "block.grimeandgold.grimebarrel": "Grime Burrow","block.grimeandgold.fly_nest": "Sift-Fly Nest",
+  "block.grimeandgold.sift_larva_egg": "Sift-Grub Egg","block.grimeandgold.aquatic_spin_rose": "Aquatic Spin Rose",
+  "block.grimeandgold.anchor_blossom": "Anchor Blossom","block.grimeandgold.spiral_daffodil": "Spiral Daffodil",
+
+  "block.grimeandgold.benthic_log": "Benthic Log",
 
   "creativemodetab.grimeandgold.grimeandgold": "Grime And Gold",
   "container.grimeandgold.grimebarrel": "Grime Burrow",

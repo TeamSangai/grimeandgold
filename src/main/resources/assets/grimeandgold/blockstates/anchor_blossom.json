@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "grimeandgold:block/anchor_blossom_bottom"
+    },
+    "half=upper": {
+      "model": "grimeandgold:block/anchor_blossom_top"
+    }
+  }
+}

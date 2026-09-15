@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "grimeandgold:block/spiral_daffodil_bottom"
+    },
+    "half=upper": {
+      "model": "grimeandgold:block/spiral_daffodil_top"
+    }
+  }
+}

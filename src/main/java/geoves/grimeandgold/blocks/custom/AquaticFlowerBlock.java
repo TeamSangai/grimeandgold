@@ -1,5 +1,6 @@
 package geoves.grimeandgold.blocks.custom;
 
+import com.mojang.datafixers.kinds.App;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import geoves.grimeandgold.tags.ModTags;
@@ -27,8 +28,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 public class AquaticFlowerBlock extends VegetationBlock implements LiquidBlockContainer, SuspiciousEffectHolder {
-    protected static final MapCodec<SuspiciousStewEffects> EFFECTS_FIELD= SuspiciousStewEffects.CODEC.fieldOf("suspicious_stew_effects");;
-    public static final MapCodec<AquaticFlowerBlock> CODEC = RecordCodecBuilder.mapCodec((i) -> i.group(EFFECTS_FIELD.forGetter(AquaticFlowerBlock::getSuspiciousEffects), propertiesCodec()).apply(i, AquaticFlowerBlock::new));
+
     private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(6.0F, 0.0F, 10.0F);
     private final SuspiciousStewEffects suspiciousStewEffects;
 
@@ -78,10 +78,6 @@ public class AquaticFlowerBlock extends VegetationBlock implements LiquidBlockCo
     @Override
     public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
         return false;
-    }
-    @Override
-    protected MapCodec<AquaticFlowerBlock> codec() {
-        return CODEC;
     }
 
     @Override

@@ -16,18 +16,9 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jspecify.annotations.Nullable;
 
 public class FlynestBlock extends BaseEntityBlock {
-    public static final MapCodec<FlynestBlock> CODEC = simpleCodec(FlynestBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty HONEY_LEVEL = IntegerProperty.create("fly_honey", 0, 5);;
     public static final int MAX_HONEY_LEVEL = 5;
-
-
-
-
-    @Override
-    public MapCodec<FlynestBlock> codec() {
-        return CODEC;
-    }
 
     public FlynestBlock(Properties properties) {
         super(properties);

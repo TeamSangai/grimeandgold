@@ -53,7 +53,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
     protected boolean canPlace(final BlockPlaceContext context, final BlockState stateForPlacement) {
         Player player = context.getPlayer();
         assert player != null;
-        return (!player.isInFluid(FluidTags.WATER) && !this.mustSurvive() || !player.isInFluid(FluidTags.WATER) && stateForPlacement.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(stateForPlacement, context.getClickedPos(), CollisionContext.placementContext(player));
+        return (!player.isInWater() && !this.mustSurvive() || !player.isInWater() && stateForPlacement.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(stateForPlacement, context.getClickedPos(), CollisionContext.placementContext(player));
     }
 
     public static ItemStack getEmptySuccessItem(final ItemStack itemStack, final Player player) {
@@ -83,7 +83,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
                     ItemStack itemStack = updatedPlaceContext.getItemInHand();
                     BlockState placedState = level.getBlockState(pos);
                     if (placedState.is(placementState.getBlock())) {
-                        this.updateCustomBlockEntityTag(pos, level, player, itemStack, placedState);
+                        updateCustomBlockEntityTag(level, player, pos, itemStack);
                         placedState.getBlock().setPlacedBy(level, pos, placedState, player, itemStack);
                         if (player instanceof ServerPlayer serverPlayer) {
                             CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos, itemStack);
@@ -112,7 +112,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
 
     @Override
     public InteractionResult use(final Level level, final Player player, final InteractionHand hand) {
-            if (player.isInFluid(FluidTags.WATER) && player.isCrouching()) {
+            if (player.isInWater() && player.isCrouching()) {
                 player.startUsingItem(hand);
                 return InteractionResult.SUCCESS;
             }

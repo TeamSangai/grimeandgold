@@ -30,7 +30,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
 public class SiftLarvaEggBlock extends Block implements LiquidBlockContainer {
-    public static final MapCodec<SiftLarvaEggBlock> CODEC = simpleCodec(SiftLarvaEggBlock::new);
     private static final int MIN_TADPOLES_SPAWN = 1;
     private static final int MAX_TADPOLES_SPAWN = 2;
     private static final int DEFAULT_MIN_HATCH_TICK_DELAY = 3600;
@@ -39,11 +38,6 @@ public class SiftLarvaEggBlock extends Block implements LiquidBlockContainer {
     private static int minHatchTickDelay = 3600;
     private static int maxHatchTickDelay = 12000;
 
-
-
-    public MapCodec<SiftLarvaEggBlock> codec() {
-        return CODEC;
-    }
 
     public SiftLarvaEggBlock(final BlockBehaviour.Properties properties) {
         super(properties);

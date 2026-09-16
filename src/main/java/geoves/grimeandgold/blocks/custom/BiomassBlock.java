@@ -16,13 +16,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BiomassBlock extends Block {
-    public static final MapCodec<BiomassBlock> CODEC = simpleCodec(BiomassBlock::new);
     private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 13.0F);
-
-    public MapCodec<BiomassBlock> codec() {
-        return CODEC;
-    }
-
 
     public BiomassBlock(Properties properties) {
         super(properties);

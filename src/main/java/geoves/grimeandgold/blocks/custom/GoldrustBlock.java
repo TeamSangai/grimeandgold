@@ -21,12 +21,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 public class GoldrustBlock extends Block implements SiftPickup {
-    public static final MapCodec<GoldrustBlock> CODEC = simpleCodec(GoldrustBlock::new);
     private static final VoxelShape SHAPE = Block.column((double)16.0F, (double)0.0F, (double)16.0F);
-
-    public MapCodec<GoldrustBlock> codec() {
-        return CODEC;
-    }
 
     public GoldrustBlock(final Properties properties) {
         super(properties);

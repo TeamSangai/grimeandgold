@@ -29,12 +29,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 public class GrimeBlock extends Block implements SiftPickup {
-    public static final MapCodec<GrimeBlock> CODEC = simpleCodec(GrimeBlock::new);
     private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(16.0F, 0.0F, 14.0F);
 
-    public MapCodec<GrimeBlock> codec() {
-        return CODEC;
-    }
 
     public GrimeBlock(final BlockBehaviour.Properties properties) {
         super(properties);

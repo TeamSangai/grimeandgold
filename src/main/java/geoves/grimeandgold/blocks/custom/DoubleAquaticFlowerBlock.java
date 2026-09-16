@@ -28,14 +28,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
 public class DoubleAquaticFlowerBlock extends DoublePlantBlock implements LiquidBlockContainer {
-    public static final MapCodec<DoubleAquaticFlowerBlock> CODEC = simpleCodec(DoubleAquaticFlowerBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = DoublePlantBlock.HALF;
     private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(12.0, 0.0, 16.0);
 
-    @Override
-    public MapCodec<DoubleAquaticFlowerBlock> codec() {
-        return CODEC;
-    }
 
     public DoubleAquaticFlowerBlock(Properties properties) {
         super(properties);

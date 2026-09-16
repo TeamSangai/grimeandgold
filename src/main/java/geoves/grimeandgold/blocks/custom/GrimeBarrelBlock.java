@@ -21,7 +21,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
 public class GrimeBarrelBlock extends BaseEntityBlock {
-    public static final MapCodec<GrimeBarrelBlock> CODEC = simpleCodec(GrimeBarrelBlock::new);
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;;
     private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 14.0F);
 
@@ -66,11 +65,6 @@ public class GrimeBarrelBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(final BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Override

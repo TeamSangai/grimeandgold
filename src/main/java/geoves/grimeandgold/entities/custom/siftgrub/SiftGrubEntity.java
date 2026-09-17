@@ -1,6 +1,7 @@
-package geoves.grimeandgold.entities.custom;
+package geoves.grimeandgold.entities.custom.siftgrub;
 
-import geoves.grimeandgold.entities.ModEntityTypes;
+import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.items.ModItems;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -8,13 +9,14 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
-import net.minecraft.world.entity.ai.behavior.CountDownCooldownTicks;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
@@ -22,19 +24,12 @@ import net.minecraft.world.level.Level;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.behaviour.base.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.base.OneRandomBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.BreedWithPartner;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FollowTemptation;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.Panic;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.*;
 import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
@@ -43,6 +38,10 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOwner<SiftGrubEntity>, Bucketable {
+    private static final boolean USE_SLB = GrimeAndGold.USE_SBL;
+    private static final Brain.Provider<SiftGrubEntity> BRAIN_PROVIDER = SiftGrubAi.getBrainProvider();
+    public final AnimationState walkAnimationState = new AnimationState();
+    public final AnimationState idleAnimationState = new AnimationState();
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(SiftGrubEntity.class, EntityDataSerializers.BOOLEAN);
 
     public SiftGrubEntity(EntityType<? extends AgeableWaterCreature> type, Level level) {
@@ -53,7 +52,7 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
         return Animal.createAnimalAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 0.1)
                 .add(Attributes.MAX_HEALTH, 8.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25F);
+                .add(Attributes.MOVEMENT_SPEED, 0.14F);
     }
     @Override
     protected void defineSynchedData(final SynchedEntityData.Builder entityData) {
@@ -63,7 +62,10 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
 
     @Override
     protected Brain<? extends LivingEntity> makeBrain(Brain.Packed packedBrain) {
-        return new SmartBrainProvider<>(this).makeBrain(this, packedBrain);
+        if (USE_SLB) {
+            return new SmartBrainProvider<>(this).makeBrain(this, packedBrain);
+        }
+        return BRAIN_PROVIDER.makeBrain(this, packedBrain);
     }
 
     @Override
@@ -96,7 +98,9 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
                         new Panic<>().speedModifier(2).setRadius(5, 5),
                         new OneRandomBehaviour<>(
                                 new SetRandomWalkTarget<>(),
-                                new Idle<>().runFor(e -> e.getRandom().nextInt(30, 60))
+                                new Idle<>()
+                                        .runFor(e -> e.getRandom().nextInt(30, 60))
+
                         )
                 ),
                 new SetRandomLookTarget<>()
@@ -104,25 +108,30 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     }
 
     @Override
-    public List<? extends BehaviorControl<?>> getFightingBehaviours(SiftGrubEntity owner) {
-        return List.of(
-                new InvalidateAttackTarget<>(),
-                new SetWalkTargetToAttackTarget<>(),
-                new AnimatableMeleeAttack<>(0)
-        );
+    protected void customServerAiStep(ServerLevel level) {
+        super.customServerAiStep(level);
+        if (USE_SLB) {
+            this.getBrain().tick(level, this);
+        }
+        ProfilerFiller profiler = Profiler.get();
+        profiler.push("siftGrubBrain");
+        this.getBrain().tick(level, this);
+        profiler.pop();
+        profiler.push("siftGrubActivityUpdate");
+        SiftGrubAi.updateActivity(this);
+        profiler.pop();
     }
 
     @Override
-    protected void customServerAiStep(ServerLevel level) {
-        super.customServerAiStep(level);
-        // Idk what the profiler stuff is, or if it's necessary with SBL
-//        ProfilerFiller profiler = Profiler.get();
-//        profiler.push("siftGrubBrain");
-        this.getBrain().tick(level, this);
-//        profiler.pop();
-//        profiler.push("siftGrubActivityUpdate");
-//        SiftFlyAi.updateActivity(this);
-//        profiler.pop();
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+//            this.animate();
+        }
+    }
+
+    private void animate() {
+        this.walkAnimationState.startIfStopped(this.age);
     }
 
     @Override
@@ -152,16 +161,12 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
 
     @Override
     public ItemStack getBucketItemStack() {
-        return null;  // Todo
+        return new ItemStack(ModItems.SIFT_GRUB_BUCKET);
     }
 
     @Override
     public SoundEvent getPickupSound() {
-        return null;  // Todo
-    }
-
-    protected SoundEvent getFloppingOnLandSound() {
-        return null;  // Todo
+        return SoundEvents.BUCKET_FILL_TADPOLE;  // Todo: this ok?
     }
 
     @Override

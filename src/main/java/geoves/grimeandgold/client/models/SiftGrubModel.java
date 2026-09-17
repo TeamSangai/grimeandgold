@@ -3,9 +3,12 @@ package geoves.grimeandgold.client.models;// Made with Blockbench 5.1.6
 // Paste this class into your mod and generate all required imports
 
 
+import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.client.animations.SiftGrubAnimations;
 import geoves.grimeandgold.client.renderstates.SiftGrubRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 
 import net.minecraft.client.model.geom.ModelPart;
@@ -15,7 +18,6 @@ import net.minecraft.world.entity.Entity;
 
 @Environment(EnvType.CLIENT)
 public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final ModelPart Tail;
 	private final ModelPart bone;
 	private final ModelPart TailEnd;
@@ -33,6 +35,9 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 	private final ModelPart legB2;
 	private final ModelPart legC2;
 	private final ModelPart LegD2;
+	private final KeyframeAnimation idleAnimation;
+	private final KeyframeAnimation walkAnimation;
+	private final KeyframeAnimation siftAnimation;
 
     public SiftGrubModel(ModelPart root) {
         super(root);
@@ -53,6 +58,9 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 		this.legB2 = this.legsR.getChild("legB2");
 		this.legC2 = this.legsR.getChild("legC2");
 		this.LegD2 = this.legsR.getChild("LegD2");
+		this.idleAnimation = SiftGrubAnimations.IDLE.bake(root);
+		this.walkAnimation = SiftGrubAnimations.WALK.bake(root);
+		this.siftAnimation = SiftGrubAnimations.SIFT.bake(root);
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -100,5 +108,25 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 		PartDefinition LegD2 = legsR.addOrReplaceChild("LegD2", CubeListBuilder.create().texOffs(6, 7).addBox(0.0F, 0.0F, -0.5F, 2.0F, 0.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 0.0F, 3.5F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
+	}
+
+	@Override
+	public void setupAnim(SiftGrubRenderState state) {  // Todo: make this better
+		super.setupAnim(state);
+		float age = state.ageInTicks;
+//		GrimeAndGold.LOGGER.info(String.valueOf(state.walkAnimationSpeed));
+		if (state.walkAnimationSpeed > 0.01F) {
+			state.walkAnimationState.startIfStopped((int) age);
+			state.idleAnimationState.stop();
+//			GrimeAndGold.LOGGER.info("yeyeyee");
+			this.walkAnimation.apply(state.walkAnimationState, age);
+//			this.walkAnimation.apply(state.walkAnimationState, age, state.walkAnimationSpeed);
+		}
+		else {
+//			GrimeAndGold.LOGGER.info("COUGH");
+			state.idleAnimationState.startIfStopped((int) age);
+			state.walkAnimationState.stop();
+			this.idleAnimation.apply(state.idleAnimationState, age);
+		}
 	}
 }

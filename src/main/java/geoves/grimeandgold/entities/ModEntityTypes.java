@@ -1,7 +1,7 @@
 package geoves.grimeandgold.entities;
 
 import geoves.grimeandgold.GrimeAndGold;
-import geoves.grimeandgold.entities.custom.SiftGrubEntity;
+import geoves.grimeandgold.entities.custom.siftgrub.SiftGrubEntity;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

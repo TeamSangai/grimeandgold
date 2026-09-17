@@ -4,7 +4,7 @@ import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.entities.ModEntityTypes;
-import geoves.grimeandgold.entities.custom.SiftGrubEntity;
+import geoves.grimeandgold.entities.custom.siftgrub.SiftGrubEntity;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.sounds.ModSounds;
@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GrimeAndGold implements ModInitializer {
+	// whether to use SmartBrainLib, because it has problems with newer versions
+	public static final boolean USE_SBL = false;
 	public static final String MOD_ID = "grimeandgold";
 
 	// This logger is used to write text to the console and the log file.

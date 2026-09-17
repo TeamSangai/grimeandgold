@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 public class GrimeBlock extends Block implements SiftPickup {
-    private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(16.0F, 0.0F, 14.0F);
+    private static final VoxelShape SHAPE = Block.column(16.0F, 0.0F, 14.0F);
 
 
     public GrimeBlock(final BlockBehaviour.Properties properties) {

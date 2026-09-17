@@ -10,9 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -34,6 +32,13 @@ public class ModBlocks {
     public static final Block ANCHOR_BLOSSOM = registerBlock("anchor_blossom", properties -> new DoubleAquaticFlowerBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
     public static final Block SPIRAL_DAFFODIL = registerBlock("spiral_daffodil", properties -> new SpiralDafodilBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
     public static final Block BENTHIC_LOG = registerBlock("benthic_log", properties -> new RotatedPillarBlock(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block DESERT_LAVENDER = registerBlock("desert_lavender", properties -> new DryFlowerBlock(MobEffects.ABSORPTION, 60.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block GLOBE_THISTLE = registerBlock("globe_thistle", properties -> new DryFlowerBlock(MobEffects.INSTANT_HEALTH, 0.4F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block DESERT_PRIMROSE = registerBlock("desert_primrose", properties -> new DryFlowerBlock(MobEffects.INSTANT_HEALTH, 0.4F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block DESERT_POPPY = registerBlock("desert_poppy", properties -> new DryFlowerBedBlock(properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED), 2));;
+    public static final Block DRY_BUSH = registerBlock("dry_bush", properties -> new DryBushBlock(properties.mapColor(MapColor.COLOR_YELLOW).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block DRY_FERN = registerBlock("dry_fern", properties -> new DryVegetationBlock(properties.mapColor(MapColor.COLOR_YELLOW).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block DRY_TALL_FERN = registerBlock("dry_tall_fern", properties -> new TallDryGrassBlock(properties.mapColor(MapColor.COLOR_YELLOW).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
 
     private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name))));

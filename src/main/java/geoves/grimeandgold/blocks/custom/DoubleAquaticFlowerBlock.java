@@ -13,10 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.LiquidBlockContainer;
-import net.minecraft.world.level.block.TallSeagrassBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -29,7 +26,7 @@ import org.jspecify.annotations.Nullable;
 
 public class DoubleAquaticFlowerBlock extends DoublePlantBlock implements LiquidBlockContainer {
     public static final EnumProperty<DoubleBlockHalf> HALF = DoublePlantBlock.HALF;
-    private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(12.0, 0.0, 16.0);
+    private static final VoxelShape SHAPE = Block.column(12.0, 0.0, 16.0);
 
 
     public DoubleAquaticFlowerBlock(Properties properties) {

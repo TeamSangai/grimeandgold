@@ -29,7 +29,7 @@ import java.util.List;
 
 public class AquaticFlowerBlock extends VegetationBlock implements LiquidBlockContainer, SuspiciousEffectHolder {
 
-    private static final VoxelShape SHAPE = DoubleAquaticFlowerBlock.column(6.0F, 0.0F, 10.0F);
+    private static final VoxelShape SHAPE = Block.column(6.0F, 0.0F, 10.0F);
     private final SuspiciousStewEffects suspiciousStewEffects;
 
     public AquaticFlowerBlock(final Holder<MobEffect> suspiciousStewEffect, final float effectSeconds, final BlockBehaviour.Properties properties) {

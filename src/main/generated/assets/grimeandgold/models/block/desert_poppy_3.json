@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/flowerbed_3",
+  "textures": {
+    "flowerbed": "grimeandgold:block/desert_poppy",
+    "stem": "grimeandgold:block/desert_poppy_stem"
+  }
+}

@@ -5,7 +5,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import geoves.grimeandgold.GrimeAndGold;
-import geoves.grimeandgold.entities.ModEntityTypes;
+import geoves.grimeandgold.entities.ActivityTypes;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 
 import java.util.List;
-import java.util.Set;
 
 public class SiftGrubAi {
     // Feel free to change these
@@ -44,7 +44,7 @@ public class SiftGrubAi {
     }
 
     protected static List<ActivityData<SiftGrubEntity>> getActivities(SiftGrubEntity SiftGrub) {
-        return List.of(initCoreActivity(), initIdleActivity());
+        return List.of(initCoreActivity(), initIdleActivity(), initFindWaterActivity());
     }
 
     private static ActivityData<SiftGrubEntity> initCoreActivity() {
@@ -65,22 +65,39 @@ public class SiftGrubAi {
                 Activity.IDLE,
                 ImmutableList.of(
                         Pair.of(
-                                0,
+                                1,
                                 new RunOne<>(
                                         ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                                         ImmutableList.of(
-                                                Pair.of(RandomStroll.stroll(1.0F, 5, 3), 1)
+                                                Pair.of(RandomStroll.swim(1.0F), 1)
                                         )
                                 )
                         )
                 ),
                 ImmutableSet.of(
-                        Pair.of(MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_ABSENT)  // Todo: should be in water
+                        Pair.of(
+                                MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_PRESENT
+                        )
+                )
+        );
+    }
+
+    private static ActivityData<SiftGrubEntity> initFindWaterActivity() {
+        return ActivityData.create(
+                ActivityTypes.SEEK_WATER,
+                ImmutableList.of(
+                        Pair.of(0, TryFindLiquid.create(10, 1.0F, FluidTags.WATER)),
+                        Pair.of(1, RandomStroll.stroll(1.0F, false))
+                ),
+                ImmutableSet.of(
+                        Pair.of(
+                                MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_ABSENT
+                        )
                 )
         );
     }
 
     public static void updateActivity(SiftGrubEntity body) {
-        body.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.IDLE));
+        body.getBrain().setActiveActivityToFirstValid(ImmutableList.of(ActivityTypes.SEEK_WATER, Activity.IDLE));
     }
 }

@@ -3,6 +3,7 @@ package geoves.grimeandgold;
 import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
+import geoves.grimeandgold.entities.ActivityTypes;
 import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.entities.custom.siftgrub.SiftGrubEntity;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
@@ -34,6 +35,7 @@ public class GrimeAndGold implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
 		ModSounds.registerSounds();
+		ActivityTypes.registerCustomActivities();
 
 		this.registerModEntities();
 	}

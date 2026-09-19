@@ -3,14 +3,18 @@ package geoves.grimeandgold.client.models;// Made with Blockbench 5.1.6
 // Paste this class into your mod and generate all required imports
 
 
+import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.client.animations.SiftGrubAnimations;
 import geoves.grimeandgold.client.renderstates.SiftGrubRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
 
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 @Environment(EnvType.CLIENT)
@@ -33,6 +37,9 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 	private final ModelPart legB2;
 	private final ModelPart legC2;
 	private final ModelPart LegD2;
+	private final KeyframeAnimation walkAnimation;
+	private final KeyframeAnimation idleAnimation;
+	private final KeyframeAnimation siftAnimation;
 
     public SiftGrubModel(ModelPart root) {
         super(root);
@@ -53,6 +60,9 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 		this.legB2 = this.legsR.getChild("legB2");
 		this.legC2 = this.legsR.getChild("legC2");
 		this.LegD2 = this.legsR.getChild("LegD2");
+		this.walkAnimation = SiftGrubAnimations.WALK.bake(root);
+		this.idleAnimation = SiftGrubAnimations.IDLE.bake(root);
+		this.siftAnimation = SiftGrubAnimations.SIFT.bake(root);
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -101,4 +111,12 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
+
+	@Override
+	public void setupAnim(SiftGrubRenderState state) {
+		super.setupAnim(state);
+		this.walkAnimation.applyWalk(state.walkAnimationPos, state.walkAnimationSpeed, 15, 69);
+		this.idleAnimation.applyWalk(state.walkAnimationPos + 22, state.walkAnimationSpeed + 22, 15, 69);
+	}
+
 }

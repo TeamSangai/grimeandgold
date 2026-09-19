@@ -17,10 +17,13 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.behaviour.base.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.base.OneRandomBehaviour;
@@ -46,12 +49,20 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
 
     public SiftGrubEntity(EntityType<? extends AgeableWaterCreature> type, Level level) {
         super(type, level);
+        if (level.isClientSide()) {
+            this.walkAnimationState.start(this.age);
+            this.idleAnimationState.start(this.age);
+        }
+        this.setPathfindingMalus(PathType.WATER, 0.0F);
+        this.navigation = new AmphibiousPathNavigation(this, level);
     }
+
     public static AttributeSupplier.Builder createAttributes() {
         // Feel free to mess with these whenever you want. Might add more attributes later
         return Animal.createAnimalAttributes()
                 .add(Attributes.ATTACK_DAMAGE, 0.1)
                 .add(Attributes.MAX_HEALTH, 8.0)
+                .add(Attributes.WATER_MOVEMENT_EFFICIENCY, 1.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.14F);
     }
     @Override
@@ -126,12 +137,11 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-//            this.animate();
+            this.animate();
         }
     }
 
     private void animate() {
-        this.walkAnimationState.startIfStopped(this.age);
     }
 
     @Override

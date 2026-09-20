@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "suspicious_stew",
+  "ingredients": [
+    "minecraft:bowl",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "grimeandgold:desert_primrose"
+  ],
+  "result": {
+    "components": {
+      "minecraft:suspicious_stew_effects": [
+        {
+          "duration": 1200,
+          "id": "minecraft:absorption"
+        }
+      ]
+    },
+    "id": "minecraft:suspicious_stew"
+  }
+}

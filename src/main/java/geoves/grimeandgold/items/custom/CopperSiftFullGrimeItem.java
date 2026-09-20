@@ -42,6 +42,8 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
+import static java.text.ListFormat.Type.OR;
+
 public class CopperSiftFullGrimeItem extends BlockItem {
     public static final ResourceKey<LootTable> GRIME_LOOT = ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "sifting_grime"));
 
@@ -53,7 +55,7 @@ public class CopperSiftFullGrimeItem extends BlockItem {
     protected boolean canPlace(final BlockPlaceContext context, final BlockState stateForPlacement) {
         Player player = context.getPlayer();
         assert player != null;
-        return (!player.isInWater() && !this.mustSurvive() || !player.isInWater() && stateForPlacement.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(stateForPlacement, context.getClickedPos(), CollisionContext.placementContext(player));
+        return (!this.mustSurvive() || stateForPlacement.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel().isUnobstructed(stateForPlacement, context.getClickedPos(), CollisionContext.placementContext(player));
     }
 
     public static ItemStack getEmptySuccessItem(final ItemStack itemStack, final Player player) {
@@ -67,37 +69,42 @@ public class CopperSiftFullGrimeItem extends BlockItem {
         } else if (!placeContext.canPlace()) {
             return InteractionResult.FAIL;
         } else {
-            BlockPlaceContext updatedPlaceContext = this.updatePlacementContext(placeContext);
-            if (updatedPlaceContext == null) {
-                return InteractionResult.FAIL;
+            assert placeContext.getPlayer() != null;
+            if (placeContext.getPlayer().isInWater() && placeContext.getPlayer().isCrouching()) {
+                return InteractionResult.PASS;
             } else {
-                BlockState placementState = this.getPlacementState(updatedPlaceContext);
-                if (placementState == null) {
-                    return InteractionResult.FAIL;
-                } else if (!this.placeBlock(updatedPlaceContext, placementState)) {
+                BlockPlaceContext updatedPlaceContext = this.updatePlacementContext(placeContext);
+                if (updatedPlaceContext == null) {
                     return InteractionResult.FAIL;
                 } else {
-                    BlockPos pos = updatedPlaceContext.getClickedPos();
-                    Level level = updatedPlaceContext.getLevel();
-                    Player player = updatedPlaceContext.getPlayer();
-                    ItemStack itemStack = updatedPlaceContext.getItemInHand();
-                    BlockState placedState = level.getBlockState(pos);
-                    if (placedState.is(placementState.getBlock())) {
-                        updateCustomBlockEntityTag(level, player, pos, itemStack);
-                        placedState.getBlock().setPlacedBy(level, pos, placedState, player, itemStack);
-                        if (player instanceof ServerPlayer serverPlayer) {
-                            CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos, itemStack);
+                    BlockState placementState = this.getPlacementState(updatedPlaceContext);
+                    if (placementState == null) {
+                        return InteractionResult.FAIL;
+                    } else if (!this.placeBlock(updatedPlaceContext, placementState)) {
+                        return InteractionResult.FAIL;
+                    } else {
+                        BlockPos pos = updatedPlaceContext.getClickedPos();
+                        Level level = updatedPlaceContext.getLevel();
+                        Player player = updatedPlaceContext.getPlayer();
+                        ItemStack itemStack = updatedPlaceContext.getItemInHand();
+                        BlockState placedState = level.getBlockState(pos);
+                        if (placedState.is(placementState.getBlock())) {
+                            updateCustomBlockEntityTag(level, player, pos, itemStack);
+                            placedState.getBlock().setPlacedBy(level, pos, placedState, player, itemStack);
+                            if (player instanceof ServerPlayer serverPlayer) {
+                                CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, pos, itemStack);
+                            }
                         }
-                    }
 
-                    int durability = itemStack.getDamageValue();
-                    SoundType soundType = placedState.getSoundType();
-                    level.playSound(null, pos, this.getPlaceSound(placedState), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
-                    level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, placedState));
-                    assert player != null;
-                    player.setItemInHand(player.getUsedItemHand(), getEmptySuccessItem(itemStack, player));
-                    player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
-                    return InteractionResult.SUCCESS;
+                        int durability = itemStack.getDamageValue();
+                        SoundType soundType = placedState.getSoundType();
+                        level.playSound(null, pos, this.getPlaceSound(placedState), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
+                        level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, placedState));
+                        assert player != null;
+                        player.setItemInHand(player.getUsedItemHand(), getEmptySuccessItem(itemStack, player));
+                        player.getItemInHand(player.getUsedItemHand()).setDamageValue(durability);
+                        return InteractionResult.SUCCESS;
+                    }
                 }
             }
         }

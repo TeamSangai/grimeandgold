@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "grimeandgold:block/benthic_wall_branch",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "grimeandgold:block/benthic_wall_branch"
+    },
+    "facing=south": {
+      "model": "grimeandgold:block/benthic_wall_branch",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "grimeandgold:block/benthic_wall_branch",
+      "y": 270
+    }
+  }
+}

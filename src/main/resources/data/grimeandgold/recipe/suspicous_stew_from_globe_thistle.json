@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "suspicious_stew",
+  "ingredients": [
+    "minecraft:bowl",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "grimeandgold:globe_thistle"
+  ],
+  "result": {
+    "components": {
+      "minecraft:suspicious_stew_effects": [
+        {
+          "duration": 1,
+          "id": "minecraft:instant_health"
+        }
+      ]
+    },
+    "id": "minecraft:suspicious_stew"
+  }
+}

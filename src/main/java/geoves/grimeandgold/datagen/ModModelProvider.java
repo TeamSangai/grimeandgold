@@ -11,9 +11,6 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Blocks;
 
 
 public class ModModelProvider extends FabricModelProvider {
@@ -23,7 +20,9 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
-            blockModelGenerators.createFlowerBed(ModBlocks.DESERT_POPPY);
+        blockModelGenerators.createFlowerBed(ModBlocks.DESERT_POPPY);
+        blockModelGenerators.createCrossBlock(ModBlocks.BENTHIC_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCoralFans(ModBlocks.BENTHIC_BRANCH, ModBlocks.BENTHIC_WALL_BRANCH);
         blockModelGenerators.createCrossBlock(ModBlocks.DESERT_LAVENDER, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DESERT_PRIMROSE, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.GLOBE_THISTLE, BlockModelGenerators.PlantType.NOT_TINTED);
@@ -51,6 +50,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(ModBlocks.DRY_TALL_FERN.asItem(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModBlocks.BENTHIC_SAPLING.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModBlocks.DRY_FERN.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModBlocks.DESERT_LAVENDER.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModBlocks.DESERT_PRIMROSE.asItem(), ModelTemplates.FLAT_ITEM);

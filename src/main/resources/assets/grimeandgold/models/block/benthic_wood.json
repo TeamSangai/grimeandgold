@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "grimeandgold:block/benthic_log",
+    "side": "grimeandgold:block/benthic_log"
+  }
+}

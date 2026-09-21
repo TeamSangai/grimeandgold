@@ -6,16 +6,8 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "terrain_matching",
-        "location": "grimeandgold:structure/geoves/woodfalls/variant1",
-        "processors": {
-          "processors": [
-            {
-              "processor_type": "minecraft:gravity",
-              "heightmap": "OCEAN_FLOOR_WG",
-              "offset": -1
-            }
-          ]
-        },
+        "location": "grimeandgold:geoves/woodfalls/variant1",
+        "processors": "minecraft:empty",
         "override_liquid_settings": "apply_waterlogging"
       }
     },{
@@ -23,16 +15,8 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "terrain_matching",
-        "location": "grimeandgold:structure/geoves/woodfalls/large_variant1",
-        "processors": {
-          "processors": [
-            {
-              "processor_type": "minecraft:gravity",
-              "heightmap": "OCEAN_FLOOR_WG",
-              "offset": -1
-            }
-          ]
-        },
+        "location": "grimeandgold:geoves/woodfalls/large_variant1",
+        "processors": "minecraft:empty",
         "override_liquid_settings": "apply_waterlogging"
       }
     }

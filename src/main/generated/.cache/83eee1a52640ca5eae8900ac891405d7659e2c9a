@@ -1,1 +1,3 @@
 // 26.3	-999999999-01-01T00:00:00	GrimeAndGold/Tags for minecraft:block
+e062e6c139cbe0f4ba5de39938a2dc1027763cbe data/minecraft/tags/block/mineable/shovel.json
+e062e6c139cbe0f4ba5de39938a2dc1027763cbe data/minecraft/tags/block/needs_stone_tool.json

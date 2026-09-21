@@ -12,15 +12,23 @@
   "block.grimeandgold.grime": "Grime", "block.grimeandgold.paydirt": "Paydirt",
   "block.grimeandgold.goldrust": "Goldrust", "block.grimeandgold.ferrisoil": "Ferrisoil",
   "block.grimeandgold.decomposter": "Decomposter", "block.grimeandgold.biomass": "Biomass",
+
+  "block.grimeandgold.gold_slag": "Gold Slag","block.grimeandgold.iron_slag": "Iron Slag","block.grimeandgold.copper_slag": "Copper Slag",
+  "block.grimeandgold.cooled_gold_slag": "Cooled Gold Slag","block.grimeandgold.cooled_iron_slag": "Cooled Iron Slag","block.grimeandgold.cooled_copper_slag": "Cooled Copper Slag",
+
   "block.grimeandgold.grimebarrel": "Grime Burrow","block.grimeandgold.fly_nest": "Sift-Fly Nest",
-  "block.grimeandgold.sift_larva_egg": "Sift-Grub Egg","block.grimeandgold.aquatic_spin_rose": "Aquatic Spin Rose",
+  "block.grimeandgold.sift_larva_egg": "Sift-Grub Egg","block.grimeandgold.grime_bricks": "Grime Bricks",
+
+  "block.grimeandgold.aquatic_spin_rose": "Aquatic Spin Rose",
   "block.grimeandgold.anchor_blossom": "Anchor Blossom","block.grimeandgold.spiral_daffodil": "Spiral Daffodil",
+
   "block.grimeandgold.desert_lavender": "Desert Lavender","block.grimeandgold.desert_primrose": "Desert Primrose",
   "block.grimeandgold.dry_bush": "Dry Bush","block.grimeandgold.dry_fern": "Dry Fern",
   "block.grimeandgold.dry_tall_fern": "Tall Dry Fern","block.grimeandgold.desert_poppy": "Desert  Poppies",
   "block.grimeandgold.globe_thistle": "Globe Thistle",
 
   "block.grimeandgold.benthic_log": "Benthic Log", "block.grimeandgold.benthic_wood": "Benthic Wood",
+  "block.grimeandgold.benthic_branch": "Benthic Branches","block.grimeandgold.benthic_sapling": "Benthic Sapling",
 
   "creativemodetab.grimeandgold.grimeandgold": "Grime And Gold",
   "container.grimeandgold.grimebarrel": "Grime Burrow",

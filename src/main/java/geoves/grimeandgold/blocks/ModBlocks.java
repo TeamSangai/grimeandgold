@@ -27,6 +27,15 @@ public class ModBlocks {
     public static final Block FERRISOIL = registerBlock("ferrisoil", properties -> new FerrisoilBlock(properties.sound(SoundType.GRAVEL).strength(0.6f, 0.75f)));
     public static final Block GOLDRUST = registerBlock("goldrust", properties -> new GoldrustBlock(properties.sound(SoundType.GRAVEL).strength(0.6f, 0.75f)));
 
+
+    public static final Block GOLD_SLAG = registerBlock("gold_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
+    public static final Block IRON_SLAG = registerBlock("iron_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
+    public static final Block COPPER_SLAG = registerBlock("copper_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
+    public static final Block COOLED_GOLD_SLAG = registerBlock("cooled_gold_slag", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(3.0f, 3.5f)));
+    public static final Block COOLED_IRON_SLAG = registerBlock("cooled_iron_slag", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(3.0f, 3.5f)));
+    public static final Block COOLED_COPPER_SLAG = registerBlock("cooled_copper_slag", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(3.0f, 3.5f)));
+
+
     public static final Block DECOMPOSTER = registerBlock("decomposter", properties -> new DecomposterBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
 
     public static final Block GRIMEBARREL = registerBlock("grimebarrel", properties -> new GrimeBarrelBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
@@ -55,6 +64,10 @@ public class ModBlocks {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name))));
         registerBlockItem(name, toRegister);
         return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name), toRegister);
+    }
+
+    public static ResourceKey<Block> getRK(Block block) {
+        return BuiltInRegistries.BLOCK.getResourceKey(block).get();
     }
 
     private static void registerBlockItem(String name, Block block) {

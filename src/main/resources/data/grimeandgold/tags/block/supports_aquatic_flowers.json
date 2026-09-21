@@ -5,6 +5,8 @@
     "minecraft:clay",
     "#minecraft:moss_blocks",
     "grimeandgold:grimebarrel",
+    "grimeandgold:grime_bricks",
+    "grimeandgold:fly_nest",
     "grimeandgold:biomass"
   ]
 }

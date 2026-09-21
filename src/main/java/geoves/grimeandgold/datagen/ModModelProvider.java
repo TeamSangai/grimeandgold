@@ -20,14 +20,17 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
+        blockModelGenerators.createTrivialCube(ModBlocks.COOLED_COPPER_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COOLED_IRON_SLAG);
+        blockModelGenerators.createTrivialCube(ModBlocks.COOLED_GOLD_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COPPER_SLAG);
+        blockModelGenerators.createTrivialCube(ModBlocks.IRON_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.GOLD_SLAG);
+
         blockModelGenerators.createFlowerBed(ModBlocks.DESERT_POPPY);
-        blockModelGenerators.createCrossBlock(ModBlocks.BENTHIC_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+
         blockModelGenerators.createCoralFans(ModBlocks.BENTHIC_BRANCH, ModBlocks.BENTHIC_WALL_BRANCH);
-        blockModelGenerators.createCrossBlock(ModBlocks.DESERT_LAVENDER, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.DESERT_PRIMROSE, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.GLOBE_THISTLE, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.DRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.DRY_TALL_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
+
+        blockModelGenerators.createCrossBlock(ModBlocks.BENTHIC_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.DESERT_LAVENDER, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.DESERT_PRIMROSE, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GLOBE_THISTLE, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.DRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.DRY_TALL_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DRY_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
         //   blockModelGenerators.blockStateOutput.accept(
       //          MultiVariantGenerator.dispatch(ModBlocks.DECOMPOSTER).with(

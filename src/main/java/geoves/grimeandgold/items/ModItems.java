@@ -46,6 +46,10 @@ public class ModItems {
         return registerItem(id, SpawnEggItem::new, new Item.Properties().spawnEgg(type));
     }
 
+    public static ResourceKey<Item> getRK(Item item) {
+        return BuiltInRegistries.ITEM.getResourceKey(item).get();
+    }
+
     private static Item registerItem(ResourceKey<Item> id, Function<Item.Properties, Item> itemFactory, Item.Properties properties) {
         Item item = itemFactory.apply(properties.setId(id));
         if (item instanceof BlockItem blockItem) {

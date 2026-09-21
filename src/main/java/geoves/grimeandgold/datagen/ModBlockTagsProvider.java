@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 
 
@@ -21,5 +22,19 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
+        tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(ModBlocks.getRK(ModBlocks.COPPER_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.GOLD_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.IRON_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG));
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(ModBlocks.getRK(ModBlocks.COPPER_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.GOLD_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.IRON_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG));
     }
 }

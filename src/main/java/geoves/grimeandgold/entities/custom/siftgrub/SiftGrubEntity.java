@@ -2,7 +2,6 @@ package geoves.grimeandgold.entities.custom.siftgrub;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.items.ModItems;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,21 +17,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
-import net.tslat.smartbrainlib.api.core.behaviour.base.FirstApplicableBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.base.OneRandomBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.Panic;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.*;
 import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
@@ -86,36 +78,17 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
 
     @Override
     public List<? extends ExtendedSensor<?>> getSensors(SiftGrubEntity siftGrubEntity) {
-        return ObjectArrayList.of(
-                new NearbyLivingEntitySensor<>(),
-                new NearbyPlayersSensor<>(),
-                new HurtBySensor<>(),
-                new InWaterSensor<>()
-        );
+        return SiftGrubAi.getSensors(siftGrubEntity);
     }
 
     @Override
     public List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(SiftGrubEntity owner) {
-        return List.of(
-                new LookAtTarget<>().runFor(45, 90),
-                new MoveToWalkTarget<>()
-        );
+        return SiftGrubAi.getAlwaysRunningBehaviours(owner);
     }
 
     @Override
     public List<? extends BehaviorControl<?>> getIdleBehaviours(SiftGrubEntity owner) {
-        return List.of(
-                new FirstApplicableBehaviour<>(
-                        new Panic<>().speedModifier(2).setRadius(5, 5),
-                        new OneRandomBehaviour<>(
-                                new SetRandomWalkTarget<>(),
-                                new Idle<>()
-                                        .runFor(e -> e.getRandom().nextInt(30, 60))
-
-                        )
-                ),
-                new SetRandomLookTarget<>()
-        );
+        return SiftGrubAi.getIdleBehaviours(owner);
     }
 
     @Override
@@ -145,8 +118,20 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     }
 
     @Override
-    protected boolean shouldTakeDrowningDamage() {
-        return false;
+    protected void addAdditionalSaveData(final ValueOutput output) {
+        super.addAdditionalSaveData(output);
+        output.putBoolean("FromBucket", this.fromBucket());
+    }
+
+    @Override
+    protected void readAdditionalSaveData(final ValueInput input) {
+        super.readAdditionalSaveData(input);
+        this.setFromBucket(input.getBooleanOr("FromBucket", false));
+    }
+
+    @Override
+    public boolean requiresCustomPersistence() {
+        return super.requiresCustomPersistence() || this.fromBucket();
     }
 
     @Override

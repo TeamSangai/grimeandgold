@@ -60,11 +60,11 @@ public class SiftFlyEntity extends Animal implements SmartBrainOwner {
     public static AttributeSupplier.Builder createAttributes() {
         // Feel free to mess with these whenever you want. Might add more attributes later
         return Animal.createAnimalAttributes()
+//                .add(Attributes.OXYGEN_BONUS, 3.0F);  // Idk how much this affects it
                 .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.FLYING_SPEED, 0.96F)
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
-                .add(Attributes.TEMPT_RANGE, 69)
-                .add(Attributes.OXYGEN_BONUS, 3.0F);  // Idk how much this affects it
+                .add(Attributes.TEMPT_RANGE, 69);
     }
 
     @Override
@@ -134,6 +134,12 @@ public class SiftFlyEntity extends Animal implements SmartBrainOwner {
         }
         super.customServerAiStep(level);
     }
+
+    @Override
+    public int getMaxAirSupply() {
+        return 4800;
+    }
+
 
     @Override
     public boolean isFood(ItemStack itemStack) {

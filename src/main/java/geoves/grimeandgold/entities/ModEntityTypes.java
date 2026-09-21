@@ -18,7 +18,7 @@ public class ModEntityTypes {
             EntityType.Builder.of(SiftFlyEntity::new, MobCategory.CREATURE)
                     .sized(0.55F, 0.5F)
                     .eyeHeight(0.3F)
-                    .clientTrackingRange(8)
+                    .clientTrackingRange(10)
     );
 
     public static final EntityType<SiftGrubEntity> SIFT_GRUB = register(
@@ -27,7 +27,7 @@ public class ModEntityTypes {
                     .sized(0.4F, 0.3F)
                     .eyeHeight(0.13F)
                     .passengerAttachments(0.2375F)
-                    .clientTrackingRange(8)
+                    .clientTrackingRange(10)
     );
 
     private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {

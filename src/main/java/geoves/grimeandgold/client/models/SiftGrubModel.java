@@ -116,7 +116,6 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 	public void setupAnim(SiftGrubRenderState state) {
 		super.setupAnim(state);
 		this.walkAnimation.applyWalk(state.walkAnimationPos, state.walkAnimationSpeed, 15, 69);
-		this.idleAnimation.applyWalk(state.walkAnimationPos + 22, state.walkAnimationSpeed + 22, 15, 69);
+		this.idleAnimation.applyWalk(state.walkAnimationPos + 22, state.walkAnimationSpeed + 22, 15, 69);  // todo: this doesn't work when not moving
 	}
-
 }

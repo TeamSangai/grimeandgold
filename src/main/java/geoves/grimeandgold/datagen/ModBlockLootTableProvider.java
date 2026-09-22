@@ -22,7 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import static net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders.between;
 
 public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
-    protected ModBlockLootTableProvider(FabricPackOutput packOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public ModBlockLootTableProvider(FabricPackOutput packOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(packOutput, registriesFuture);
     }
 

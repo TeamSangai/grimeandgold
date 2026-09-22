@@ -11,6 +11,7 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TexturedModel;
 
 
 public class ModModelProvider extends FabricModelProvider {
@@ -23,6 +24,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialCube(ModBlocks.COOLED_COPPER_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COOLED_IRON_SLAG);
         blockModelGenerators.createTrivialCube(ModBlocks.COOLED_GOLD_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COPPER_SLAG);
         blockModelGenerators.createTrivialCube(ModBlocks.IRON_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.GOLD_SLAG);
+
+        blockModelGenerators.createFurnace(ModBlocks.SLAG_FURNACE, TexturedModel.ORIENTABLE);
 
         blockModelGenerators.createFlowerBed(ModBlocks.DESERT_POPPY);
 

@@ -30,6 +30,7 @@ public class ModCreativeTabs {
                         output.accept(ModBlocks.GOLD_SLAG);
 
                         output.accept(ModBlocks.DECOMPOSTER);
+                        output.accept(ModBlocks.SLAG_FURNACE);
 
                         output.accept(ModBlocks.GRIMEBARREL);
                         output.accept(ModBlocks.FLY_NEST);

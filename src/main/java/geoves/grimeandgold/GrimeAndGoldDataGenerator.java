@@ -11,8 +11,10 @@ public class GrimeAndGoldDataGenerator implements DataGeneratorEntrypoint {
 
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModBlockTagsProvider::new);
+		pack.addProvider(ModBlockLootTableProvider::new);
 		pack.addProvider(ModItemTagsProvider::new);
 		pack.addProvider(ModSoundsProvider::new);
+		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModEntityTagsProvider::new);
 	}
 }

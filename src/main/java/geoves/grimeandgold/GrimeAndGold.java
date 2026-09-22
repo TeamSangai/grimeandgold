@@ -8,6 +8,7 @@ import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.entities.custom.siftgrub.SiftGrubEntity;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
+import geoves.grimeandgold.recipe.ModRecipes;
 import geoves.grimeandgold.sounds.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
@@ -35,6 +36,7 @@ public class GrimeAndGold implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
 		ModSounds.registerSounds();
+		ModRecipes.registerModRecipes();
 		ActivityTypes.registerCustomActivities();
 
 		this.registerModEntities();

@@ -37,6 +37,7 @@ public class ModBlocks {
 
 
     public static final Block DECOMPOSTER = registerBlock("decomposter", properties -> new DecomposterBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
+    public static final Block SLAG_FURNACE = registerBlock("slag_furnace", properties -> new SlagFurnaceBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
 
     public static final Block GRIMEBARREL = registerBlock("grimebarrel", properties -> new GrimeBarrelBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
     public static final Block FLY_NEST = registerBlock("fly_nest", properties -> new FlynestBlock(properties.sound(SoundType.PACKED_MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(1.0f, 3.0f)));

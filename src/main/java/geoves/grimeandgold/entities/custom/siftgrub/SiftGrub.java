@@ -67,6 +67,7 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
     protected void defineSynchedData(final SynchedEntityData.Builder entityData) {
         super.defineSynchedData(entityData);
         entityData.define(FROM_BUCKET, false);
+        entityData.define(DATA_STATE, State.IDLING);
     }
 
     @Override
@@ -223,8 +224,8 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
 
     public enum State {
         IDLING(0),
-        SEARCHING(4),
-        SIFTING(3);
+        SEARCHING(1),
+        SIFTING(2);
 
         public static final IntFunction<SiftGrub.State> BY_ID = ByIdMap.continuous(SiftGrub.State::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, SiftGrub.State> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, SiftGrub.State::id);

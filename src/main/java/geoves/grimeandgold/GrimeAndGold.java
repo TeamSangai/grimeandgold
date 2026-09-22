@@ -4,8 +4,9 @@ import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.entities.ActivityTypes;
+import geoves.grimeandgold.entities.ModEntityDataSerializers;
 import geoves.grimeandgold.entities.ModEntityTypes;
-import geoves.grimeandgold.entities.custom.siftgrub.SiftGrubEntity;
+import geoves.grimeandgold.entities.custom.siftgrub.SiftGrub;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.recipe.ModRecipes;
@@ -38,6 +39,7 @@ public class GrimeAndGold implements ModInitializer {
 		ModSounds.registerSounds();
 		ModRecipes.registerModRecipes();
 		ActivityTypes.registerCustomActivities();
+		ModEntityDataSerializers.register();
 
 		this.registerModEntities();
 	}
@@ -45,7 +47,7 @@ public class GrimeAndGold implements ModInitializer {
 	private void registerModEntities() {
 		// Idk why the warning
 		FabricDefaultAttributeRegistry.register(ModEntityTypes.SIFT_FLY, SiftFlyEntity.createAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntityTypes.SIFT_GRUB, SiftGrubEntity.createAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntityTypes.SIFT_GRUB, SiftGrub.createAttributes());
 	}
 
 	// M: Yooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo do you see this?

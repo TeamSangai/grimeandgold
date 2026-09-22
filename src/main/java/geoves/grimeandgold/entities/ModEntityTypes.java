@@ -1,7 +1,7 @@
 package geoves.grimeandgold.entities;
 
 import geoves.grimeandgold.GrimeAndGold;
-import geoves.grimeandgold.entities.custom.siftgrub.SiftGrubEntity;
+import geoves.grimeandgold.entities.custom.siftgrub.SiftGrub;
 import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,9 +21,9 @@ public class ModEntityTypes {
                     .clientTrackingRange(10)
     );
 
-    public static final EntityType<SiftGrubEntity> SIFT_GRUB = register(
+    public static final EntityType<SiftGrub> SIFT_GRUB = register(
             "sift_grub",
-            EntityType.Builder.of(SiftGrubEntity::new, MobCategory.CREATURE)
+            EntityType.Builder.of(SiftGrub::new, MobCategory.CREATURE)
                     .sized(0.4F, 0.3F)
                     .eyeHeight(0.13F)
                     .passengerAttachments(0.2375F)

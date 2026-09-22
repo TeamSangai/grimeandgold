@@ -1,14 +1,19 @@
 package geoves.grimeandgold.entities.custom.siftgrub;
 
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.entities.ModEntityDataSerializers;
 import geoves.grimeandgold.items.ModItems;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.*;
@@ -26,24 +31,25 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
-import net.tslat.smartbrainlib.api.core.sensor.vanilla.*;
 import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.IntFunction;
 
-public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOwner<SiftGrubEntity>, Bucketable {
-    private static final boolean USE_SLB = GrimeAndGold.USE_SBL;
-    private static final Brain.Provider<SiftGrubEntity> BRAIN_PROVIDER = SiftGrubAi.getBrainProvider();
+public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<SiftGrub>, Bucketable {
     public final AnimationState walkAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(SiftGrubEntity.class, EntityDataSerializers.BOOLEAN);
+    public final AnimationState siftAnimationState = new AnimationState();
+    private static final boolean USE_SLB = GrimeAndGold.USE_SBL;
+    private static final Brain.Provider<SiftGrub> BRAIN_PROVIDER = SiftGrubAi.getBrainProvider();
+    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(SiftGrub.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<SiftGrub.State> DATA_STATE = SynchedEntityData.defineId(SiftGrub.class, ModEntityDataSerializers.SIFT_GRUB_STATE);
 
-    public SiftGrubEntity(EntityType<? extends AgeableWaterCreature> type, Level level) {
+    public SiftGrub(EntityType<? extends AgeableWaterCreature> type, Level level) {
         super(type, level);
         if (level.isClientSide()) {
             this.walkAnimationState.start(this.age);
-            this.idleAnimationState.start(this.age);
         }
         this.setPathfindingMalus(PathType.WATER, 0.0F);
         this.navigation = new AmphibiousPathNavigation(this, level);
@@ -72,22 +78,22 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     }
 
     @Override
-    public Brain<SiftGrubEntity> getBrain() {
-        return (Brain<SiftGrubEntity>) super.getBrain();
+    public Brain<SiftGrub> getBrain() {
+        return (Brain<SiftGrub>) super.getBrain();
     }
 
     @Override
-    public List<? extends ExtendedSensor<?>> getSensors(SiftGrubEntity siftGrubEntity) {
-        return SiftGrubAi.getSensors(siftGrubEntity);
+    public List<? extends ExtendedSensor<?>> getSensors(SiftGrub siftGrub) {
+        return SiftGrubAi.getSensors(siftGrub);
     }
 
     @Override
-    public List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(SiftGrubEntity owner) {
+    public List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(SiftGrub owner) {
         return SiftGrubAi.getAlwaysRunningBehaviours(owner);
     }
 
     @Override
-    public List<? extends BehaviorControl<?>> getIdleBehaviours(SiftGrubEntity owner) {
+    public List<? extends BehaviorControl<?>> getIdleBehaviours(SiftGrub owner) {
         return SiftGrubAi.getIdleBehaviours(owner);
     }
 
@@ -129,6 +135,52 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
         this.setFromBucket(input.getBooleanOr("FromBucket", false));
     }
 
+    private SiftGrub.State getState() {
+        return this.entityData.get(DATA_STATE);
+    }
+
+    private SiftGrub setState(SiftGrub.State state) {
+        this.entityData.set(DATA_STATE, state);
+        return this;
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+        if (DATA_STATE.equals(accessor)) {
+            SiftGrub.State state = this.getState();
+            this.resetAnimations();
+            switch (state) {
+                case IDLING:
+                    this.idleAnimationState.startIfStopped(this.tickCount);
+                    break;
+                case SIFTING:
+                    this.siftAnimationState.startIfStopped(this.tickCount);
+                    break;
+            }
+            this.refreshDimensions();
+        }
+        super.onSyncedDataUpdated(accessor);
+    }
+
+    public SiftGrub updateState(SiftGrub.State state) {
+        switch (state) {
+            case IDLING:
+                this.setState(State.IDLING);
+                break;
+            case SIFTING:
+                this.setState(State.SIFTING);
+                break;
+            case SEARCHING:
+                this.setState(State.SEARCHING);
+        }
+        return this;
+    }
+
+    private void resetAnimations() {
+        this.idleAnimationState.stop();
+        this.siftAnimationState.stop();
+    }
+
     @Override
     public boolean requiresCustomPersistence() {
         return super.requiresCustomPersistence() || this.fromBucket();
@@ -167,5 +219,23 @@ public class SiftGrubEntity extends AgeableWaterCreature implements SmartBrainOw
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
         return null;
+    }
+
+    public enum State {
+        IDLING(0),
+        SEARCHING(4),
+        SIFTING(3);
+
+        public static final IntFunction<SiftGrub.State> BY_ID = ByIdMap.continuous(SiftGrub.State::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+        public static final StreamCodec<ByteBuf, SiftGrub.State> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, SiftGrub.State::id);
+        private final int id;
+
+        State(final int id) {
+            this.id = id;
+        }
+
+        public int id() {
+            return this.id;
+        }
     }
 }

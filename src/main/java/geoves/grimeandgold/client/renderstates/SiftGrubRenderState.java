@@ -9,4 +9,5 @@ import net.minecraft.world.entity.AnimationState;
 public class SiftGrubRenderState extends LivingEntityRenderState {
     public final AnimationState walkAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState siftAnimationState = new AnimationState();
 }

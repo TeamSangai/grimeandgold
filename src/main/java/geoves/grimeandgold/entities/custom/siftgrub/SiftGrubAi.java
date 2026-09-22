@@ -9,6 +9,7 @@ import geoves.grimeandgold.entities.ActivityTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
@@ -33,14 +34,17 @@ import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 
 import java.util.List;
+import java.util.Map;
 
 public class SiftGrubAi {
     // Feel free to change these
     private static final float PANIC_SPEED_MULTIPLIER = 2.0F;
     private static final int LOOK_DURATION_MIN = 45;
     private static final int LOOK_DURATION_MAX = 90;
+    private static final int IDLE_DURATION_MIN = 30;
+    private static final int IDLE_DURATION_MAX = 60;
 
-    protected static Brain.Provider<SiftGrubEntity> getBrainProvider() {
+    protected static Brain.Provider<SiftGrub> getBrainProvider() {
         return Brain.provider(
                 List.of(
                         // memory stuff
@@ -55,15 +59,15 @@ public class SiftGrubAi {
         );
     }
 
-    protected static void initMemories(SiftGrubEntity SiftGrub, RandomSource random) {
+    protected static void initMemories(SiftGrub SiftGrub, RandomSource random) {
         GrimeAndGold.LOGGER.info("SiftGrubAI: yo wassup");
     }
 
-    protected static List<ActivityData<SiftGrubEntity>> getActivities(SiftGrubEntity SiftGrub) {
+    protected static List<ActivityData<SiftGrub>> getActivities(SiftGrub SiftGrub) {
         return List.of(initCoreActivity(), initIdleActivity(), initFindWaterActivity());
     }
 
-    private static ActivityData<SiftGrubEntity> initCoreActivity() {
+    private static ActivityData<SiftGrub> initCoreActivity() {
         return ActivityData.create(
                 Activity.CORE,
                 0,
@@ -77,37 +81,28 @@ public class SiftGrubAi {
     }
 
     /**
-     * walk around
-     * sift
-     *      if sifty:
-     *          take back to burrow, reduce time to pupate
-     * idle
-     * repeat
+     * Idle, wander around, sift, repeat
      */
-    private static ActivityData<SiftGrubEntity> initIdleActivity() {
+    private static ActivityData<SiftGrub> initIdleActivity() {  // todo: make resting a separate activity
         return ActivityData.create(
                 Activity.IDLE,
                 ImmutableList.of(
+                        Pair.of(0, new RandomLookAround(UniformInt.of(150, 250), 30.0F, 0.0F, 0.0F)),
+//                        Pair.of(1, RandomStroll.swim(1.0F))
                         Pair.of(
                                 0,
                                 new GateBehavior<>(
                                         ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
                                         ImmutableSet.of(),
-                                        GateBehavior.OrderPolicy.ORDERED,
-                                        GateBehavior.RunningPolicy.TRY_ALL,
+                                        GateBehavior.OrderPolicy.SHUFFLED,
+                                        GateBehavior.RunningPolicy.RUN_ONE,
                                         ImmutableList.of(
-                                                Pair.of(RandomStroll.swim(1.0F), 2),
-                                                Pair.of(SetWalkTargetFromLookTarget.create(0.5F, 3), 3),
-                                                Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)
-                                        )
-                                )
-                        ),
-                        Pair.of(
-                                1,
-                                new RunOne<>(
-                                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
-                                        ImmutableList.of(
-                                                Pair.of(RandomStroll.swim(1.0F), 1)
+//                                                Pair.of(new SiftGrubAi.Resting(), 1),
+//                                                Pair.of(new RandomLookAround(UniformInt.of(150, 250), 30.0F, 0.0F, 0.0F), 20),
+                                                Pair.of(new DoNothing(30, 100), 1),
+                                                Pair.of(RandomStroll.swim(1.0F), 1),
+//                                                Pair.of(new SiftGrubAi.Sifting(), 1),
+                                                Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)  // idk what this is for
                                         )
                                 )
                         )
@@ -120,7 +115,7 @@ public class SiftGrubAi {
         );
     }
 
-    private static ActivityData<SiftGrubEntity> initFindWaterActivity() {
+    private static ActivityData<SiftGrub> initFindWaterActivity() {
         return ActivityData.create(
                 ActivityTypes.SEEK_WATER,
                 ImmutableList.of(
@@ -135,13 +130,55 @@ public class SiftGrubAi {
         );
     }
 
-    public static void updateActivity(SiftGrubEntity body) {
+    public static void updateActivity(SiftGrub body) {
         body.getBrain().setActiveActivityToFirstValid(ImmutableList.of(ActivityTypes.SEEK_WATER, Activity.IDLE));
+    }
+
+    /**
+     * <p>
+     * Sift grub attempts to sift on any surface it finds itself on after wandering around <br>
+     * Use sifting animation
+     * </p>
+     */
+    private static class Sifting extends Behavior<SiftGrub> {
+        private Sifting() {
+            super(
+                    Map.of(
+                            MemoryModuleType.IS_PANICKING,
+                            MemoryStatus.VALUE_ABSENT,
+                            MemoryModuleType.WALK_TARGET,
+                            MemoryStatus.VALUE_ABSENT
+                    ),
+                    100
+            );
+        }
+    }
+
+    /**
+     * <p>
+     * Chilling after sifting (or attempting to) <br>
+     * Use idle animation
+     * </p>
+     */
+    private static class Resting extends Behavior<SiftGrub> {
+        private Resting() {
+
+            super(
+                    Map.of(
+                            MemoryModuleType.WALK_TARGET,
+                            MemoryStatus.VALUE_PRESENT,
+                            MemoryModuleType.IS_PANICKING,
+                            MemoryStatus.VALUE_ABSENT
+                    ),
+                    100  // 600
+            );
+        }
+
     }
 
      // <=================== SBL STUFF BELOW ====================>
 
-    protected static List<? extends ExtendedSensor<?>> getSensors(SiftGrubEntity siftGrubEntity) {
+    protected static List<? extends ExtendedSensor<?>> getSensors(SiftGrub siftGrub) {
         return ObjectArrayList.of(
                 new NearbyLivingEntitySensor<>(),
                 new NearbyPlayersSensor<>(),
@@ -150,14 +187,14 @@ public class SiftGrubAi {
         );
     }
 
-    protected static List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(SiftGrubEntity owner) {
+    protected static List<? extends BehaviorControl<?>> getAlwaysRunningBehaviours(SiftGrub owner) {
         return List.of(
                 new LookAtTarget<>().runFor(45, 90),
                 new MoveToWalkTarget<>()
         );
     }
 
-    protected static List<? extends BehaviorControl<?>> getIdleBehaviours(SiftGrubEntity owner) {
+    protected static List<? extends BehaviorControl<?>> getIdleBehaviours(SiftGrub owner) {
         return List.of(
                 new FirstApplicableBehaviour<>(
                         new Panic<>().speedModifier(2).setRadius(5, 5),

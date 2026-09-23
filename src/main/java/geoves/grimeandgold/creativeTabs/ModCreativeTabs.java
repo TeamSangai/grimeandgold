@@ -18,6 +18,9 @@ public class ModCreativeTabs {
                     .title(Component.translatable("creativemodetab.grimeandgold.grimeandgold"))
                     .displayItems((parameters, output) -> {
                         output.accept(ModBlocks.BIOMASS);
+                        output.accept(ModBlocks.HULL_PLATING);
+                        output.accept(ModBlocks.HULL_PLATING_SLAB);
+                        output.accept(ModBlocks.HULL_PLATING_STAIRS);
 
                         output.accept(ModBlocks.BENTHIC_LOG);
                         output.accept(ModBlocks.BENTHIC_WOOD);

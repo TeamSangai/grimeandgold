@@ -1,5 +1,6 @@
 package geoves.grimeandgold.menu;
 
+import geoves.grimeandgold.GrimeAndGold;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -8,7 +9,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class SlagFurnaceScreen extends AbstractContainerScreen<SlagFurnaceMenu> {
-    private static final Identifier TEXTURE = Identifier.withDefaultNamespace("textures/gui/container/dispenser.png");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "textures/gui/slag_furnace_ui");
 
     public SlagFurnaceScreen(SlagFurnaceMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "grimeandgold:block/hull_plating_slab"
+    },
+    "type=double": {
+      "model": "grimeandgold:block/hull_plating"
+    },
+    "type=top": {
+      "model": "grimeandgold:block/hull_plating_slab_top"
+    }
+  }
+}

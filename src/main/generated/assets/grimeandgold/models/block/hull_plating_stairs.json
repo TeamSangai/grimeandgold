@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "grimeandgold:block/hull_plating",
+    "side": "grimeandgold:block/hull_plating",
+    "top": "grimeandgold:block/hull_plating"
+  }
+}

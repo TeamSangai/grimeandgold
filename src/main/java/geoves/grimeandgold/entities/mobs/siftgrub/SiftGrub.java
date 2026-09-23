@@ -1,7 +1,8 @@
-package geoves.grimeandgold.entities.custom.siftgrub;
+package geoves.grimeandgold.entities.mobs.siftgrub;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.entities.ModEntityDataSerializers;
+import geoves.grimeandgold.entities.ai.MemoryModuleTypes;
 import geoves.grimeandgold.items.ModItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
@@ -14,8 +15,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ByIdMap;
+import net.minecraft.util.Unit;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,6 +29,7 @@ import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -35,6 +39,7 @@ import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.IntFunction;
 
 public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<SiftGrub>, Bucketable {
@@ -119,6 +124,12 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
         if (this.level().isClientSide()) {
             this.animate();
         }
+        else {
+            Optional<Integer> a = this.getBrain().getMemory(MemoryModuleTypes.SIFT_COOLDOWN);
+            if (a.isPresent() && a.get() % 50 == 0) {
+                GrimeAndGold.LOGGER.info(String.valueOf(a.get()));
+            }
+        }
     }
 
     private void animate() {
@@ -153,13 +164,28 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
             switch (state) {
                 case IDLING:
                     this.idleAnimationState.startIfStopped(this.tickCount);
+                    GrimeAndGold.LOGGER.info("animating idle");
                     break;
                 case SIFTING:
                     this.siftAnimationState.startIfStopped(this.tickCount);
+                    GrimeAndGold.LOGGER.info("animating sift");
                     break;
             }
             this.refreshDimensions();
         }
+//        if (DATA_POSE.equals(accessor)) {
+//            this.resetAnimations();
+//            switch (this.getPose()) {
+//                case STANDING:
+//                    this.idleAnimationState.startIfStopped(this.tickCount);
+//                    this.siftAnimationState.stop();
+//                    break;
+//                case DIGGING:
+//                    this.siftAnimationState.startIfStopped(this.tickCount);
+//                    this.idleAnimationState.stop();
+//                    break;
+//            }
+//        }
         super.onSyncedDataUpdated(accessor);
     }
 
@@ -180,6 +206,12 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
     private void resetAnimations() {
         this.idleAnimationState.stop();
         this.siftAnimationState.stop();
+    }
+
+    @Override
+    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
+//        this.getBrain().setMemoryWithExpiry(MemoryModuleTypes.SIFT_COOLDOWN, Unit.INSTANCE, 100);
+        return super.finalizeSpawn(level, difficulty, spawnReason, groupData);
     }
 
     @Override

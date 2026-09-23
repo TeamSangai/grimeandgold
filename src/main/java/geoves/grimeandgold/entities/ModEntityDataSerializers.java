@@ -1,7 +1,7 @@
 package geoves.grimeandgold.entities;
 
 import geoves.grimeandgold.GrimeAndGold;
-import geoves.grimeandgold.entities.custom.siftgrub.SiftGrub;
+import geoves.grimeandgold.entities.mobs.siftgrub.SiftGrub;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityDataRegistry;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.Identifier;

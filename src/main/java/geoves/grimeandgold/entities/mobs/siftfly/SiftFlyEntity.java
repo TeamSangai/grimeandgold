@@ -1,4 +1,4 @@
-package geoves.grimeandgold.entities.custom.siftfly;
+package geoves.grimeandgold.entities.mobs.siftfly;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.entities.ModEntityTypes;

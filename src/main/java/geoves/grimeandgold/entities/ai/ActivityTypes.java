@@ -1,4 +1,4 @@
-package geoves.grimeandgold.entities;
+package geoves.grimeandgold.entities.ai;
 
 import geoves.grimeandgold.GrimeAndGold;
 import net.minecraft.core.Registry;
@@ -7,6 +7,7 @@ import net.minecraft.world.entity.schedule.Activity;
 
 public class ActivityTypes extends Activity {
     public static final Activity SEEK_WATER = register("seek_water");
+    public static final Activity SEARCH = register("search");
 
     public ActivityTypes(String name) {
         super(name);

@@ -85,7 +85,7 @@ public class SiftGrubAnimations {
 		))
 		.build();
 
-	public static final AnimationDefinition SIFT = AnimationDefinition.Builder.withLength(1.5417F)
+	public static final AnimationDefinition SIFT = AnimationDefinition.Builder.withLength(1.5417F).looping()
 		.addAnimation("bone3", new AnimationChannel(AnimationChannel.Targets.ROTATION, 
 			new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
 			new Keyframe(0.25F, KeyframeAnimations.degreeVec(30.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

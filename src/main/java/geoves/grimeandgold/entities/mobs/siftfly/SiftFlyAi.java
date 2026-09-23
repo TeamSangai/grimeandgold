@@ -1,4 +1,4 @@
-package geoves.grimeandgold.entities.custom.siftfly;
+package geoves.grimeandgold.entities.mobs.siftfly;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;

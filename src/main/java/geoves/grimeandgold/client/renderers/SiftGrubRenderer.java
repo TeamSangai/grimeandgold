@@ -4,7 +4,7 @@ import geoves.grimeandgold.client.ModelLayers;
 import geoves.grimeandgold.client.Textures;
 import geoves.grimeandgold.client.models.SiftGrubModel;
 import geoves.grimeandgold.client.renderstates.SiftGrubRenderState;
-import geoves.grimeandgold.entities.custom.siftgrub.SiftGrub;
+import geoves.grimeandgold.entities.mobs.siftgrub.SiftGrub;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

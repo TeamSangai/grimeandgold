@@ -1,16 +1,20 @@
-package geoves.grimeandgold.entities.custom.siftgrub;
+package geoves.grimeandgold.entities.mobs.siftgrub;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import geoves.grimeandgold.GrimeAndGold;
-import geoves.grimeandgold.entities.ActivityTypes;
+import geoves.grimeandgold.entities.ai.ActivityTypes;
+import geoves.grimeandgold.entities.ai.MemoryModuleTypes;
+import geoves.grimeandgold.entities.ai.behaviours.Sifting;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
@@ -43,6 +47,9 @@ public class SiftGrubAi {
     private static final int LOOK_DURATION_MAX = 90;
     private static final int IDLE_DURATION_MIN = 30;
     private static final int IDLE_DURATION_MAX = 60;
+    private static final int SIFT_DURATION_MIN = 60;
+    private static final int SIFT_DURATION_MAX = 100;
+    private static final int SIFT_COOLDOWN = 69;
 
     protected static Brain.Provider<SiftGrub> getBrainProvider() {
         return Brain.provider(
@@ -64,7 +71,7 @@ public class SiftGrubAi {
     }
 
     protected static List<ActivityData<SiftGrub>> getActivities(SiftGrub SiftGrub) {
-        return List.of(initCoreActivity(), initIdleActivity(), initFindWaterActivity());
+        return List.of(initCoreActivity(), initIdleActivity(), initFindWaterActivity(), initSearchingActivity());
     }
 
     private static ActivityData<SiftGrub> initCoreActivity() {
@@ -75,15 +82,16 @@ public class SiftGrubAi {
                         new AnimalPanic<>(PANIC_SPEED_MULTIPLIER),
                         new LookAtTargetSink(LOOK_DURATION_MIN, LOOK_DURATION_MAX),
                         new MoveToTargetSink(),
-                        new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
+                        new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
+                        new CountDownCooldownTicks(MemoryModuleTypes.SIFT_COOLDOWN)
                 )
         );
     }
 
     /**
-     * Idle, wander around, sift, repeat
+     * Just chilling
      */
-    private static ActivityData<SiftGrub> initIdleActivity() {  // todo: make resting a separate activity
+    private static ActivityData<SiftGrub> initIdleActivity() {
         return ActivityData.create(
                 Activity.IDLE,
                 ImmutableList.of(
@@ -98,9 +106,9 @@ public class SiftGrubAi {
                                         GateBehavior.RunningPolicy.RUN_ONE,
                                         ImmutableList.of(
 //                                                Pair.of(new SiftGrubAi.Resting(), 1),
-//                                                Pair.of(new RandomLookAround(UniformInt.of(150, 250), 30.0F, 0.0F, 0.0F), 20),
-                                                Pair.of(new DoNothing(30, 100), 1),
-                                                Pair.of(RandomStroll.swim(1.0F), 1),
+                                                Pair.of(new RandomLookAround(UniformInt.of(150, 250), 30.0F, 0.0F, 0.0F), 20),
+//                                                Pair.of(new DoNothing(30, 100), 1),
+//                                                Pair.of(RandomStroll.swim(1.0F), 1),
 //                                                Pair.of(new SiftGrubAi.Sifting(), 1),
                                                 Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)  // idk what this is for
                                         )
@@ -110,6 +118,40 @@ public class SiftGrubAi {
                 ImmutableSet.of(
                         Pair.of(
                                 MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_PRESENT
+                        )
+                )
+        );
+    }
+
+    /**
+     * walk around and sift
+     */
+    private static ActivityData<SiftGrub> initSearchingActivity() {
+        return ActivityData.create(
+                Activity.INVESTIGATE,
+                ImmutableList.of(
+                        Pair.of(
+                                0,
+                                new GateBehavior<>(
+                                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
+                                        ImmutableSet.of(),
+                                        GateBehavior.OrderPolicy.SHUFFLED,
+                                        GateBehavior.RunningPolicy.RUN_ONE,
+                                        ImmutableList.of(
+                                                Pair.of(RandomStroll.swim(1.0F), 3),
+                                                Pair.of(new DoNothing(5, 30), 2),
+                                                Pair.of(new Sifting<>(SIFT_DURATION_MIN, SIFT_DURATION_MAX, SIFT_COOLDOWN), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)  // idk what this is for
+                                        )
+                                )
+                        )
+                ),
+                ImmutableSet.of(
+                        Pair.of(
+                                MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_PRESENT
+                        ),
+                        Pair.of(
+                                MemoryModuleTypes.SIFT_COOLDOWN, MemoryStatus.VALUE_ABSENT
                         )
                 )
         );
@@ -131,27 +173,7 @@ public class SiftGrubAi {
     }
 
     public static void updateActivity(SiftGrub body) {
-        body.getBrain().setActiveActivityToFirstValid(ImmutableList.of(ActivityTypes.SEEK_WATER, Activity.IDLE));
-    }
-
-    /**
-     * <p>
-     * Sift grub attempts to sift on any surface it finds itself on after wandering around <br>
-     * Use sifting animation
-     * </p>
-     */
-    private static class Sifting extends Behavior<SiftGrub> {
-        private Sifting() {
-            super(
-                    Map.of(
-                            MemoryModuleType.IS_PANICKING,
-                            MemoryStatus.VALUE_ABSENT,
-                            MemoryModuleType.WALK_TARGET,
-                            MemoryStatus.VALUE_ABSENT
-                    ),
-                    100
-            );
-        }
+        body.getBrain().setActiveActivityToFirstValid(ImmutableList.of(ActivityTypes.SEEK_WATER, Activity.INVESTIGATE, Activity.IDLE));
     }
 
     /**
@@ -175,6 +197,12 @@ public class SiftGrubAi {
         }
 
     }
+
+//    public static void setSiftCooldown(LivingEntity entity) {
+//        if (entity.getBrain().hasMemoryValue(MemoryModuleTypes.SIFT_COOLDOWN)) {
+//            entity.getBrain().setMemoryWithExpiry(MemoryModuleTypes.SIFT_COOLDOWN, Unit.INSTANCE, 100);
+//        }
+//    }
 
      // <=================== SBL STUFF BELOW ====================>
 

@@ -3,11 +3,12 @@ package geoves.grimeandgold;
 import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
-import geoves.grimeandgold.entities.ActivityTypes;
+import geoves.grimeandgold.entities.ai.ActivityTypes;
 import geoves.grimeandgold.entities.ModEntityDataSerializers;
 import geoves.grimeandgold.entities.ModEntityTypes;
-import geoves.grimeandgold.entities.custom.siftgrub.SiftGrub;
-import geoves.grimeandgold.entities.custom.siftfly.SiftFlyEntity;
+import geoves.grimeandgold.entities.ai.MemoryModuleTypes;
+import geoves.grimeandgold.entities.mobs.siftgrub.SiftGrub;
+import geoves.grimeandgold.entities.mobs.siftfly.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.recipe.ModRecipes;
 import geoves.grimeandgold.sounds.ModSounds;
@@ -38,8 +39,9 @@ public class GrimeAndGold implements ModInitializer {
 		ModBlockEntities.registerBlockEntities();
 		ModSounds.registerSounds();
 		ModRecipes.registerModRecipes();
-		ActivityTypes.registerCustomActivities();
 		ModEntityDataSerializers.register();
+		ActivityTypes.registerCustomActivities();
+		MemoryModuleTypes.register();
 
 		this.registerModEntities();
 	}

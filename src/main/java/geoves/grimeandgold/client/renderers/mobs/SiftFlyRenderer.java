@@ -1,4 +1,4 @@
-package geoves.grimeandgold.client.renderers;
+package geoves.grimeandgold.client.renderers.mobs;
 
 import geoves.grimeandgold.client.ModelLayers;
 import geoves.grimeandgold.client.Textures;

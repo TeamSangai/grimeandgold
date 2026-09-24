@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
 public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
-	private final ModelPart head;
+	public final ModelPart head;
 	private final ModelPart Tail;
 	private final ModelPart bone;
 	private final ModelPart TailEnd;
@@ -120,7 +120,7 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 		this.idleAnimation.apply(state.idleAnimationState, state.ageInTicks);
 		this.siftAnimation.apply(state.siftAnimationState, state.ageInTicks);
 
-		this.head.xRot = Mth.clamp(state.xRot, -22, 22) * (float) (Math.PI / 180.0);
-		this.head.yRot = Mth.clamp(state.yRot, -30, 30) * (float) (Math.PI / 180.0);
+		this.head.xRot = Mth.clamp(state.xRot, -15, 15) * (float) (Math.PI / 180.0);
+		this.head.yRot = Mth.clamp(state.yRot, -20, 20) * (float) (Math.PI / 180.0);
 	}
 }

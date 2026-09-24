@@ -2,7 +2,6 @@ package geoves.grimeandgold.entities.mobs.siftgrub;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.entities.ModEntityDataSerializers;
-import geoves.grimeandgold.entities.ai.MemoryModuleTypes;
 import geoves.grimeandgold.items.ModItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +26,7 @@ import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
 import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
@@ -38,7 +38,6 @@ import net.tslat.smartbrainlib.api.internal.SmartBrainProvider;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.IntFunction;
 
 public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<SiftGrub>, Bucketable {
@@ -57,6 +56,7 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
         }
         this.setPathfindingMalus(PathType.WATER, 0.0F);
         this.navigation = new AmphibiousPathNavigation(this, level);
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.GRASS_BLOCK));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -124,10 +124,10 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
             this.animate();
         }
         else {
-            Optional<Integer> a = this.getBrain().getMemory(MemoryModuleTypes.SIFT_COOLDOWN);
-            if (a.isPresent() && a.get() % 50 == 0) {
-                GrimeAndGold.LOGGER.info(String.valueOf(a.get()));
-            }
+//            Optional<Integer> a = this.getBrain().getMemory(MemoryModuleTypes.SIFT_COOLDOWN);
+//            if (a.isPresent() && a.get() % 50 == 0) {
+//                GrimeAndGold.LOGGER.info(String.valueOf(a.get()));
+//            }
         }
     }
 
@@ -184,6 +184,9 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
                 break;
             case SEARCHING:
                 this.setState(State.SEARCHING);
+                break;
+            case COLLECTING:
+                this.setState(State.COLLECTING);
         }
         return this;
     }
@@ -242,7 +245,8 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
     public enum State {
         IDLING(0),
         SEARCHING(1),
-        SIFTING(2);
+        SIFTING(2),
+        COLLECTING(3);
 
         public static final IntFunction<SiftGrub.State> BY_ID = ByIdMap.continuous(SiftGrub.State::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, SiftGrub.State> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, SiftGrub.State::id);

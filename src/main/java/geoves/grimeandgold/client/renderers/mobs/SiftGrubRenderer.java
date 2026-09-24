@@ -1,4 +1,4 @@
-package geoves.grimeandgold.client.renderers;
+package geoves.grimeandgold.client.renderers.mobs;
 
 import geoves.grimeandgold.client.ModelLayers;
 import geoves.grimeandgold.client.Textures;
@@ -9,6 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.HoldingEntityRenderState;
 import net.minecraft.resources.Identifier;
 
 @Environment(EnvType.CLIENT)
@@ -30,6 +31,7 @@ public class SiftGrubRenderer extends MobRenderer<SiftGrub, SiftGrubRenderState,
     @Override
     public void extractRenderState(SiftGrub entity, SiftGrubRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
+        HoldingEntityRenderState.extractHoldingEntityRenderState(entity, state, this.itemModelResolver);
         state.walkAnimationState.copyFrom(entity.walkAnimationState);
         state.idleAnimationState.copyFrom(entity.idleAnimationState);
         state.siftAnimationState.copyFrom(entity.siftAnimationState);

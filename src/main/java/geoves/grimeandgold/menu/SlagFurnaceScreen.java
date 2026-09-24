@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class SlagFurnaceScreen extends AbstractContainerScreen<SlagFurnaceMenu> {
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "textures/gui/slag_furnace_ui");
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "textures/gui/slag_furnace_ui.png");
 
     public SlagFurnaceScreen(SlagFurnaceMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);

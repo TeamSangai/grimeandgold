@@ -73,9 +73,10 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
 
             @Override
             public int getCount() {
-                return 4;
+                return 2;
             }
         };
+        this.items = NonNullList.withSize(4, ItemStack.EMPTY);
     }
 
     @Override

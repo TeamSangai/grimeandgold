@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ByIdMap;
-import net.minecraft.util.Unit;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
@@ -164,28 +163,14 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
             switch (state) {
                 case IDLING:
                     this.idleAnimationState.startIfStopped(this.tickCount);
-                    GrimeAndGold.LOGGER.info("animating idle");
                     break;
                 case SIFTING:
                     this.siftAnimationState.startIfStopped(this.tickCount);
-                    GrimeAndGold.LOGGER.info("animating sift");
+                    this.idleAnimationState.startIfStopped(this.tickCount);
                     break;
             }
             this.refreshDimensions();
         }
-//        if (DATA_POSE.equals(accessor)) {
-//            this.resetAnimations();
-//            switch (this.getPose()) {
-//                case STANDING:
-//                    this.idleAnimationState.startIfStopped(this.tickCount);
-//                    this.siftAnimationState.stop();
-//                    break;
-//                case DIGGING:
-//                    this.siftAnimationState.startIfStopped(this.tickCount);
-//                    this.idleAnimationState.stop();
-//                    break;
-//            }
-//        }
         super.onSyncedDataUpdated(accessor);
     }
 
@@ -210,7 +195,7 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
 
     @Override
     public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData groupData) {
-//        this.getBrain().setMemoryWithExpiry(MemoryModuleTypes.SIFT_COOLDOWN, Unit.INSTANCE, 100);
+        SiftGrubAi.initMemories(this, this.getRandom());
         return super.finalizeSpawn(level, difficulty, spawnReason, groupData);
     }
 

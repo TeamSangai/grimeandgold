@@ -11,10 +11,8 @@ import geoves.grimeandgold.entities.ai.behaviours.Sifting;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
@@ -38,18 +36,16 @@ import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 
 import java.util.List;
-import java.util.Map;
 
 public class SiftGrubAi {
     // Feel free to change these
     private static final float PANIC_SPEED_MULTIPLIER = 2.0F;
     private static final int LOOK_DURATION_MIN = 45;
     private static final int LOOK_DURATION_MAX = 90;
-    private static final int IDLE_DURATION_MIN = 30;
-    private static final int IDLE_DURATION_MAX = 60;
     private static final int SIFT_DURATION_MIN = 60;
     private static final int SIFT_DURATION_MAX = 100;
-    private static final int SIFT_COOLDOWN = 69;
+    private static final int SIFT_MIN_COOLDOWN = 69;
+    private static final int SIFT_MAX_COOLDOWN = 96;
 
     protected static Brain.Provider<SiftGrub> getBrainProvider() {
         return Brain.provider(
@@ -66,7 +62,8 @@ public class SiftGrubAi {
         );
     }
 
-    protected static void initMemories(SiftGrub SiftGrub, RandomSource random) {
+    protected static void initMemories(SiftGrub body, RandomSource random) {
+        body.getBrain().setMemory(MemoryModuleTypes.SIFT_COOLDOWN, 69);
         GrimeAndGold.LOGGER.info("SiftGrubAI: yo wassup");
     }
 
@@ -83,8 +80,9 @@ public class SiftGrubAi {
                         new LookAtTargetSink(LOOK_DURATION_MIN, LOOK_DURATION_MAX),
                         new MoveToTargetSink(),
                         new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                        new CountDownCooldownTicks(MemoryModuleTypes.SIFT_COOLDOWN)
-                )
+                        new CountDownCooldownTicks(MemoryModuleTypes.SIFT_COOLDOWN),
+                        new CountDownCooldownTicks(MemoryModuleType.GAZE_COOLDOWN_TICKS)
+                        )
         );
     }
 
@@ -95,25 +93,7 @@ public class SiftGrubAi {
         return ActivityData.create(
                 Activity.IDLE,
                 ImmutableList.of(
-                        Pair.of(0, new RandomLookAround(UniformInt.of(150, 250), 30.0F, 0.0F, 0.0F)),
-//                        Pair.of(1, RandomStroll.swim(1.0F))
-                        Pair.of(
-                                0,
-                                new GateBehavior<>(
-                                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
-                                        ImmutableSet.of(),
-                                        GateBehavior.OrderPolicy.SHUFFLED,
-                                        GateBehavior.RunningPolicy.RUN_ONE,
-                                        ImmutableList.of(
-//                                                Pair.of(new SiftGrubAi.Resting(), 1),
-                                                Pair.of(new RandomLookAround(UniformInt.of(150, 250), 30.0F, 0.0F, 0.0F), 20),
-//                                                Pair.of(new DoNothing(30, 100), 1),
-//                                                Pair.of(RandomStroll.swim(1.0F), 1),
-//                                                Pair.of(new SiftGrubAi.Sifting(), 1),
-                                                Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)  // idk what this is for
-                                        )
-                                )
-                        )
+                        Pair.of(0, new RandomLookAround(UniformInt.of(14, 39), 30.0F, 0.0F, 0.0F))
                 ),
                 ImmutableSet.of(
                         Pair.of(
@@ -140,7 +120,7 @@ public class SiftGrubAi {
                                         ImmutableList.of(
                                                 Pair.of(RandomStroll.swim(1.0F), 3),
                                                 Pair.of(new DoNothing(5, 30), 2),
-                                                Pair.of(new Sifting<>(SIFT_DURATION_MIN, SIFT_DURATION_MAX, SIFT_COOLDOWN), 2),
+                                                Pair.of(new Sifting<>(UniformInt.of(SIFT_DURATION_MIN, SIFT_DURATION_MAX), UniformInt.of(SIFT_MIN_COOLDOWN, SIFT_MAX_COOLDOWN)), 2),
                                                 Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)  // idk what this is for
                                         )
                                 )
@@ -175,34 +155,6 @@ public class SiftGrubAi {
     public static void updateActivity(SiftGrub body) {
         body.getBrain().setActiveActivityToFirstValid(ImmutableList.of(ActivityTypes.SEEK_WATER, Activity.INVESTIGATE, Activity.IDLE));
     }
-
-    /**
-     * <p>
-     * Chilling after sifting (or attempting to) <br>
-     * Use idle animation
-     * </p>
-     */
-    private static class Resting extends Behavior<SiftGrub> {
-        private Resting() {
-
-            super(
-                    Map.of(
-                            MemoryModuleType.WALK_TARGET,
-                            MemoryStatus.VALUE_PRESENT,
-                            MemoryModuleType.IS_PANICKING,
-                            MemoryStatus.VALUE_ABSENT
-                    ),
-                    100  // 600
-            );
-        }
-
-    }
-
-//    public static void setSiftCooldown(LivingEntity entity) {
-//        if (entity.getBrain().hasMemoryValue(MemoryModuleTypes.SIFT_COOLDOWN)) {
-//            entity.getBrain().setMemoryWithExpiry(MemoryModuleTypes.SIFT_COOLDOWN, Unit.INSTANCE, 100);
-//        }
-//    }
 
      // <=================== SBL STUFF BELOW ====================>
 

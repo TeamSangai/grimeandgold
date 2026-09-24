@@ -2,7 +2,6 @@ package geoves.grimeandgold.items;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.ModBlocks;
-import geoves.grimeandgold.entities.ModEntityTypeIds;
 import geoves.grimeandgold.entities.ModEntityTypes;
 import geoves.grimeandgold.items.custom.CopperSiftFullFerrisoilItem;
 import geoves.grimeandgold.items.custom.CopperSiftFullGoldrustItem;
@@ -18,7 +17,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.material.Fluids;
 
@@ -26,6 +27,10 @@ import java.util.function.Function;
 
 public class ModItems {
     public static final Item DIAMOND_SHARD = registerItem("diamond_shard", Item::new);
+    public static final Item FERROBEET_MELODY = registerItem("ferrobeet_melody", Item::new);
+    public static final Item BEETROOT_PADDY = registerItem("beetroot_paddy", properties -> new Item(properties.food(new FoodProperties(3, 0.2f, false))));
+    public static final Item COOKED_BEETROOT_PADDY = registerItem("cooked_beetroot_paddy", properties -> new Item(properties.food(new FoodProperties(5, 0.3f, false))));
+    public static final Item BEETROOT_BURGER = registerItem("beetroot_burger", properties -> new Item(properties.food(new FoodProperties(8, 1.0f, false))));
     public static final Item COPPER_SIFT_EMPTY = registerItem("copper_sift", properties -> new EmptyCopperSiftItem(properties.stacksTo(1).durability(8)));
     public static final Item COPPER_SIFT_FULL_GRIME = registerItem("copper_sift_filled_grime", properties -> new CopperSiftFullGrimeItem(ModBlocks.GRIME, properties.stacksTo(1).durability(8)));
     public static final Item COPPER_SIFT_FULL_FERRISOIL = registerItem("copper_sift_filled_ferrisoil", properties -> new CopperSiftFullFerrisoilItem(ModBlocks.FERRISOIL, properties.stacksTo(1).durability(8)));

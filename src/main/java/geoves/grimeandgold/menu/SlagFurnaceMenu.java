@@ -43,18 +43,18 @@ public class SlagFurnaceMenu extends AbstractContainerMenu {
         assert this.blockEntity.getLevel() != null;
         this.data = data;
 
-        this.addSlot(new Slot(inventory,0, 54, 34));
+        this.addSlot(new Slot(inventory,0, 56, 17));
 
-        this.addSlot(new SlagFuelSlot(this, inventory,1, 54, 34));
+        this.addSlot(new SlagFuelSlot(this, inventory,1, 56, 53));
         // Output
-        this.addSlot(new Slot(inventory,2, 104, 34) {
+        this.addSlot(new Slot(inventory,2, 116, 20) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
                 return false;
             }
         });
         // byproduct
-        this.addSlot(new Slot(inventory,3, 104, 34) {
+        this.addSlot(new Slot(inventory,3, 116, 53) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
                 return false;
@@ -111,49 +111,38 @@ public class SlagFurnaceMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(final Player player, final int slotIndex) {
-        ItemStack clicked = ItemStack.EMPTY;
-        Slot slot = this.slots.get(slotIndex);
-        if (slot.hasItem()) {
-            ItemStack stack = slot.getItem();
-            clicked = stack.copy();
-            if (slotIndex == 2) {
-                if (!this.moveItemStackTo(stack, 3, 39, true)) {
-                    return ItemStack.EMPTY;
-                }
+    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
+        Slot sourceSlot = slots.get(pIndex);
+        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        ItemStack sourceStack = sourceSlot.getItem();
+        ItemStack copyOfSourceStack = sourceStack.copy();
 
-                slot.onQuickCraft(stack, clicked);
-            } else if (slotIndex != 1 && slotIndex != 0) {
-                if (this.isFuel(stack)) {
-                    if (!this.moveItemStackTo(stack, 1, 2, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (slotIndex >= 3 && slotIndex < 30) {
-                    if (!this.moveItemStackTo(stack, 30, 39, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (slotIndex >= 30 && slotIndex < 39 && !this.moveItemStackTo(stack, 3, 30, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.moveItemStackTo(stack, 3, 39, false)) {
+        // Check if the slot clicked is one of the vanilla container slots
+        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+            // This is a vanilla container slot so merge the stack into the tile inventory
+            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
+                    + TE_INVENTORY_SLOT_COUNT, false)) {
+                return ItemStack.EMPTY;  // EMPTY_ITEM
+            }
+        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+            // This is a TE slot so merge the stack into the players inventory
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
-
-            if (stack.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
-
-            if (stack.getCount() == clicked.getCount()) {
-                return ItemStack.EMPTY;
-            }
-
-            slot.onTake(player, stack);
+        } else {
+            System.out.println("Invalid slotIndex:" + pIndex);
+            return ItemStack.EMPTY;
         }
-
-        return clicked;
+        // If stack size == 0 (the entire stack was moved) set slot contents to null
+        if (sourceStack.getCount() == 0) {
+            sourceSlot.set(ItemStack.EMPTY);
+        } else {
+            sourceSlot.setChanged();
+        }
+        sourceSlot.onTake(playerIn, sourceStack);
+        return copyOfSourceStack;
     }
+
 
 
     public boolean isFuel(final ItemStack itemStack) {

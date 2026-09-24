@@ -36,5 +36,9 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.getRK(ModBlocks.HULL_PLATING)).add(ModBlocks.getRK(ModBlocks.HULL_PLATING_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS));
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.getRK(ModBlocks.HULL_PLATING)).add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.HULL_PLATING_SLAB));
     }
 }

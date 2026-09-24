@@ -25,6 +25,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialCube(ModBlocks.COOLED_GOLD_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COPPER_SLAG);
         blockModelGenerators.createTrivialCube(ModBlocks.IRON_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.GOLD_SLAG);
 
+        blockModelGenerators.family(ModBlocks.HULL_PLATING).slab(ModBlocks.HULL_PLATING_SLAB).stairs(ModBlocks.HULL_PLATING_STAIRS);
+
         blockModelGenerators.createFurnace(ModBlocks.SLAG_FURNACE, TexturedModel.ORIENTABLE);
 
         blockModelGenerators.createFlowerBed(ModBlocks.DESERT_POPPY);

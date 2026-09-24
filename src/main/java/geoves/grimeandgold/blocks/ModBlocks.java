@@ -21,11 +21,17 @@ import java.util.function.Function;
 
 public class ModBlocks {
     public static final Block BIOMASS = registerBlock("biomass", properties -> new BiomassBlock(properties.sound(SoundType.WET_SPONGE)));
+
+
     public static final Block GRIME = registerBlock("grime", properties -> new GrimeBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.5f, 0.5f)));
     public static final Block GRIME_BRICKS = registerBlock("grime_bricks", properties -> new Block(properties.sound(SoundType.PACKED_MUD).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
     public static final Block PAYDIRT = registerBlock("paydirt", properties -> new PayDirtBlock(properties.sound(SoundType.GRAVEL).strength(0.5f, 0.5f)));
     public static final Block FERRISOIL = registerBlock("ferrisoil", properties -> new FerrisoilBlock(properties.sound(SoundType.GRAVEL).strength(0.6f, 0.75f)));
     public static final Block GOLDRUST = registerBlock("goldrust", properties -> new GoldrustBlock(properties.sound(SoundType.GRAVEL).strength(0.6f, 0.75f)));
+
+    public static final Block HULL_PLATING = registerBlock("hull_plating", properties -> new Block(properties.sound(SoundType.IRON).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final Block HULL_PLATING_SLAB = registerBlock("hull_plating_slab", properties -> new SlabBlock(properties.sound(SoundType.IRON).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
+    public static final Block HULL_PLATING_STAIRS = registerBlock("hull_plating_stairs", properties -> new StairBlock(ModBlocks.HULL_PLATING.defaultBlockState(), properties.sound(SoundType.IRON).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
 
 
     public static final Block GOLD_SLAG = registerBlock("gold_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));

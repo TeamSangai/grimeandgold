@@ -19,6 +19,7 @@ import org.jspecify.annotations.Nullable;
 
 public class SlagFurnaceBlock extends AbstractFurnaceBlock {
 
+
     public SlagFurnaceBlock(Properties properties) {
         super(properties);
     }

@@ -29,7 +29,7 @@ public class SlagFurnaceMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public SlagFurnaceMenu(int pContainerId, Inventory inv, BlockPos blockPos) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(blockPos), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(blockPos), new SimpleContainerData(4));
     }
 
     public SlagFurnaceMenu(int pContainerID, Inventory inv, BlockEntity entity, ContainerData data) {
@@ -64,6 +64,7 @@ public class SlagFurnaceMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
+
     public void fillCraftSlotsStackedContents(final StackedItemContents stackedContents) {
         Container var3 = this.inventory;
         if (var3 instanceof StackedContentsCompatible stackedContentsCompatible) {
@@ -78,6 +79,7 @@ public class SlagFurnaceMenu extends AbstractContainerMenu {
     public Slot getByproductSlot() {
         return this.slots.get(3);
     }
+
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -87,7 +89,7 @@ public class SlagFurnaceMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;
 
     @Override
     public boolean stillValid(Player pPlayer) {

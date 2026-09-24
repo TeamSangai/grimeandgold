@@ -43,11 +43,13 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
     private final ContainerData data;
     private int progress = 0;
     private int maxProgress = 300;
-    public final NonNullList<ItemStack> inventory = NonNullList.withSize(2, ItemStack.EMPTY);
+    public final NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
     private static final int INPUT_SLOT = 0;
     private static final int FUEL_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
     private static final int BYPRODUCT_SLOT = 3;
+    public static final int CONTAINER_SIZE = 4;
+
 
     public SlagFurnaceBlockEntity(final BlockPos worldPosition, final BlockState blockState) {
         super(ModBlockEntities.SLAG_FURNACE_BE, worldPosition, blockState, RecipeType.SMELTING);
@@ -71,7 +73,7 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
 
             @Override
             public int getCount() {
-                return 2;
+                return 4;
             }
         };
     }
@@ -176,7 +178,7 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
 
         inventory.set(INPUT_SLOT, inventory.get(INPUT_SLOT).copyWithCount(inventory.get(INPUT_SLOT).getCount() - 1));
         inventory.set(OUTPUT_SLOT, output.copyWithCount(inventory.get(OUTPUT_SLOT).getCount() + output.getCount()));
-        inventory.set(BYPRODUCT_SLOT, output.copyWithCount(inventory.get(BYPRODUCT_SLOT).getCount() + output.getCount()));
+        inventory.set(BYPRODUCT_SLOT, output.copyWithCount(inventory.get(BYPRODUCT_SLOT).getCount() + byproduct.getCount()));
 
     }
 

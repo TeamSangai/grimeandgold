@@ -43,7 +43,6 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
     private final ContainerData data;
     private int progress = 0;
     private int maxProgress = 300;
-    public final NonNullList<ItemStack> inventory = NonNullList.withSize(4, ItemStack.EMPTY);
     private static final int INPUT_SLOT = 0;
     private static final int FUEL_SLOT = 1;
     private static final int OUTPUT_SLOT = 2;
@@ -90,10 +89,6 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
     protected Component getDefaultName() {
         return DEFAULT_NAME;
     }
-    @Override
-    public NonNullList<ItemStack> getItems() {
-        return inventory;
-    }
 
     @Override
     protected void saveAdditional(ValueOutput output) {
@@ -101,7 +96,7 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
         output.putInt("slag_furnace.progress", progress);
         output.putInt("slag_furnace.max_progress", maxProgress);
 
-        ContainerHelper.saveAllItems(output, inventory);
+        ContainerHelper.saveAllItems(output, this.items);
     }
 
     @Override
@@ -110,7 +105,7 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
         progress = input.getIntOr("slag_furnace.progress", 0);
         maxProgress = input.getIntOr("slag_furnace.max_progress", 72);
 
-        ContainerHelper.loadAllItems(input, inventory);
+        ContainerHelper.loadAllItems(input, this.items);
     }
 
 
@@ -141,7 +136,7 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
             return false;
         }
 
-        ItemStack output = recipe.get().value().assemble(new SlagSmeltingInput(inventory.get(INPUT_SLOT)));
+        ItemStack output = recipe.get().value().assemble(new SlagSmeltingInput(this.items.get(INPUT_SLOT)));
         boolean isItemOutputRight = canInsertItemIntoOutputSlot(output);
         boolean isAmountRight = canInsertAmountIntoOutputSlot(output.getCount());
 
@@ -149,43 +144,43 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
     }
 
     private boolean canInsertAmountIntoOutputSlot(int count) {
-        int maxCount = inventory.get(OUTPUT_SLOT).isEmpty() ? 64 : inventory.get(OUTPUT_SLOT).getMaxStackSize();
-        int currentCount = inventory.get(OUTPUT_SLOT).getCount();
+        int maxCount = this.items.get(OUTPUT_SLOT).isEmpty() ? 64 : this.items.get(OUTPUT_SLOT).getMaxStackSize();
+        int currentCount = this.items.get(OUTPUT_SLOT).getCount();
 
         return maxCount >= currentCount + count;
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
-        return inventory.get(OUTPUT_SLOT).isEmpty() ||
-                inventory.get(OUTPUT_SLOT).is(output.getItem());
+        return this.items.get(OUTPUT_SLOT).isEmpty() ||
+                this.items.get(OUTPUT_SLOT).is(output.getItem());
     }
 
 
     public void drops() {
         assert this.level != null;
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        Containers.dropContents(this.level, this.worldPosition, this.items);
     }
 
     private Optional<RecipeHolder<SlagSmelting>> getCurrentRecipe(){
         assert level != null;
         return ((ServerLevel) level).recipeAccess()
-                .getRecipeFor(ModRecipes.SLAG_SMELTING_RECIPE_TYPE, new SlagSmeltingInput(inventory.get(INPUT_SLOT)), level);
+                .getRecipeFor(ModRecipes.SLAG_SMELTING_RECIPE_TYPE, new SlagSmeltingInput(this.items.get(INPUT_SLOT)), level);
     }
 
     private void craftItem() {
         Optional<RecipeHolder<SlagSmelting>> recipe = getCurrentRecipe();
-        ItemStack output = recipe.get().value().assemble(new SlagSmeltingInput(inventory.get(INPUT_SLOT)));
-        ItemStack byproduct = recipe.get().value().assemble(new SlagSmeltingInput(inventory.get(INPUT_SLOT)));
+        ItemStack output = recipe.get().value().assemble(new SlagSmeltingInput(this.items.get(INPUT_SLOT)));
+        ItemStack byproduct = recipe.get().value().assemble(new SlagSmeltingInput(this.items.get(INPUT_SLOT)));
 
-        inventory.set(INPUT_SLOT, inventory.get(INPUT_SLOT).copyWithCount(inventory.get(INPUT_SLOT).getCount() - 1));
-        inventory.set(OUTPUT_SLOT, output.copyWithCount(inventory.get(OUTPUT_SLOT).getCount() + output.getCount()));
-        inventory.set(BYPRODUCT_SLOT, output.copyWithCount(inventory.get(BYPRODUCT_SLOT).getCount() + byproduct.getCount()));
+        this.items.set(INPUT_SLOT, this.items.get(INPUT_SLOT).copyWithCount(this.items.get(INPUT_SLOT).getCount() - 1));
+        this.items.set(OUTPUT_SLOT, output.copyWithCount(this.items.get(OUTPUT_SLOT).getCount() + output.getCount()));
+        this.items.set(BYPRODUCT_SLOT, output.copyWithCount(this.items.get(BYPRODUCT_SLOT).getCount() + byproduct.getCount()));
 
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
-        return inventory.get(OUTPUT_SLOT).isEmpty() ||
-                inventory.get(OUTPUT_SLOT).getCount() < inventory.get(OUTPUT_SLOT).getMaxStackSize();
+        return this.items.get(OUTPUT_SLOT).isEmpty() ||
+                this.items.get(OUTPUT_SLOT).getCount() < this.items.get(OUTPUT_SLOT).getMaxStackSize();
     }
 
     private void increaseCraftingProgress() {

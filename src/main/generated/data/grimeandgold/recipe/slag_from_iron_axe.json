@@ -1,0 +1,10 @@
+{
+  "type": "grimeandgold:slag_smelting",
+  "byproduct": {
+    "id": "grimeandgold:iron_slag"
+  },
+  "ingredient": "minecraft:iron_axe",
+  "result": {
+    "id": "grimeandgold:iron_slag"
+  }
+}

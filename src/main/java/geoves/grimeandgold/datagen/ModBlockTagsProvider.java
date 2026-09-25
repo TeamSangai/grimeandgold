@@ -40,5 +40,6 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS));
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.getRK(ModBlocks.HULL_PLATING)).add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS))
                 .add(ModBlocks.getRK(ModBlocks.HULL_PLATING_SLAB));
+        tag(ModTags.Blocks.SIFT_LARVA_CAN_TRANSMUTE).add(ModBlocks.getRK(ModBlocks.GRIME));
     }
 }

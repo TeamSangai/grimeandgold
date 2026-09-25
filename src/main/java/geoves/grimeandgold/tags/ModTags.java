@@ -13,6 +13,7 @@ public class ModTags {
         public static final TagKey<Block> SIFT_LARVA_DESIRED = createTag("sift_larva_desired");
         public static final TagKey<Block> SIFT_LARVA_DISLIKED = createTag("sift_larva_disliked");
         public static final TagKey<Block> SUPPORTS_AQUATIC_FLOWERS = createTag("supports_aquatic_flowers");
+        public static final TagKey<Block> SIFT_LARVA_CAN_TRANSMUTE = createTag("sift_larva_can_transmute");
 
 
         private static TagKey<Block> createTag(String name) {

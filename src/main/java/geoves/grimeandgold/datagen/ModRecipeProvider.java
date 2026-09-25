@@ -26,7 +26,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
-                SlagSmeltingRecipeBuilder.slagSmeltingRecipe(RecipeCategory.MISC, Ingredient.of(Items.IRON_AXE), ModBlocks.IRON_SLAG.asItem(), ModBlocks.IRON_SLAG.asItem());
+                SlagSmeltingRecipeBuilder.slagSmeltingRecipe(RecipeCategory.MISC, Ingredient.of(Items.IRON_AXE), ModBlocks.IRON_SLAG.asItem(), ModBlocks.IRON_SLAG.asItem()).unlockedBy(getHasName(ModBlocks.IRON_SLAG), has(ModBlocks.IRON_SLAG.asItem()))
+                        .save(output, "grimeandgold:slag_from_iron_axe");
             }
         };
     }

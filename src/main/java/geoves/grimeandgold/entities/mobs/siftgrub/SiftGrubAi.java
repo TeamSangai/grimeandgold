@@ -93,7 +93,7 @@ public class SiftGrubAi {
         return ActivityData.create(
                 Activity.IDLE,
                 ImmutableList.of(
-                        Pair.of(0, new RandomLookAround(UniformInt.of(14, 39), 30.0F, 0.0F, 0.0F))
+                        Pair.of(0, new RandomLookAround(UniformInt.of(14, 39), 60.0F, 0.0F, 0.0F))
                 ),
                 ImmutableSet.of(
                         Pair.of(

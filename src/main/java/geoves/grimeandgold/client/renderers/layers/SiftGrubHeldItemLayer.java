@@ -30,13 +30,14 @@ public class SiftGrubHeldItemLayer extends RenderLayer<SiftGrubRenderState, Sift
         if (!item.isEmpty()) {
             poseStack.pushPose();
             poseStack.translate(this.getParentModel().head.x / 16.0F, this.getParentModel().head.y / 16.0F, this.getParentModel().head.z / 16.0F);
-            poseStack.translate(0, 1.5F, 0.05F);
-            // Todo: clamp this
-            poseStack.translate(-Mth.sin(state.yRot * Mth.DEG_TO_RAD) * 0.3F, 0, -Mth.cos(state.yRot * Mth.DEG_TO_RAD) * 0.5F);
-//            poseStack.translate(-Mth.sin(state.xRot) * 0.1F, 0F, -Mth.cos(state.xRot) * 0.1F);
-            poseStack.rotateDegrees(Axis.YN, yRot);
-            poseStack.rotateDegrees(Axis.XP, xRot);
-            poseStack.rotateDegrees(Axis.XP, 180.0F);  // + state.yRot (also this should be y axis)
+            poseStack.translate(0, 1.5F, 0.05F);  // 0.05
+            poseStack.translate(
+                    -Mth.sin(Mth.clamp(state.yRot, -20, 20) * Mth.DEG_TO_RAD) * 0.35F,  // it's good enough lol
+                    0,
+                    -Mth.cos(Mth.clamp(state.yRot, -20, 20) * Mth.DEG_TO_RAD) * 0.5F
+            );
+            poseStack.rotateDegrees(Axis.YP, (Mth.clamp(state.yRot, -20, 20)));
+            poseStack.rotateDegrees(Axis.XP, 180.0F);
             poseStack.scale(0.5F, 0.5F, 0.5F);
             item.submit(poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();

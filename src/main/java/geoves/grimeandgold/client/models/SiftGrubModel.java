@@ -120,7 +120,7 @@ public class SiftGrubModel extends EntityModel<SiftGrubRenderState> {
 		this.idleAnimation.apply(state.idleAnimationState, state.ageInTicks);
 		this.siftAnimation.apply(state.siftAnimationState, state.ageInTicks);
 
-		this.head.xRot = Mth.clamp(state.xRot, -15, 15) * (float) (Math.PI / 180.0);
+		this.head.xRot = Mth.clamp(state.xRot, 0, 3) * (float) (Math.PI / 180.0);  // Mth.DEG_TO_RAD
 		this.head.yRot = Mth.clamp(state.yRot, -20, 20) * (float) (Math.PI / 180.0);
 	}
 }

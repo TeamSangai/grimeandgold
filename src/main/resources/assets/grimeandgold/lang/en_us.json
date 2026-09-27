@@ -39,6 +39,9 @@
   "sounds.grimeandgold.fly_ambient": "Fly Buzzes",
 
   "container.grimeandgold.grimebarrel": "Grime Burrow",
-  "container.slag_furnace": "Slag Furnace"
+  "container.slag_furnace": "Slag Furnace",
+  "container.grimeandgold.mud_burrow": "Mud Burrow",
+  "container.grimeandgold.snow_burrow": "Snow Burrow",
+  "container.grimeandgold.clay_burrow": "Clay Burrow"
 
 }

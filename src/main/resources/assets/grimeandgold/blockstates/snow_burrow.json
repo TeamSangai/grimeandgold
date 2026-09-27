@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "grimeandgold:block/snow_burrow",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "grimeandgold:block/snow_burrow"
+    },
+    "facing=south": {
+      "model": "grimeandgold:block/snow_burrow",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "grimeandgold:block/snow_burrow",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "grimeandgold:block/snow_burrow_up"
+    },
+    "facing=down": {
+      "model": "grimeandgold:block/snow_burrow_up",
+      "x": 180
+    }
+  }
+}

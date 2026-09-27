@@ -38,8 +38,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         createSilkTouchDispatchTable(ModBlocks.DRY_FERN, this.applyExplosionDecay(ModBlocks.DRY_FERN, LootItem.lootTableItem(ModBlocks.DRY_FERN.asItem())));
         createSilkTouchDispatchTable(ModBlocks.DRY_BUSH, this.applyExplosionDecay(ModBlocks.DRY_BUSH, LootItem.lootTableItem(ModBlocks.DRY_BUSH.asItem())));
 
-        createMultipleOreDrops(ModBlocks.COOLED_GOLD_SLAG, Items.GOLD_NUGGET, 1, 4);createMultipleOreDrops(ModBlocks.COOLED_IRON_SLAG, Items.IRON_NUGGET, 1, 3);
-        createMultipleOreDrops(ModBlocks.COOLED_COPPER_SLAG, Items.COPPER_NUGGET, 2, 6);
+        add(ModBlocks.COOLED_GOLD_SLAG, createMultipleOreDrops(ModBlocks.COOLED_GOLD_SLAG, Items.GOLD_NUGGET, 2, 8));
+        add(ModBlocks.COOLED_IRON_SLAG, createMultipleOreDrops(ModBlocks.COOLED_IRON_SLAG, Items.IRON_NUGGET, 1, 5));
+        add(ModBlocks.COOLED_COPPER_SLAG, createMultipleOreDrops(ModBlocks.COOLED_COPPER_SLAG, Items.COPPER_NUGGET, 2, 11));
 
     }
     public LootTable.Builder createMultipleOreDrops(final Block block, Item item, int minDrops, int maxDrops) {

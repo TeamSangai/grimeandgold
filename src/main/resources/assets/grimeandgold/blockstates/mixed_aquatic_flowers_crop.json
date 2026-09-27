@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "grimeandgold:block/aquatic_mixed_flowers_stage0"
+    },
+    "age=1": {
+      "model": "grimeandgold:block/aquatic_mixed_flowers_stage1"
+    },
+    "age=2": {
+      "model": "grimeandgold:block/aquatic_mixed_flowers_stage2"
+    }
+  }
+}

@@ -6,10 +6,14 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractFurnaceMenu;
 
 public class SlagFurnaceScreen extends AbstractContainerScreen<SlagFurnaceMenu> {
     private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "textures/gui/slag_furnace_ui.png");
+    private final Identifier litProgressSprite = Identifier.withDefaultNamespace("container/furnace/lit_progress");
+    private final Identifier burnProgressSprite = Identifier.withDefaultNamespace("container/furnace/burn_progress");
 
     public SlagFurnaceScreen(SlagFurnaceMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -24,9 +28,17 @@ public class SlagFurnaceScreen extends AbstractContainerScreen<SlagFurnaceMenu> 
     @Override
     public void extractBackground(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
-        int xo = (this.width - this.imageWidth) / 2;
-        int yo = (this.height - this.imageHeight) / 2;
+        int xo = this.leftPos;
+        int yo = this.topPos;
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, xo, yo, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
+        if ((this.menu).isLit()) {
+            int litSpriteHeight = 14;
+            int litProgressHeight = Mth.ceil((this.menu).getLitProgress() * 13.0F) + 1;
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.litProgressSprite, 14, 14, 0, 14 - litProgressHeight, xo + 56, yo + 36 + 14 - litProgressHeight, 14, litProgressHeight);
+        }
+
+        int burnProgressWidth = Mth.ceil((this.menu).getBurnProgress() * 24.0F);
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, this.burnProgressSprite, 24, 16, 0, 0, xo + 79, yo + 34, burnProgressWidth, 16);
     }
 
 }

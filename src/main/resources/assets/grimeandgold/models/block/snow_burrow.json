@@ -1,0 +1,13 @@
+
+{
+  "parent": "minecraft:block/cube_directional",
+  "textures": {
+    "down": "minecraft:block/snow",
+    "east": "minecraft:block/snow",
+    "north": "grimeandgold:block/snow_burrow",
+    "particle": "minecraft:block/snow",
+    "south": "minecraft:block/snow",
+    "up": "minecraft:block/snow",
+    "west": "minecraft:block/snow"
+  }
+}

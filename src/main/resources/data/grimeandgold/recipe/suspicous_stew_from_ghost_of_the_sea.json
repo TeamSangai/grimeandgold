@@ -5,14 +5,14 @@
     "minecraft:bowl",
     "#minecraft:mushrooms",
     "#minecraft:mushrooms",
-    "grimeandgold:aquatic_spin_rose"
+    "grimeandgold:ghost_of_the_sea"
   ],
   "result": {
     "components": {
       "minecraft:suspicious_stew_effects": [
         {
-          "duration": 90,
-          "id": "minecraft:dolphins_grace"
+          "duration": 300,
+          "id": "minecraft:breath_of_the_nautilus"
         }
       ]
     },

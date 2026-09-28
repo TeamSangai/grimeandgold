@@ -56,7 +56,6 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
         }
         this.setPathfindingMalus(PathType.WATER, 0.0F);
         this.navigation = new AmphibiousPathNavigation(this, level);
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.GRASS_BLOCK));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

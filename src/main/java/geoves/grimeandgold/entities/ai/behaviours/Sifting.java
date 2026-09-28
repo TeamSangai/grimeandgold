@@ -7,14 +7,26 @@ import geoves.grimeandgold.entities.ai.MemoryModuleTypes;
 import geoves.grimeandgold.entities.mobs.siftgrub.SiftGrub;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Prediction;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BlockPosTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Map;
 
 public class Sifting<E extends SiftGrub> extends Behavior<E> {
@@ -68,7 +80,18 @@ public class Sifting<E extends SiftGrub> extends Behavior<E> {
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
         if (block instanceof SiftPickup siftable) {
-//            siftable.
+            ItemStack itemStack = body.getItemBySlot(EquipmentSlot.MAINHAND);
+            if (!itemStack.isEmpty()) {
+                body.drop(itemStack, true, Prediction.PREDICTED);
+            }
+            LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.SNIFFER_DIGGING);
+            LootParams params = new LootParams.Builder(level)  // Is there a better way to do this lol
+                    .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(body.getOnPos()))  // Idk if this is right
+                    .withParameter(LootContextParams.INTERACTING_ENTITY, body)
+                    .withParameter(LootContextParams.BLOCK_STATE, body.getBlockStateOn())
+                    .create(LootContextParamSets.BLOCK_INTERACT);
+            List<ItemStack> drops = lootTable.getRandomItems(params);
+            body.setItemSlot(EquipmentSlot.MAINHAND, drops.get(level.getRandom().nextInt(drops.size())));
         }
         GrimeAndGold.LOGGER.info(state.getBlock().toString());
         GrimeAndGold.LOGGER.info("Is siftable: " + (state.getBlock() instanceof SiftPickup));

@@ -38,7 +38,9 @@ public class ModCreativeTabs {
                         output.accept(ModBlocks.GRIMEBARREL);
                         output.accept(ModBlocks.FLY_NEST);
 
+                        output.accept(ModItems.AQUATIC_MIXED_SEEDS);
                         output.accept(ModBlocks.AQUATIC_SPIN_ROSE);
+                        output.accept(ModBlocks.GHOST_OF_THE_SEA);
                         output.accept(ModBlocks.ANCHOR_BLOSSOM);
                         output.accept(ModBlocks.SPIRAL_DAFFODIL);
                         output.accept(ModItems.BENTHIC_BRANCH_ITEM);

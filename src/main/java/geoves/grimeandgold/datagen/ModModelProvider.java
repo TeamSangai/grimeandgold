@@ -2,6 +2,7 @@ package geoves.grimeandgold.datagen;
 
 import geoves.grimeandgold.blocks.ModBlocks;
 
+import geoves.grimeandgold.blocks.custom.AquaticSproutCropBlock;
 import geoves.grimeandgold.blocks.custom.DecomposterBlock;
 import geoves.grimeandgold.datagen.util.C6;
 import geoves.grimeandgold.items.ModItems;
@@ -12,6 +13,8 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TexturedModel;
+
+import static geoves.grimeandgold.blocks.custom.AquaticSproutCropBlock.AGE;
 
 
 public class ModModelProvider extends FabricModelProvider {
@@ -37,6 +40,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createCrossBlock(ModBlocks.DESERT_PRIMROSE, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GLOBE_THISTLE, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.DRY_TALL_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DRY_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.GHOST_OF_THE_SEA, BlockModelGenerators.PlantType.NOT_TINTED);
         //   blockModelGenerators.blockStateOutput.accept(
       //          MultiVariantGenerator.dispatch(ModBlocks.DECOMPOSTER).with(
        //                 C6.initial(
@@ -58,7 +62,9 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(ModBlocks.DRY_TALL_FERN.asItem(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModBlocks.GHOST_OF_THE_SEA.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COOKED_BEETROOT_PADDY, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.AQUATIC_MIXED_SEEDS, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.BEETROOT_PADDY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.FERROBEET_MELODY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.BEETROOT_BURGER, ModelTemplates.FLAT_ITEM);

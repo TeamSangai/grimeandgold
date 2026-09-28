@@ -34,6 +34,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implements ExtendedMenuProvider<BlockPos> {
@@ -41,6 +42,11 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
     private static final short DEFAULT_LIT_TIME_REMAINING = 0;
     private static final short DEFAULT_LIT_TOTAL_TIME = 0;
     private final ContainerData data;
+    private int litTimeRemaining;
+    private int litTotalTime;
+    private int cookingTimer;
+    private int cookingTotalTime;
+    private float speedMultiplier;
     private int progress = 0;
     private int maxProgress = 300;
     private static final int INPUT_SLOT = 0;
@@ -53,26 +59,42 @@ public class SlagFurnaceBlockEntity extends AbstractFurnaceBlockEntity implement
     public SlagFurnaceBlockEntity(final BlockPos worldPosition, final BlockState blockState) {
         super(ModBlockEntities.SLAG_FURNACE_BE, worldPosition, blockState, RecipeType.SMELTING);
         this.data = new ContainerData() {
-            @Override
-            public int get(int dataId) {
-                return switch (dataId) {
-                    case 0 -> SlagFurnaceBlockEntity.this.progress;
-                    case 1 -> SlagFurnaceBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
+            {
+                Objects.requireNonNull(SlagFurnaceBlockEntity.this);
             }
 
-            @Override
-            public void set(int dataId, int value) {
+            public int get(final int dataId) {
                 switch (dataId) {
-                    case 0: SlagFurnaceBlockEntity.this.progress = value;
-                    case 1: SlagFurnaceBlockEntity.this.maxProgress = value;
+                    case 0 -> {
+                        return SlagFurnaceBlockEntity.this.litTimeRemaining;
+                    }
+                    case 1 -> {
+                        return SlagFurnaceBlockEntity.this.litTotalTime;
+                    }
+                    case 2 -> {
+                        return SlagFurnaceBlockEntity.this.cookingTimer;
+                    }
+                    case 3 -> {
+                        return SlagFurnaceBlockEntity.this.cookingTotalTime;
+                    }
+                    default -> {
+                        return 0;
+                    }
                 }
             }
 
-            @Override
+            public void set(final int dataId, final int value) {
+                switch (dataId) {
+                    case 0 -> SlagFurnaceBlockEntity.this.litTimeRemaining = value;
+                    case 1 -> SlagFurnaceBlockEntity.this.litTotalTime = value;
+                    case 2 -> SlagFurnaceBlockEntity.this.cookingTimer = value;
+                    case 3 -> SlagFurnaceBlockEntity.this.cookingTotalTime = value;
+                }
+
+            }
+
             public int getCount() {
-                return 2;
+                return 4;
             }
         };
         this.items = NonNullList.withSize(4, ItemStack.EMPTY);

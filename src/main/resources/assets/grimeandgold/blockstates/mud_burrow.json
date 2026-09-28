@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "grimeandgold:block/mud_burrow",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "grimeandgold:block/mud_burrow"
+    },
+    "facing=south": {
+      "model": "grimeandgold:block/mud_burrow",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "grimeandgold:block/mud_burrow",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "grimeandgold:block/mud_burrow_up"
+    },
+    "facing=down": {
+      "model": "grimeandgold:block/mud_burrow_up",
+      "x": 180
+    }
+  }
+}

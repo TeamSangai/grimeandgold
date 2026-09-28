@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "grimeandgold:block/ghost_of_the_sea"
+  }
+}

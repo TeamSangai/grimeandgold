@@ -3,6 +3,7 @@ package geoves.grimeandgold;
 import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
+import geoves.grimeandgold.data.ModDataComponents;
 import geoves.grimeandgold.entities.ai.ActivityTypes;
 import geoves.grimeandgold.entities.ModEntityDataSerializers;
 import geoves.grimeandgold.entities.ModEntityTypes;
@@ -12,9 +13,19 @@ import geoves.grimeandgold.entities.mobs.siftfly.SiftFlyEntity;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.recipe.ModRecipes;
 import geoves.grimeandgold.sounds.ModSounds;
+import geoves.grimeandgold.tags.ModTags;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.core.component.BlockTransformer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +53,11 @@ public class GrimeAndGold implements ModInitializer {
 		ModEntityDataSerializers.register();
 		ActivityTypes.registerCustomActivities();
 		MemoryModuleTypes.register();
-
+		ModDataComponents.registerDataComponents();
+		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_GRIME_BURROW), ModBlocks.GRIMEBARREL).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
+		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_CLAY_BURROW), ModBlocks.CLAY_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
+		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_MUD_BURROW), ModBlocks.MUD_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
+		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_SNOW_BURROW), ModBlocks.SNOW_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
 		this.registerModEntities();
 	}
 

@@ -41,5 +41,11 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.getRK(ModBlocks.HULL_PLATING)).add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS))
                 .add(ModBlocks.getRK(ModBlocks.HULL_PLATING_SLAB));
         tag(ModTags.Blocks.SIFT_LARVA_CAN_TRANSMUTE).add(ModBlocks.getRK(ModBlocks.GRIME));
+        tag(ModTags.Blocks.TURNS_INTO_CLAY_BURROW).add(Objects.requireNonNull(Blocks.CLAY.properties().blockId()));
+        tag(ModTags.Blocks.TURNS_INTO_MUD_BURROW).add(Objects.requireNonNull(Blocks.MUD.properties().blockId()));
+        tag(ModTags.Blocks.TURNS_INTO_SNOW_BURROW).add(Objects.requireNonNull(Blocks.SNOW_BLOCK.properties().blockId()));
+        tag(ModTags.Blocks.TURNS_INTO_GRIME_BURROW).add(ModBlocks.getRK(ModBlocks.GRIME));
+        tag(ModTags.Blocks.AQUATIC_POLLINATOR_FLOWERS).add(ModBlocks.getRK(ModBlocks.AQUATIC_SPIN_ROSE)).add(ModBlocks.getRK(ModBlocks.GHOST_OF_THE_SEA))
+                .add(ModBlocks.getRK(ModBlocks.ANCHOR_BLOSSOM)).add(ModBlocks.getRK(ModBlocks.SPIRAL_DAFFODIL));
     }
 }

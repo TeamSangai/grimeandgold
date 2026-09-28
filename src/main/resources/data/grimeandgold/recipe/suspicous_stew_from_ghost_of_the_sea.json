@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "suspicious_stew",
+  "ingredients": [
+    "minecraft:bowl",
+    "#minecraft:mushrooms",
+    "#minecraft:mushrooms",
+    "grimeandgold:ghost_of_the_sea"
+  ],
+  "result": {
+    "components": {
+      "minecraft:suspicious_stew_effects": [
+        {
+          "duration": 300,
+          "id": "minecraft:breath_of_the_nautilus"
+        }
+      ]
+    },
+    "id": "minecraft:suspicious_stew"
+  }
+}

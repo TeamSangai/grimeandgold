@@ -46,10 +46,15 @@ public class ModBlocks {
     public static final Block SLAG_FURNACE = registerBlock("slag_furnace", properties -> new SlagFurnaceBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
 
     public static final Block GRIMEBARREL = registerBlock("grimebarrel", properties -> new GrimeBarrelBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
+    public static final Block MUD_BURROW = registerBlock("mud_burrow", properties -> new MudBurrowBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
+    public static final Block CLAY_BURROW = registerBlock("clay_burrow", properties -> new ClayBurrowBlock(properties.sound(SoundType.GRAVEL).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
+    public static final Block SNOW_BURROW = registerBlock("snow_burrow", properties -> new SnowBurrowBlock(properties.sound(SoundType.SNOW).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
     public static final Block FLY_NEST = registerBlock("fly_nest", properties -> new FlynestBlock(properties.sound(SoundType.PACKED_MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(1.0f, 3.0f)));
     public static final Block FLY_LARVA_EGG = registerBlock("sift_larva_egg", properties -> new SiftLarvaEggBlock(properties.mapColor(MapColor.WATER).instabreak().noOcclusion().sound(SoundType.FROGSPAWN).pushReaction(PushReaction.POPPED)));
 
+    public static final Block AQUATIC_MIXED_CROP = registerBlock("mixed_aquatic_flowers_crop", properties -> new AquaticSproutCropBlock(properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.POPPED)));;
     public static final Block AQUATIC_SPIN_ROSE = registerBlock("aquatic_spin_rose", properties -> new AquaticFlowerBlock(MobEffects.DOLPHINS_GRACE, 4.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block GHOST_OF_THE_SEA = registerBlock("ghost_of_the_sea", properties -> new AquaticFlowerBlock(MobEffects.BREATH_OF_THE_NAUTILUS, 6.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block ANCHOR_BLOSSOM = registerBlock("anchor_blossom", properties -> new DoubleAquaticFlowerBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
     public static final Block SPIRAL_DAFFODIL = registerBlock("spiral_daffodil", properties -> new SpiralDafodilBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
 

@@ -40,15 +40,6 @@ public class GrimeBlock extends Block implements SiftPickup {
         return SHAPE;
     }
 
-    @Override
-    protected @NonNull InteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (itemStack.is(ItemTags.SHOVELS)) {
-            assert !level.isClientSide();
-            level.setBlock(pos, ModBlocks.GRIMEBARREL.defaultBlockState(), 11);
-            return InteractionResult.SUCCESS;
-        }
-        return super.useItemOn(itemStack, state, level, pos, player, hand, hitResult);
-    }
 
     protected VoxelShape getBlockSupportShape(final BlockState state, final BlockGetter level, final BlockPos pos) {
         return Shapes.block();

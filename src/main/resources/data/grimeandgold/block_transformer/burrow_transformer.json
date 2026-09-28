@@ -1,0 +1,67 @@
+[
+  {
+    "block_state_provider": {
+      "type": "minecraft:rule_based",
+      "rules": [
+        {
+          "if_true": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "grimeandgold:turns_into_grime_burrow"
+              }
+            ]
+          },
+          "then": {
+            "id": "grimeandgold:grimebarrel"
+          }
+        },{
+          "if_true": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "grimeandgold:turns_into_mud_burrow"
+              }
+            ]
+          },
+          "then": {
+            "id": "grimeandgold:mud_burrow"
+          }
+        },{
+          "if_true": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "grimeandgold:turns_into_clay_burrow"
+              }
+            ]
+          },
+          "then": {
+            "id": "grimeandgold:clay_burrow"
+          }
+        },{
+          "if_true": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_block_tag",
+                "tag": "grimeandgold:turns_into_snow_burrow"
+              }
+            ]
+          },
+          "then": {
+            "id": "grimeandgold:snow_burrow"
+          }
+        }
+      ]
+    },
+    "disallowed_faces": [
+      "down"
+    ],
+    "item_damage_per_use": 1,
+    "sound": "minecraft:item.shovel.flatten"
+  }
+]

@@ -1,0 +1,13 @@
+
+{
+  "parent": "minecraft:block/cube_directional",
+  "textures": {
+    "down": "minecraft:block/clay",
+    "east": "minecraft:block/clay",
+    "north": "minecraft:block/clay",
+    "particle": "minecraft:block/clay",
+    "south": "minecraft:block/clay",
+    "up": "grimeandgold:block/clay_burrow",
+    "west": "minecraft:block/clay"
+  }
+}

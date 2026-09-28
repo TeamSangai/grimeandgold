@@ -1,0 +1,13 @@
+
+{
+  "parent": "minecraft:block/cube_directional",
+  "textures": {
+    "down": "minecraft:block/mud",
+    "east": "minecraft:block/mud",
+    "north": "grimeandgold:block/mud_burrow",
+    "particle": "minecraft:block/mud",
+    "south": "minecraft:block/mud",
+    "up": "minecraft:block/mud",
+    "west": "minecraft:block/mud"
+  }
+}

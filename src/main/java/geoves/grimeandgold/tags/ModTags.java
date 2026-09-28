@@ -14,7 +14,11 @@ public class ModTags {
         public static final TagKey<Block> SIFT_LARVA_DISLIKED = createTag("sift_larva_disliked");
         public static final TagKey<Block> SUPPORTS_AQUATIC_FLOWERS = createTag("supports_aquatic_flowers");
         public static final TagKey<Block> SIFT_LARVA_CAN_TRANSMUTE = createTag("sift_larva_can_transmute");
-
+        public static final TagKey<Block> TURNS_INTO_GRIME_BURROW = createTag("turns_into_grime_burrow");
+        public static final TagKey<Block> TURNS_INTO_CLAY_BURROW = createTag("turns_into_clay_burrow");
+        public static final TagKey<Block> TURNS_INTO_MUD_BURROW = createTag("turns_into_mud_burrow");
+        public static final TagKey<Block> TURNS_INTO_SNOW_BURROW = createTag("turns_into_snow_burrow");
+        public static final TagKey<Block> AQUATIC_POLLINATOR_FLOWERS = createTag("aquatic_pollinator_flowers");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));

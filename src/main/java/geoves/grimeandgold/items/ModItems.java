@@ -39,6 +39,8 @@ public class ModItems {
     public static final Item SIFT_GRUB_BUCKET = registerItem("sift_grub_bucket", properties -> new MobBucketItem(ModEntityTypes.SIFT_GRUB, Fluids.WATER, SoundEvents.BUCKET_EMPTY_TADPOLE, properties.stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final Item BENTHIC_BRANCH_ITEM = registerItem("benthic_branch_item", properties -> new StandingAndWallBlockItem(ModBlocks.BENTHIC_BRANCH, ModBlocks.BENTHIC_WALL_BRANCH, Direction.DOWN, properties));
 
+    public static final Item AQUATIC_MIXED_SEEDS = registerItem("aquatic_mixed_seeds", properties -> new BlockItem(ModBlocks.AQUATIC_MIXED_CROP, properties));
+
     public static final Item SIFT_FLY_SPAWN_EGG = registerSpawnEgg(ModItemIds.SIFT_FLY_SPAWN_EGG, ModEntityTypes.SIFT_FLY);
     public static final Item SIFT_GRUB_SPAWN_EGG = registerSpawnEgg(ModItemIds.SIFT_GRUB_SPAWN_EGG, ModEntityTypes.SIFT_GRUB);
 

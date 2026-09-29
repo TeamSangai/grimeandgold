@@ -12,6 +12,7 @@ import java.util.Optional;
 public class MemoryModuleTypes<U> extends MemoryModuleType<U> {
     public static final MemoryModuleType<Integer> SIFT_COOLDOWN = register("sift_cooldown", Codec.INT);
 //    public static final MemoryModuleType<Unit> SIFT_COOLDOWN = register("sift_cooldown", Unit.CODEC);
+    public static final MemoryModuleType<Integer> STORE_COOLDOWN = register("store_cooldown", Codec.INT);
 
     public MemoryModuleTypes(Optional optional) {
         super(optional);

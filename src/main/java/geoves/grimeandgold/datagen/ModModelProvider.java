@@ -36,11 +36,13 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockModelGenerators.createCoralFans(ModBlocks.BENTHIC_BRANCH, ModBlocks.BENTHIC_WALL_BRANCH);
 
+        blockModelGenerators.createDoublePlantWithDefaultItem(ModBlocks.COCOA_BLOOM, BlockModelGenerators.PlantType.NOT_TINTED);
+
         blockModelGenerators.createCrossBlock(ModBlocks.BENTHIC_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.DESERT_LAVENDER, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DESERT_PRIMROSE, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GLOBE_THISTLE, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.DRY_TALL_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.DRY_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.GHOST_OF_THE_SEA, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.DRY_FERN, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GHOST_OF_THE_SEA, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.DEEP_SEA_ROCKET, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GLACIER_HOLLY, BlockModelGenerators.PlantType.NOT_TINTED);
         //   blockModelGenerators.blockStateOutput.accept(
       //          MultiVariantGenerator.dispatch(ModBlocks.DECOMPOSTER).with(
        //                 C6.initial(
@@ -62,7 +64,6 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(ModBlocks.DRY_TALL_FERN.asItem(), ModelTemplates.FLAT_ITEM);
-        itemModelGenerators.generateFlatItem(ModBlocks.GHOST_OF_THE_SEA.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COOKED_BEETROOT_PADDY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.AQUATIC_MIXED_SEEDS, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.BEETROOT_PADDY, ModelTemplates.FLAT_ITEM);
@@ -81,6 +82,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_FULL_PAYDIRT, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_EMPTY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModBlocks.AQUATIC_SPIN_ROSE.asItem(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModBlocks.GHOST_OF_THE_SEA.asItem(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModBlocks.DEEP_SEA_ROCKET.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_FLY_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_GRUB_BUCKET, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_GRUB_SPAWN_EGG, ModelTemplates.FLAT_ITEM);

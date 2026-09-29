@@ -5,13 +5,19 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.blocks.custom.SnowBurrowBlock;
 import geoves.grimeandgold.entities.ai.ActivityTypes;
 import geoves.grimeandgold.entities.ai.MemoryModuleTypes;
 import geoves.grimeandgold.entities.ai.behaviours.Sifting;
+import geoves.grimeandgold.entities.ai.behaviours.Store;
+import geoves.grimeandgold.tags.ModTags;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.ActivityData;
 import net.minecraft.world.entity.ai.Brain;
@@ -21,6 +27,8 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.tslat.smartbrainlib.api.core.behaviour.base.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.base.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
@@ -34,8 +42,10 @@ import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.InWaterSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class SiftGrubAi {
     // Feel free to change these
@@ -46,6 +56,7 @@ public class SiftGrubAi {
     private static final int SIFT_DURATION_MAX = 100;
     private static final int SIFT_MIN_COOLDOWN = 69;
     private static final int SIFT_MAX_COOLDOWN = 96;
+    private static final Predicate<BlockState>  TRANSPORT_ITEM_DESTINATION_BLOCK = block -> block.is(ModTags.Blocks.BURROWS);
 
     protected static Brain.Provider<SiftGrub> getBrainProvider() {
         return Brain.provider(
@@ -143,6 +154,37 @@ public class SiftGrubAi {
         );
     }
 
+    private static ActivityData<SiftGrub> initStoringActivity() {
+        return ActivityData.create(
+                Activity.INVESTIGATE,
+                ImmutableList.of(
+                        Pair.of(
+                                0,
+                                new GateBehavior<>(
+                                        ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
+                                        ImmutableSet.of(),
+                                        GateBehavior.OrderPolicy.SHUFFLED,
+                                        GateBehavior.RunningPolicy.RUN_ONE,
+                                        ImmutableList.of(
+                                                Pair.of(RandomStroll.swim(1.0F), 3),
+                                                Pair.of(BehaviorBuilder.triggerIf(Entity::isInWater), 5)  // idk what this is for
+                                        )
+                                )
+                        )
+                ),
+                ImmutableSet.of(
+                        Pair.of(
+                                MemoryModuleType.IS_IN_WATER, MemoryStatus.VALUE_PRESENT
+                        ),
+                        Pair.of(
+                                MemoryModuleTypes.SIFT_COOLDOWN, MemoryStatus.VALUE_ABSENT
+                        )
+                )
+        );
+    }
+
+
+
     private static ActivityData<SiftGrub> initFindWaterActivity() {
         return ActivityData.create(
                 ActivityTypes.SEEK_WATER,
@@ -193,5 +235,23 @@ public class SiftGrubAi {
                 ),
                 new SetRandomLookTarget<>()
         );
+    }
+    private static TransportItemsBetweenContainers.OnTargetReachedInteraction onReachedBurrowInteraction(SiftGrub.State state, @Nullable SoundEvent sound) {
+        return (body, target, ticksSinceReachingTarget) -> {
+            if (body instanceof SiftGrub siftGrub) {
+                Container container = target.container();
+                if (ticksSinceReachingTarget == 1) {
+                    container.startOpen(siftGrub);
+                    siftGrub.setOpenedBurrowPos(target.pos());
+                    siftGrub.setState(state);
+                }
+                if (ticksSinceReachingTarget == 30) {
+                    if (container.getEntitiesWithContainerOpen().contains(body)) {
+                        container.stopOpen(siftGrub);
+                    }
+                    siftGrub.clearOpenedBurrowPos();
+                }
+            }
+        };
     }
 }

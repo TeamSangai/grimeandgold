@@ -8,6 +8,7 @@ import net.minecraft.world.entity.schedule.Activity;
 public class ActivityTypes extends Activity {
     public static final Activity SEEK_WATER = register("seek_water");
     public static final Activity SEARCH = register("search");
+    public static final Activity STORE = register("store");
 
     public ActivityTypes(String name) {
         super(name);

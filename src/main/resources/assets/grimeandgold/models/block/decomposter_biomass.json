@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "front": "grimeandgold:block/decomposter_done_grime",
+    "front": "grimeandgold:block/decomposter_done_biomass",
     "side": "grimeandgold:block/decomposter_side",
     "top": "grimeandgold:block/decomposter_side"
   }

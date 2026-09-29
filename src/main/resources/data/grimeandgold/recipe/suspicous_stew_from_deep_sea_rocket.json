@@ -5,14 +5,14 @@
     "minecraft:bowl",
     "#minecraft:mushrooms",
     "#minecraft:mushrooms",
-    "grimeandgold:ghost_of_the_sea"
+    "grimeandgold:deep_sea_rocket"
   ],
   "result": {
     "components": {
       "minecraft:suspicious_stew_effects": [
         {
           "duration": 320,
-          "id": "minecraft:breath_of_the_nautilus"
+          "id": "minecraft:speed"
         }
       ]
     },

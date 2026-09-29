@@ -1,0 +1,184 @@
+{
+  "variants": {
+    "facing=east,active=false,output=tbd": {
+      "model": "grimeandgold:block/decomposter",
+      "y": 90
+    },
+    "facing=north,active=false,output=tbd": {
+      "model": "grimeandgold:block/decomposter"
+    },
+    "facing=south,active=false,output=tbd": {
+      "model": "grimeandgold:block/decomposter",
+      "y": 180
+    },
+    "facing=west,active=false,output=tbd": {
+      "model": "grimeandgold:block/decomposter",
+      "y": 270
+    },
+    "facing=east,active=true,output=tbd": {
+      "model": "grimeandgold:block/decomposter_active",
+      "y": 90
+    },
+    "facing=north,active=true,output=tbd": {
+      "model": "grimeandgold:block/decomposter_active"
+    },
+    "facing=south,active=true,output=tbd": {
+      "model": "grimeandgold:block/decomposter_active",
+      "y": 180
+    },
+    "facing=west,active=true,output=tbd": {
+      "model": "grimeandgold:block/decomposter_active",
+      "y": 270
+    },
+    "facing=east,active=false,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal",
+      "y": 90
+    },
+    "facing=north,active=false,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal"
+    },
+    "facing=south,active=false,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal",
+      "y": 180
+    },
+    "facing=west,active=false,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal",
+      "y": 270
+    },
+    "facing=east,active=false,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime",
+      "y": 90
+    },
+    "facing=north,active=false,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime"
+    },
+    "facing=south,active=false,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime",
+      "y": 180
+    },
+    "facing=west,active=false,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime",
+      "y": 270
+    },
+    "facing=east,active=false,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite",
+      "y": 90
+    },
+    "facing=north,active=false,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite"
+    },
+    "facing=south,active=false,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite",
+      "y": 180
+    },
+    "facing=west,active=false,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite",
+      "y": 270
+    },
+    "facing=east,active=false,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt",
+      "y": 90
+    },
+    "facing=north,active=false,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt"
+    },
+    "facing=south,active=false,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt",
+      "y": 180
+    },
+    "facing=west,active=false,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt",
+      "y": 270
+    },
+    "facing=east,active=false,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass",
+      "y": 90
+    },
+    "facing=north,active=false,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass"
+    },
+    "facing=south,active=false,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass",
+      "y": 180
+    },
+    "facing=west,active=false,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass",
+      "y": 270
+    },
+    "facing=east,active=true,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal",
+      "y": 90
+    },
+    "facing=north,active=true,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal"
+    },
+    "facing=south,active=true,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal",
+      "y": 180
+    },
+    "facing=west,active=true,output=bonemeal": {
+      "model": "grimeandgold:block/decomposter_bonemeal",
+      "y": 270
+    },
+    "facing=east,active=true,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime",
+      "y": 90
+    },
+    "facing=north,active=true,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime"
+    },
+    "facing=south,active=true,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime",
+      "y": 180
+    },
+    "facing=west,active=true,output=grime": {
+      "model": "grimeandgold:block/decomposter_grime",
+      "y": 270
+    },
+    "facing=east,active=true,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite",
+      "y": 90
+    },
+    "facing=north,active=true,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite"
+    },
+    "facing=south,active=true,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite",
+      "y": 180
+    },
+    "facing=west,active=true,output=calcite": {
+      "model": "grimeandgold:block/decomposter_calcite",
+      "y": 270
+    },
+    "facing=east,active=true,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt",
+      "y": 90
+    },
+    "facing=north,active=true,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt"
+    },
+    "facing=south,active=true,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt",
+      "y": 180
+    },
+    "facing=west,active=true,output=dirt": {
+      "model": "grimeandgold:block/decomposter_dirt",
+      "y": 270
+    },
+    "facing=east,active=true,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass",
+      "y": 90
+    },
+    "facing=north,active=true,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass"
+    },
+    "facing=south,active=true,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass",
+      "y": 180
+    },
+    "facing=west,active=true,output=biomass": {
+      "model": "grimeandgold:block/decomposter_biomass",
+      "y": 270
+    }
+  }
+}

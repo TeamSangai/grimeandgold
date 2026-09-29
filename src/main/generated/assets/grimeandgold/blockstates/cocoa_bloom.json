@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "grimeandgold:block/cocoa_bloom_bottom"
+    },
+    "half=upper": {
+      "model": "grimeandgold:block/cocoa_bloom_top"
+    }
+  }
+}

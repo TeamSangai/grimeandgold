@@ -1,9 +1,12 @@
 package geoves.grimeandgold.entities.mobs.siftgrub;
 
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.entities.ModEntityDataSerializers;
 import geoves.grimeandgold.items.ModItems;
+import geoves.grimeandgold.tags.ModTags;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -22,13 +25,15 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.TransportItemsBetweenContainers;
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
 import net.minecraft.world.entity.animal.AgeableWaterCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -40,10 +45,11 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.function.IntFunction;
 
-public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<SiftGrub>, Bucketable {
+public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<SiftGrub>, Bucketable, ContainerUser {
     public final AnimationState walkAnimationState = new AnimationState();
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState siftAnimationState = new AnimationState();
+    private @Nullable BlockPos openedBurrowPos;
     private static final boolean USE_SLB = GrimeAndGold.USE_SBL;
     private static final Brain.Provider<SiftGrub> BRAIN_PROVIDER = SiftGrubAi.getBrainProvider();
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(SiftGrub.class, EntityDataSerializers.BOOLEAN);
@@ -149,7 +155,7 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
         return this.entityData.get(DATA_STATE);
     }
 
-    private SiftGrub setState(SiftGrub.State state) {
+    public SiftGrub setState(SiftGrub.State state) {
         this.entityData.set(DATA_STATE, state);
         return this;
     }
@@ -186,6 +192,15 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
                 break;
             case COLLECTING:
                 this.setState(State.COLLECTING);
+                break;
+            case STORING:
+                this.setState(State.STORING);
+                break;
+            case MAKE_BURROW:
+                this.setState(State.MAKE_BURROW);
+                break;
+            case PUPATE:
+                this.setState(State.PUPATE);
         }
         return this;
     }
@@ -233,7 +248,7 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
 
     @Override
     public SoundEvent getPickupSound() {
-        return SoundEvents.BUCKET_FILL_TADPOLE;  // Todo: this ok?
+        return SoundEvents.BUCKET_FILL_TADPOLE;
     }
 
     @Override
@@ -241,11 +256,39 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
         return null;
     }
 
+    public void setOpenedBurrowPos(BlockPos openedBurrowPos) {
+        this.openedBurrowPos = openedBurrowPos;
+    }
+
+    public void clearOpenedBurrowPos() {
+        this.openedBurrowPos = null;
+    }
+
+    @Override
+    public boolean hasContainerOpen(ContainerOpenersCounter container, BlockPos blockPos) {
+        if (this.openedBurrowPos == null) {
+            return false;
+        }
+        BlockState blockState = this.level().getBlockState(this.openedBurrowPos);
+        return this.openedBurrowPos.equals(blockPos) || blockState.getBlock().defaultBlockState().is(ModTags.Blocks.BURROWS);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public double getContainerInteractionRange() {
+        return 0;
+    }
+
     public enum State {
         IDLING(0),
         SEARCHING(1),
         SIFTING(2),
-        COLLECTING(3);
+        COLLECTING(3),
+        STORING(4),
+        MAKE_BURROW(5),
+        PUPATE(6);
 
         public static final IntFunction<SiftGrub.State> BY_ID = ByIdMap.continuous(SiftGrub.State::id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
         public static final StreamCodec<ByteBuf, SiftGrub.State> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, SiftGrub.State::id);

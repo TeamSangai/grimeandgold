@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "grimeandgold:block/deep_sea_rocket"
+  }
+}

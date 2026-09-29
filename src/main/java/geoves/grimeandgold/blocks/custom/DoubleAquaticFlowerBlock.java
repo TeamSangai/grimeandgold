@@ -1,16 +1,16 @@
 package geoves.grimeandgold.blocks.custom;
 
-import com.mojang.serialization.MapCodec;
-import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.tags.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
@@ -24,10 +24,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
-public class DoubleAquaticFlowerBlock extends DoublePlantBlock implements LiquidBlockContainer {
+public class DoubleAquaticFlowerBlock extends DoublePlantBlock implements LiquidBlockContainer, BonemealableBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = DoublePlantBlock.HALF;
     private static final VoxelShape SHAPE = Block.column(12.0, 0.0, 16.0);
-
 
     public DoubleAquaticFlowerBlock(Properties properties) {
         super(properties);
@@ -42,9 +41,18 @@ public class DoubleAquaticFlowerBlock extends DoublePlantBlock implements Liquid
         return state.isFaceSturdy(level, pos, Direction.UP) && state.is(ModTags.Blocks.SUPPORTS_AQUATIC_FLOWERS);
     }
 
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source) {
+        return true;
+    }
+
     @Override
-    protected ItemStack getCloneItemStack(final LevelReader level, final BlockPos pos, final BlockState state, final boolean includeData) {
-        return new ItemStack(ModBlocks.ANCHOR_BLOSSOM);
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
+        TallFlowerBlock.popResource(level, pos, new ItemStack(this));
     }
 
     @Override

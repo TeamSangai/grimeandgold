@@ -1,56 +1,68 @@
 {
   "type": "generic",
   "pools": [{
-    "rolls": 3,
-    "bonus_rolls": 1.0,
+    "rolls": 5,
+    "bonus_rolls": 2.0,
     "entries": [{
-      "type": "minecraft:item",
-      "functions": [{
-          "count": {
-            "type": "minecraft:uniform",
-            "max": 3.0,
-            "min": 1.0
-          },
-          "function": "minecraft:set_count"
-        }],
-      "name": "minecraft:iron_nugget",
-      "weight": 2
-      },{
       "type": "minecraft:item",
       "functions": [{
         "count": {
           "type": "minecraft:uniform",
           "max": 5.0,
-          "min": 2.0
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:iron_nugget",
+      "weight": 24
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": 1,
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:raw_iron",
+      "weight": 12
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
         },
         "function": "minecraft:set_count"
       }],
       "name": "minecraft:copper_nugget",
-      "weight": 6
+      "weight": 30
     },{
       "type": "minecraft:item",
       "functions": [{
         "count": 1,
         "function": "minecraft:set_count"
       }],
-      "name": "minecraft:dirt",
-      "weight": 12
+      "name": "minecraft:raw_copper",
+      "weight": 15
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 5.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "minecraft:gold_nugget",
+      "weight": 28
     },{
       "type": "minecraft:item",
       "functions": [{
         "count": 1,
         "function": "minecraft:set_count"
       }],
-      "name": "minecraft:carrot",
-      "weight": 12
-    },{
-      "type": "minecraft:item",
-      "functions": [{
-        "count": 1,
-        "function": "minecraft:set_count"
-      }],
-      "name": "minecraft:potato",
-      "weight": 12
+      "name": "minecraft:raw_gold",
+      "weight": 14
     },{
       "type": "minecraft:item",
       "functions": [{
@@ -62,19 +74,7 @@
         "function": "minecraft:set_count"
       }],
       "name": "minecraft:wheat_seeds",
-      "weight": 25
-    },{
-      "type": "minecraft:item",
-      "functions": [{
-        "count": {
-          "type": "minecraft:uniform",
-          "max": 5.0,
-          "min": 1.0
-        },
-        "function": "minecraft:set_count"
-      }],
-      "name": "grimeandgold:aquatic_mixed_seeds",
-      "weight": 32
+      "weight": 5
     },{
       "type": "minecraft:item",
       "functions": [{
@@ -86,32 +86,20 @@
         "function": "minecraft:set_count"
       }],
       "name": "minecraft:beetroot_seeds",
-      "weight": 26
+      "weight": 5
     },{
       "type": "minecraft:item",
       "functions": [{
         "count": {
           "type": "minecraft:uniform",
-          "max": 3.0,
+          "max": 5.0,
           "min": 1.0
         },
         "function": "minecraft:set_count"
       }],
-      "name": "minecraft:melon_seeds",
-      "weight": 24
-    },{
-      "type": "minecraft:item",
-      "functions": [{
-        "count": {
-          "type": "minecraft:uniform",
-          "max": 3.0,
-          "min": 1.0
-        },
-        "function": "minecraft:set_count"
-      }],
-      "name": "minecraft:pumpkin_seeds",
-      "weight": 20
+      "name": "grimeandgold:diamond_shard",
+      "weight": 5
     }]
   }],
-  "random_sequence": "grimeandgold:sifting_grime"
+  "random_sequence": "grimeandgold:sifting_paydirt"
 }

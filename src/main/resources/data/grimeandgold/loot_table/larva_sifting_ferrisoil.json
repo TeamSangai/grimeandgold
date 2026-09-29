@@ -20,13 +20,25 @@
       "functions": [{
         "count": {
           "type": "minecraft:uniform",
-          "max": 3.0,
+          "max": 4.0,
           "min": 1.0
         },
         "function": "minecraft:set_count"
       }],
       "name": "minecraft:beetroot_seeds",
       "weight": 32
+    },{
+      "type": "minecraft:item",
+      "functions": [{
+        "count": {
+          "type": "minecraft:uniform",
+          "max": 3.0,
+          "min": 1.0
+        },
+        "function": "minecraft:set_count"
+      }],
+      "name": "grimeandgold:aquatic_mixed_seeds",
+      "weight": 28
     },{
       "type": "minecraft:item",
       "functions": [{

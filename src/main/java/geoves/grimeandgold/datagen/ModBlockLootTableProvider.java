@@ -31,7 +31,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.IRON_SLAG);dropSelf(ModBlocks.COPPER_SLAG);dropSelf(ModBlocks.GOLD_SLAG);dropSelf(ModBlocks.BENTHIC_SAPLING);
         dropSelf(ModBlocks.BENTHIC_LOG);dropSelf(ModBlocks.BENTHIC_WOOD);dropSelf(ModBlocks.GLOBE_THISTLE);dropSelf(ModBlocks.DESERT_PRIMROSE);
         dropSelf(ModBlocks.DESERT_LAVENDER);dropSelf(ModBlocks.ANCHOR_BLOSSOM);dropSelf(ModBlocks.AQUATIC_SPIN_ROSE);dropSelf(ModBlocks.SPIRAL_DAFFODIL);
-        dropSelf(ModBlocks.GRIME_BRICKS);dropSelf(ModBlocks.GRIMEBARREL);
+        dropSelf(ModBlocks.GRIME_BRICKS);dropSelf(ModBlocks.GRIMEBARREL);dropSelf(ModBlocks.GHOST_OF_THE_SEA);dropSelf(ModBlocks.DEEP_SEA_ROCKET);
+        dropSelf(ModBlocks.GLACIER_HOLLY);dropSelf(ModBlocks.COCOA_BLOOM);
 
         dropOther(ModBlocks.BENTHIC_BRANCH, ModItems.BENTHIC_BRANCH_ITEM);dropOther(ModBlocks.BENTHIC_WALL_BRANCH, ModItems.BENTHIC_BRANCH_ITEM);
         createSilkTouchDispatchTable(ModBlocks.DRY_TALL_FERN, this.applyExplosionDecay(ModBlocks.DRY_TALL_FERN, LootItem.lootTableItem(ModBlocks.DRY_TALL_FERN.asItem())));

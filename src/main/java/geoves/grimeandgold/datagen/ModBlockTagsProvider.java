@@ -46,6 +46,6 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(ModTags.Blocks.TURNS_INTO_SNOW_BURROW).add(Objects.requireNonNull(Blocks.SNOW_BLOCK.properties().blockId()));
         tag(ModTags.Blocks.TURNS_INTO_GRIME_BURROW).add(ModBlocks.getRK(ModBlocks.GRIME));
         tag(ModTags.Blocks.AQUATIC_POLLINATOR_FLOWERS).add(ModBlocks.getRK(ModBlocks.AQUATIC_SPIN_ROSE)).add(ModBlocks.getRK(ModBlocks.GHOST_OF_THE_SEA))
-                .add(ModBlocks.getRK(ModBlocks.ANCHOR_BLOSSOM)).add(ModBlocks.getRK(ModBlocks.SPIRAL_DAFFODIL));
+                .add(ModBlocks.getRK(ModBlocks.ANCHOR_BLOSSOM)).add(ModBlocks.getRK(ModBlocks.SPIRAL_DAFFODIL)).add(ModBlocks.getRK(ModBlocks.DEEP_SEA_ROCKET));
     }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "grimeandgold:slag_from_iron_axe"
+        "recipes": "grimeandgold:slag_from_iron_equipment"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "grimeandgold:slag_from_iron_axe"
+      "grimeandgold:slag_from_iron_equipment"
     ]
   }
 }

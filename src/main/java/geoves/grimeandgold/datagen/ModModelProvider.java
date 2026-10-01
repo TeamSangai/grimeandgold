@@ -43,22 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createCrossBlock(ModBlocks.DRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.DRY_TALL_FERN, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DRY_FERN, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GHOST_OF_THE_SEA, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createCrossBlock(ModBlocks.DEEP_SEA_ROCKET, BlockModelGenerators.PlantType.NOT_TINTED);blockModelGenerators.createCrossBlock(ModBlocks.GLACIER_HOLLY, BlockModelGenerators.PlantType.NOT_TINTED);
-        //   blockModelGenerators.blockStateOutput.accept(
-      //          MultiVariantGenerator.dispatch(ModBlocks.DECOMPOSTER).with(
-       //                 C6.initial(
-       //                         DecomposterBlock.FACING,
-        //                        DecomposterBlock.ACTIVE,
-       //                         DecomposterBlock.DONE,
-         //                       DecomposterBlock.VEGETATION,
-         //                       DecomposterBlock.CALCIUM,
-         //                       DecomposterBlock.FLESH
-         //               ).generate((facing, active, done, veg, calc, flesh) -> BlockModelGenerators.plainVariant(TexturedModel.ORIENTABLE.createWithSuffix(
-         //                       ModBlocks.DECOMPOSTER,
-         //                       "_" + (active ? "active" : "inactive") + "_" + (done ? "complete" : "incomplete") + "_" + veg + "_" + calc + "_" + flesh,
-         //                       blockModelGenerators.modelOutput
-         //               )))
-        //        )
-       // );
+
+
     }
 
     @Override
@@ -75,6 +61,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModBlocks.DESERT_PRIMROSE.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModBlocks.GLOBE_THISTLE.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModBlocks.DRY_BUSH.asItem(), ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModBlocks.GLACIER_HOLLY.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.DIAMOND_SHARD, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_FULL_GRIME, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COPPER_SIFT_FULL_FERRISOIL, ModelTemplates.FLAT_ITEM);

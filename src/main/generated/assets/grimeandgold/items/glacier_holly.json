@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "grimeandgold:block/glacier_holly"
+    "model": "grimeandgold:item/glacier_holly"
   }
 }

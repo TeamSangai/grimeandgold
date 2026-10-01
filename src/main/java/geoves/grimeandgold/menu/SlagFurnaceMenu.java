@@ -4,6 +4,7 @@ import geoves.grimeandgold.blocks.entities.SlagFurnaceBlockEntity;
 import geoves.grimeandgold.menu.util.SlagFuelSlot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

@@ -1,0 +1,26 @@
+{
+  "type": "grimeandgold:slag_smelting",
+  "byproduct": {
+    "id": "grimeandgold:iron_slag"
+  },
+  "ingredient": [
+    "minecraft:iron_axe",
+    "minecraft:iron_boots",
+    "minecraft:iron_chestplate",
+    "minecraft:iron_hoe",
+    "minecraft:iron_pickaxe",
+    "minecraft:iron_nautilus_armor",
+    "minecraft:iron_helmet",
+    "minecraft:chainmail_chestplate",
+    "minecraft:iron_leggings",
+    "minecraft:iron_spear",
+    "minecraft:iron_sword",
+    "minecraft:chainmail_boots",
+    "minecraft:chainmail_helmet",
+    "minecraft:chainmail_leggings",
+    "minecraft:iron_shovel"
+  ],
+  "result": {
+    "id": "grimeandgold:iron_slag"
+  }
+}

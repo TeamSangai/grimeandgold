@@ -3,8 +3,8 @@
   "byproduct": {
     "id": "grimeandgold:iron_slag"
   },
-  "ingredient": "minecraft:iron_axe",
+  "ingredient": "minecraft:raw_iron",
   "result": {
-    "id": "grimeandgold:iron_slag"
+    "id": "minecraft:iron_ingot"
   }
 }

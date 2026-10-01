@@ -64,6 +64,7 @@ public class SiftFlyEntity extends Animal implements SmartBrainOwner {
                 .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.FLYING_SPEED, 0.96F)
                 .add(Attributes.MOVEMENT_SPEED, 0.3F)
+                .add(Attributes.OXYGEN_BONUS, 3.0F)
                 .add(Attributes.TEMPT_RANGE, 69);
     }
 

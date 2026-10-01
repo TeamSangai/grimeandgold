@@ -70,7 +70,8 @@ public class SiftGrub extends AgeableWaterCreature implements SmartBrainOwner<Si
                 .add(Attributes.ATTACK_DAMAGE, 0.1)
                 .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.WATER_MOVEMENT_EFFICIENCY, 1.0F)
-                .add(Attributes.MOVEMENT_SPEED, 0.14F);
+                .add(Attributes.MOVEMENT_SPEED, 0.14F)
+                .add(Attributes.OXYGEN_BONUS, 2.0F);
     }
     @Override
     protected void defineSynchedData(final SynchedEntityData.Builder entityData) {

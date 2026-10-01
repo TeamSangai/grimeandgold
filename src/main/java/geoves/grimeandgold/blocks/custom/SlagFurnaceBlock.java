@@ -1,14 +1,9 @@
 package geoves.grimeandgold.blocks.custom;
 
-import geoves.grimeandgold.blocks.entities.GrimeBarrelBlockEntity;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.blocks.entities.SlagFurnaceBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,6 +11,8 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
+
+import java.util.Objects;
 
 public class SlagFurnaceBlock extends AbstractFurnaceBlock {
 
@@ -32,7 +29,7 @@ public class SlagFurnaceBlock extends AbstractFurnaceBlock {
         }
 
         return createTickerHelper(type, ModBlockEntities.SLAG_FURNACE_BE,
-                (level1, pos, state, entity) -> entity.serverTick(level1.getServer().getLevel(level1.dimension()), pos, state));
+                (level1, pos, state, entity) -> entity.ServerTick(Objects.requireNonNull(level1.getServer()).getLevel(level1.dimension()), pos, state));
     }
 
 

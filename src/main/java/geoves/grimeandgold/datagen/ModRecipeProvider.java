@@ -13,7 +13,9 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.ItemLike;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
@@ -26,8 +28,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
-                SlagSmeltingRecipeBuilder.slagSmeltingRecipe(RecipeCategory.MISC, Ingredient.of(Items.IRON_AXE), ModBlocks.IRON_SLAG.asItem(), ModBlocks.IRON_SLAG.asItem()).unlockedBy(getHasName(ModBlocks.IRON_SLAG), has(ModBlocks.IRON_SLAG.asItem()))
-                        .save(output, "grimeandgold:slag_from_iron_axe");
+                SlagSmeltingRecipeBuilder.slagSmeltingRecipe(RecipeCategory.MISC, Ingredient.of(Items.IRON_AXE, Items.IRON_BOOTS, Items.IRON_CHESTPLATE
+                                , Items.IRON_HOE, Items.IRON_PICKAXE, Items.IRON_NAUTILUS_ARMOR, Items.IRON_HELMET, Items.CHAINMAIL_CHESTPLATE
+                                , Items.IRON_LEGGINGS, Items.IRON_SPEAR, Items.IRON_SWORD, Items.CHAINMAIL_BOOTS, Items.CHAINMAIL_HELMET
+                                , Items.CHAINMAIL_LEGGINGS, Items.IRON_SHOVEL), ModBlocks.IRON_SLAG.asItem(), ModBlocks.IRON_SLAG.asItem())
+                        .unlockedBy(getHasName(ModBlocks.IRON_SLAG), has(ModBlocks.IRON_SLAG.asItem())).save(output, "grimeandgold:slag_from_iron_equipment");
             }
         };
     }

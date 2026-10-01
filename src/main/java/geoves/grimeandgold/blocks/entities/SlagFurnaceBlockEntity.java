@@ -23,10 +23,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -40,23 +38,23 @@ import java.util.Optional;
 
 public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements ExtendedMenuProvider<BlockPos> {
     private static final Component DEFAULT_NAME = Component.translatable("container.slag_furnace");
-    private static final short DEFAULT_LIT_TIME_REMAINING = 0;
-    private static final short DEFAULT_LIT_TOTAL_TIME = 0;
+    private final short DEFAULT_LIT_TIME_REMAINING = 0;
+    private final short DEFAULT_LIT_TOTAL_TIME = 0;
     private NonNullList<ItemStack> items;
     private final ContainerData data;
-    private static int litTimeRemaining;
-    private static int litTotalTime;
-    private static int cookingTimer;
-    private static int cookingTotalTime;
-    private static float speedMultiplier;
+    private int litTimeRemaining;
+    private  int litTotalTime;
+    private int cookingTimer;
+    private int cookingTotalTime;
+    private float speedMultiplier;
     private int progress = 0;
-    private int maxProgress = 300;
-    private static final int INPUT_SLOT = 0;
-    private static final int FUEL_SLOT = 1;
-    private static final int OUTPUT_SLOT = 2;
-    private static final int BYPRODUCT_SLOT = 3;
-    public static final int CONTAINER_SIZE = 4;
-    private static final RecipeManager.CachedCheck<SlagSmeltingInput, SlagSmelting> quickCheck = RecipeManager.createCheck(ModRecipes.SLAG_SMELTING_RECIPE_TYPE);;
+    private int maxProgress = 124;
+    private final int INPUT_SLOT = 0;
+    private final int FUEL_SLOT = 1;
+    private final int OUTPUT_SLOT = 2;
+    private final int BYPRODUCT_SLOT = 3;
+    public final int CONTAINER_SIZE = 4;
+    private final RecipeManager.CachedCheck<SlagSmeltingInput, SlagSmelting> quickCheck = RecipeManager.createCheck(ModRecipes.SLAG_SMELTING_RECIPE_TYPE);;
     private final Reference2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed;
 
 
@@ -137,7 +135,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         progress = input.getIntOr("slag_furnace.progress", 0);
-        maxProgress = input.getIntOr("slag_furnace.max_progress", 72);
+        maxProgress = input.getIntOr("slag_furnace.max_progress", 124);
 
         ContainerHelper.loadAllItems(input, this.items);
     }
@@ -185,7 +183,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                 .getRecipeFor(ModRecipes.SLAG_SMELTING_RECIPE_TYPE, new SlagSmeltingInput(this.items.get(INPUT_SLOT)), level);
     }
 
-    public void serverTick(ServerLevel level, BlockPos pos, BlockState state){
+    public void ServerTick(ServerLevel level, BlockPos pos, BlockState state){
         boolean hasFuel;
         boolean isLit;
         boolean wasLit;
@@ -232,7 +230,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                             if (cookingTimer >= cookingTotalTime) {
                                 cookingTimer = 0;
                                 cookingTotalTime = this.getTotalCookTime(recipe, this);
-                                burn(items, ingredient, burnResult);
+                                craftItem();
                                 setRecipeUsed(recipe);
                                 changed = true;
                             }
@@ -260,7 +258,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
     }
 
 
-    private static boolean canBurn(NonNullList<ItemStack> items, int maxStackSize, ItemStack burnResult) {
+    private boolean canBurn(NonNullList<ItemStack> items, int maxStackSize, ItemStack burnResult) {
         ItemStack resultItemStack = items.get(2);
         if (resultItemStack.isEmpty()) {
             return true;
@@ -270,19 +268,6 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
         }
         int resultCount = resultItemStack.getCount() + burnResult.count();
         return resultCount <= Math.min(maxStackSize, burnResult.getMaxStackSize());
-    }
-
-    private static void burn(NonNullList<ItemStack> items, ItemStack inputItemStack, ItemStack result) {
-        ItemStack resultItemStack = items.get(2);
-        if (resultItemStack.isEmpty()) {
-            items.set(2, result.copy());
-        } else {
-            resultItemStack.grow(result.getCount());
-        }
-        if (inputItemStack.is(Items.WET_SPONGE) && !items.get(1).isEmpty() && items.get(1).is(Items.BUCKET)) {
-            items.set(1, new ItemStack(Items.WATER_BUCKET));
-        }
-        inputItemStack.shrink(1);
     }
 
     public void setRecipeUsed(@Nullable RecipeHolder<?> recipeUsed) {
@@ -300,7 +285,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
         return ResolvableFloat.getFromItem(fuelItem, DataComponents.COOKING_FUEL, CookingFuel::speedMultiplier, this.getLootContext(level), 1.0f);
     }
 
-    private static void consumeFuel(ServerLevel level, BlockPos pos, NonNullList<ItemStack> items, ItemStack fuel) {
+    private void consumeFuel(ServerLevel level, BlockPos pos, NonNullList<ItemStack> items, ItemStack fuel) {
         Item fuelItem = fuel.getItem();
         ItemStackTemplate remainder = fuelItem.getCraftingRemainder();
         ItemStack newFuel = fuel;
@@ -352,7 +337,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
 
     private void resetProgress() {
         progress = 0;
-        maxProgress = 72;
+        maxProgress = 124;
     }
 
     @Override
@@ -365,6 +350,6 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
      */
     @Override
     public int getContainerSize() {
-        return 0;
+        return 4;
     }
 }

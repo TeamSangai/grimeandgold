@@ -32,7 +32,7 @@ public class SlagFurnaceBlock extends AbstractFurnaceBlock {
         }
 
         return createTickerHelper(type, ModBlockEntities.SLAG_FURNACE_BE,
-                (level1, pos, state, entity) -> entity.tick(level1, pos, state));
+                (level1, pos, state, entity) -> entity.serverTick(level1.getServer().getLevel(level1.dimension()), pos, state));
     }
 
 

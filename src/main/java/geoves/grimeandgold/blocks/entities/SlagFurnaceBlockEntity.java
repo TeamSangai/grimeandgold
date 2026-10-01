@@ -148,22 +148,6 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
         return new SlagFurnaceMenu(containerId, inventory, this, this.data);
     }
 
-    public void tick(Level level, BlockPos pos, BlockState state) {
-        if(hasRecipe() && isOutputSlotEmptyOrReceivable()) {
-            increaseCraftingProgress();
-            level.setBlockAndUpdate(pos, state.setValue(SlagFurnaceBlock.LIT, true));
-            setChanged(level, pos, state);
-
-            if(hasCraftingFinished()) {
-                craftItem();
-                resetProgress();
-            }
-        } else {
-            resetProgress();
-            level.setBlockAndUpdate(pos, state.setValue(SlagFurnaceBlock.LIT, false));
-        }
-    }
-
     private boolean hasRecipe() {
         Optional<RecipeHolder<SlagSmelting>> recipe = getCurrentRecipe();
         if(recipe.isEmpty()) {
@@ -201,7 +185,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                 .getRecipeFor(ModRecipes.SLAG_SMELTING_RECIPE_TYPE, new SlagSmeltingInput(this.items.get(INPUT_SLOT)), level);
     }
 
-    public void serverTick(ServerLevel level, BlockPos pos, BlockState state, SlagFurnaceBlockEntity entity){
+    public void serverTick(ServerLevel level, BlockPos pos, BlockState state){
         boolean hasFuel;
         boolean isLit;
         boolean wasLit;
@@ -223,7 +207,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                 SlagSmeltingInput SlagSmeltingInput = new SlagSmeltingInput(ingredient);
                 RecipeHolder<SlagSmelting> recipe = quickCheck.getRecipeFor(SlagSmeltingInput, level).orElse(null);
                 if (recipe != null) {
-                    int maxStackSize = entity.getMaxStackSize();
+                    int maxStackSize = this.getMaxStackSize();
                     ItemStack burnResult = ((SlagSmelting)recipe.value()).assemble(SlagSmeltingInput);
                     if (!burnResult.isEmpty() && canBurn(items, maxStackSize, burnResult)) {
                         if (!isLit) {
@@ -234,7 +218,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                             speedMultiplier = newSpeedMultiplier;
                             if (cookingTotalTime > 0 && cookingTimer < cookingTotalTime) {
                                 float completionRatio = (float)cookingTimer / (float)cookingTotalTime;
-                                cookingTotalTime = getTotalCookTime(recipe, entity);
+                                cookingTotalTime = getTotalCookTime(recipe, this);
                                 cookingTimer = (int)Math.ceil(completionRatio * (float) cookingTotalTime);
                             }
                             if (newLitTime > 0) {
@@ -247,7 +231,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                             ++cookingTimer;
                             if (cookingTimer >= cookingTotalTime) {
                                 cookingTimer = 0;
-                                cookingTotalTime = this.getTotalCookTime(recipe, entity);
+                                cookingTotalTime = this.getTotalCookTime(recipe, this);
                                 burn(items, ingredient, burnResult);
                                 setRecipeUsed(recipe);
                                 changed = true;

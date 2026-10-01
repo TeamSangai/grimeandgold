@@ -4,10 +4,12 @@ import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 
 public class ModBlockEntities {
@@ -29,7 +31,7 @@ public class ModBlockEntities {
 
     public static final BlockEntityType<SlagFurnaceBlockEntity> SLAG_FURNACE_BE =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "slag_furnace_be"),
-                    FabricBlockEntityTypeBuilder.create(SlagFurnaceBlockEntity::new, ModBlocks.SLAG_FURNACE).build());
+                    FabricBlockEntityTypeBuilder.create((BlockPos worldPosition, BlockState blockState) -> new SlagFurnaceBlockEntity(worldPosition, blockState), ModBlocks.SLAG_FURNACE).build());
 
     public static void registerBlockEntities() {
         GrimeAndGold.LOGGER.info("Registering ModBlockEntities for " + GrimeAndGold.MOD_ID);

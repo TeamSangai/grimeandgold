@@ -30,6 +30,9 @@ public record SlagSmelting(Ingredient inputItem, ItemStackTemplate output, ItemS
                     SlagSmelting::new);
 
 
+
+
+
     @Override
     public boolean matches(SlagSmeltingInput input, Level level) {
         if(level.isClientSide()) {

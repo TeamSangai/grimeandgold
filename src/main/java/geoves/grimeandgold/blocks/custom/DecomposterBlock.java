@@ -1,6 +1,7 @@
 package geoves.grimeandgold.blocks.custom;
 
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.enums.Output;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.tags.ModTags;
@@ -76,28 +77,24 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         int calciumValue = state.getValue(CALCIUM);
         if (state.getValue(ACTIVE) && state.getValue(OUTPUT) == Output.TBD) {
             if (VegValue == 10 && fleshValue == 10 && calciumValue == 0){
-                state.setValue(OUTPUT, Output.BIOMASS);
-                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
+                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(OUTPUT, Output.BIOMASS));
                 GrimeAndGold.LOGGER.info(String.valueOf(state.getValue(OUTPUT)));
             }
             else if (VegValue == 10 && fleshValue == 0 && calciumValue == 0){
                 state.setValue(OUTPUT, Output.BONEMEAL);
-                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
+                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(OUTPUT, Output.BONEMEAL));
                 GrimeAndGold.LOGGER.info(String.valueOf(state.getValue(OUTPUT)));
             }
             else if (VegValue == 0 && fleshValue == 10 && calciumValue == 0){
-                level.setBlockAndUpdate(pos, state.setValue(OUTPUT, Output.GRIME));
-                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
+                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(OUTPUT, Output.DIRT));
                 GrimeAndGold.LOGGER.info(String.valueOf(state.getValue(OUTPUT)));
             }
             else if (VegValue == 5 && fleshValue == 5 && calciumValue == 5){
-                level.setBlockAndUpdate(pos, state.setValue(OUTPUT, Output.GRIME));
-                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
+                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(OUTPUT, Output.GRIME));
                 GrimeAndGold.LOGGER.info(String.valueOf(state.getValue(OUTPUT)));
             }
             else if (VegValue == 0 && fleshValue == 0 && calciumValue == 10){
-                level.setBlockAndUpdate(pos, state.setValue(OUTPUT, Output.CALCITE));
-                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false));
+                level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(OUTPUT, Output.CALCITE));
                 GrimeAndGold.LOGGER.info(String.valueOf(state.getValue(OUTPUT)));
             }
         }
@@ -251,6 +248,12 @@ public class DecomposterBlock extends Block implements WorldlyContainerHolder {
         else if (state.getValue(OUTPUT) == Output.DIRT) {
             ItemStack dirt = new ItemStack(Blocks.DIRT);
             this.MakeOutPut(level, dirt, 2, pos);
+            this.ResetValues(level, state, pos);
+            return InteractionResult.SUCCESS;
+        }
+        else if (state.getValue(OUTPUT) == Output.BIOMASS) {
+            ItemStack bmass = new ItemStack(ModBlocks.BIOMASS);
+            this.MakeOutPut(level, bmass, 2, pos);
             this.ResetValues(level, state, pos);
             return InteractionResult.SUCCESS;
         }

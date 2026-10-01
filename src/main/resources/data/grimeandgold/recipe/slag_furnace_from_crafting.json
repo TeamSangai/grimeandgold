@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:cobbled_deepslate",
+    "B": "minecraft:copper_ingot",
+    "C": "minecraft:furnace"
+  },
+  "pattern": [
+    "BAB",
+    "BCB",
+    "BAB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "grimeandgold:slag_furnace"
+  }
+}

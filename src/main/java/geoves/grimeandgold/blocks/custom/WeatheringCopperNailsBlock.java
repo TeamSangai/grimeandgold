@@ -1,12 +1,14 @@
 package geoves.grimeandgold.blocks.custom;
 
-import geoves.grimeandgold.GrimeAndGold;
-import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.datagen.ModDamageTypes;
+import geoves.grimeandgold.effects.ModEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
@@ -18,7 +20,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.NonNull;
 
-import java.util.Objects;
+import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.OXIDIZED;
+
 
 public class WeatheringCopperNailsBlock extends Block implements WeatheringCopper {
     private final WeatherState weatherState;
@@ -38,12 +41,27 @@ public class WeatheringCopperNailsBlock extends Block implements WeatheringCoppe
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
         if (level instanceof ServerLevel serverLevel) {
-            if (entity instanceof LivingEntity) {
+            if (entity instanceof LivingEntity livingEntity) {
+                int chance = level.getRandom().nextInt(12);
+                if (InfectionChance() > chance) {
+                    livingEntity.addEffect(new MobEffectInstance(ModEffects.FERAL_WOUND, 2400, 0));
+                }
                 entity.hurtServer(serverLevel, ModDamageTypes.create(level, ModDamageTypes.SHARP_FLOOR), 1);
+
             }
         }
         super.entityInside(state, level, pos, entity, effectApplier, isPrecise);
     }
+
+    public int InfectionChance() {
+        return switch (weatherState){
+            case EXPOSED -> 2;
+            case WEATHERED -> 5;
+            case OXIDIZED -> 10;
+            default -> 0;
+        };
+    }
+
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {

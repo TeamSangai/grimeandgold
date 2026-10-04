@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "suspicious_stew",
+  "ingredients": [
+    "minecraft:bowl",
+    "#minecraft:mushrooms",
+    "#minecraft:mushrooms",
+    "grimeandgold:glacier_holly"
+  ],
+  "result": {
+    "components": {
+      "minecraft:suspicious_stew_effects": [
+        {
+          "duration": 500,
+          "id": "grimeandgold:feral_wound"
+        }
+      ]
+    },
+    "id": "minecraft:suspicious_stew"
+  }
+}

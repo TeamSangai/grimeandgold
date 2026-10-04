@@ -19,7 +19,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
@@ -45,6 +44,7 @@ public class ModItems {
     public static final Item BENTHIC_BRANCH_ITEM = registerItem("benthic_branch_item", properties -> new StandingAndWallBlockItem(ModBlocks.BENTHIC_BRANCH, ModBlocks.BENTHIC_WALL_BRANCH, Direction.DOWN, properties));
 
     public static final Item AQUATIC_MIXED_SEEDS = registerItem("aquatic_mixed_seeds", properties -> new BlockItem(ModBlocks.AQUATIC_MIXED_CROP, properties));
+    public static final Item DESERT_MIXED_SEEDS = registerItem("desert_mixed_seeds", properties -> new BlockItem(ModBlocks.DESERT_MIXED_CROP, properties));
 
     public static final Item ITEM_COPPER_NAILS = registerItem("copper_nails_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS, properties));
     public static final Item ITEM_COPPER_NAILS_EXPOSED = registerItem("copper_nails_exposed_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_EXPOSED, properties));

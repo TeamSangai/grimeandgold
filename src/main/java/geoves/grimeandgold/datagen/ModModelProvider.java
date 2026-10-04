@@ -58,6 +58,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModBlocks.DRY_TALL_FERN.asItem(), ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.COOKED_BEETROOT_PADDY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.AQUATIC_MIXED_SEEDS, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.DESERT_MIXED_SEEDS, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.BEETROOT_PADDY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.FERROBEET_MELODY, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.BEETROOT_BURGER, ModelTemplates.FLAT_ITEM);

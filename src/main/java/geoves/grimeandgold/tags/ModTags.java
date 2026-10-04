@@ -4,7 +4,9 @@ import geoves.grimeandgold.GrimeAndGold;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
@@ -21,6 +23,8 @@ public class ModTags {
         public static final TagKey<Block> BURROWS = createTag("burrows");
         public static final TagKey<Block> AQUATIC_POLLINATOR_FLOWERS = createTag("aquatic_pollinator_flowers");
         public static final TagKey<Block> BENTHIC_LOGS = createTag("benthic_logs");
+        public static final TagKey<Block> OVERWORLD_COOLED_SLAG_REPLACEABLE = createTag("overworld_cooled_slag_replaceable");
+        public static final TagKey<Block> NETHER_SLAG_REPLACEABLE = createTag("overworld_cooled_slag_replaceable");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));
@@ -47,6 +51,19 @@ public class ModTags {
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));
+        }
+    }
+    public static class DamageTypes {
+        public static final TagKey<DamageType> DAMAGES_BOOTS = createTag("damages_boots");
+
+        private static TagKey<DamageType> createTag(String name) {
+            return TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));
+        }
+    }public static class Biomes {
+        public static final TagKey<Biome> IS_SNOWY_MOUNTAIN = createTag("is_snowy_mountain");
+
+        private static TagKey<Biome> createTag(String name) {
+            return TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));
         }
     }
 }

@@ -60,7 +60,12 @@
   "container.grimeandgold.clay_burrow": "Clay Burrow",
   "block.grimeandgold.froster": "Froster",
 
+  "effect.grimeandgold.feral_wound": "Feral Wound",
+  "effect.grimeandgold.feral_wound.description": "Causes occasional damage and exhaustion over a long period of time",
+
   "death.attack.sharp_floor": "%s discovered the floor was sharp!",
-  "death.attack.sharp_floor.player": "%s discovered how sharp the floor was thanks to %s"
+  "death.attack.sharp_floor.player": "%s discovered how sharp the floor was thanks to %s",
+  "death.attack.feral_wound": "%s died thanks to feral wounds",
+  "death.attack.feral_wound.player": "%s died to feral wounds while trying to escape %s"
 
 }

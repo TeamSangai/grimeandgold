@@ -2,6 +2,7 @@ package geoves.grimeandgold.blocks;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.custom.*;
+import geoves.grimeandgold.effects.ModEffects;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -72,7 +73,7 @@ public class ModBlocks {
     public static final Block AQUATIC_SPIN_ROSE = registerBlock("aquatic_spin_rose", properties -> new AquaticFlowerBlock(MobEffects.DOLPHINS_GRACE, 5.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block GHOST_OF_THE_SEA = registerBlock("ghost_of_the_sea", properties -> new AquaticFlowerBlock(MobEffects.BREATH_OF_THE_NAUTILUS, 16.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block DEEP_SEA_ROCKET = registerBlock("deep_sea_rocket", properties -> new AquaticFlowerBlock(MobEffects.SPEED, 16.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
-    public static final Block GLACIER_HOLLY = registerBlock("glacier_holly", properties -> new AquaticFlowerBlock(MobEffects.MINING_FATIGUE, 12.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+    public static final Block GLACIER_HOLLY = registerBlock("glacier_holly", properties -> new AquaticFlowerBlock(ModEffects.FERAL_WOUND, 25.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block ANCHOR_BLOSSOM = registerBlock("anchor_blossom", properties -> new DoubleAquaticFlowerBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
     public static final Block SPIRAL_DAFFODIL = registerBlock("spiral_daffodil", properties -> new DoubleAquaticFlowerBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
     public static final Block COCOA_BLOOM = registerBlock("cocoa_bloom", properties -> new DoubleAquaticFlowerBlock(properties.mapColor(MapColor.WATER).replaceable().noCollision().instabreak().sound(SoundType.WET_GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));
@@ -90,6 +91,7 @@ public class ModBlocks {
     public static final Block BENTHIC_DOOR = registerBlock("benthic_door", properties -> new DoorBlock(BlockSetType.POPLAR, properties.mapColor(MapColor.STONE).noOcclusion().strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_TRAPDOOR = registerBlock("benthic_trapdoor", properties -> new TrapDoorBlock(BlockSetType.POPLAR, properties.mapColor(MapColor.STONE).noOcclusion().strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
 
+    public static final Block DESERT_MIXED_CROP = registerBlock("mixed_dry_flowers_crop", properties -> new DrySproutCropBlock(properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));;
     public static final Block DESERT_LAVENDER = registerBlock("desert_lavender", properties -> new DryFlowerBlock(MobEffects.ABSORPTION, 60.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block GLOBE_THISTLE = registerBlock("globe_thistle", properties -> new DryFlowerBlock(MobEffects.INSTANT_HEALTH, 0.4F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block DESERT_PRIMROSE = registerBlock("desert_primrose", properties -> new DryFlowerBlock(MobEffects.INSTANT_HEALTH, 0.4F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;

@@ -4,6 +4,7 @@ import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.blocks.entities.ModBlockEntities;
 import geoves.grimeandgold.creativeTabs.ModCreativeTabs;
 import geoves.grimeandgold.data.ModDataComponents;
+import geoves.grimeandgold.effects.ModEffects;
 import geoves.grimeandgold.entities.ai.ActivityTypes;
 import geoves.grimeandgold.entities.ModEntityDataSerializers;
 import geoves.grimeandgold.entities.ModEntityTypes;
@@ -55,6 +56,7 @@ public class GrimeAndGold implements ModInitializer {
 		ActivityTypes.registerCustomActivities();
 		MemoryModuleTypes.register();
 		ModDataComponents.registerDataComponents();
+		ModEffects.registerEffects();
 		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_GRIME_BURROW), ModBlocks.GRIMEBARREL).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
 		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_CLAY_BURROW), ModBlocks.CLAY_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
 		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_MUD_BURROW), ModBlocks.MUD_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());

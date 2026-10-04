@@ -9,6 +9,7 @@ import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Blocks;
 
 
@@ -56,6 +57,11 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(ModTags.Blocks.AQUATIC_POLLINATOR_FLOWERS).add(ModBlocks.getRK(ModBlocks.AQUATIC_SPIN_ROSE)).add(ModBlocks.getRK(ModBlocks.GHOST_OF_THE_SEA))
                 .add(ModBlocks.getRK(ModBlocks.ANCHOR_BLOSSOM)).add(ModBlocks.getRK(ModBlocks.SPIRAL_DAFFODIL)).add(ModBlocks.getRK(ModBlocks.DEEP_SEA_ROCKET));
         tag(ModTags.Blocks.BENTHIC_LOGS).add(ModBlocks.getRK(ModBlocks.BENTHIC_LOG)).add(ModBlocks.getRK(ModBlocks.BENTHIC_WOOD));
+
+        tag(ModTags.Blocks.OVERWORLD_COOLED_SLAG_REPLACEABLE).add(Objects.requireNonNull(Blocks.SNOW_BLOCK.properties().blockId()))
+                .add(Objects.requireNonNull(Blocks.POWDER_SNOW.properties().blockId()));
+        tag(ModTags.Blocks.NETHER_SLAG_REPLACEABLE).add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId()))
+                .add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId())).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()));
 
     }
 }

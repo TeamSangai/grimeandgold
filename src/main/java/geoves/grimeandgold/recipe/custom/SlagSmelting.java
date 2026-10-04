@@ -15,7 +15,7 @@ public record SlagSmelting(Ingredient inputItem, ItemStackTemplate output, ItemS
             instance.group(
                     Ingredient.CODEC.fieldOf("ingredient").forGetter(SlagSmelting::inputItem),
                     ItemStackTemplate.CODEC.fieldOf("result").forGetter(SlagSmelting::output),
-                    ItemStackTemplate.CODEC.fieldOf("byproduct").forGetter(SlagSmelting::output)
+                    ItemStackTemplate.CODEC.fieldOf("byproduct").forGetter(SlagSmelting::byproduct)
             ).apply(instance, SlagSmelting::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, SlagSmelting> STREAM_CODEC =
             StreamCodec.composite(

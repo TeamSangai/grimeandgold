@@ -14,6 +14,7 @@ import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.recipe.ModRecipes;
 import geoves.grimeandgold.sounds.ModSounds;
 import geoves.grimeandgold.tags.ModTags;
+import geoves.grimeandgold.worldgen.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.Event;
@@ -58,6 +59,9 @@ public class GrimeAndGold implements ModInitializer {
 		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_CLAY_BURROW), ModBlocks.CLAY_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
 		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_MUD_BURROW), ModBlocks.MUD_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
 		BlockTransformerHelper.registerShovel(BlockTransformer.BlockTransformData.builder(BlockPredicate.matchesTag(ModTags.Blocks.TURNS_INTO_SNOW_BURROW), ModBlocks.SNOW_BURROW).itemDamagePerUse(1).sound(SoundEvents.SHOVEL_FLATTEN).transformType(BlockTransformer.TransformType.SINGLE_BLOCK).build());
+
+		ModWorldGeneration.generateModWorldGen();
+
 		this.registerModEntities();
 	}
 

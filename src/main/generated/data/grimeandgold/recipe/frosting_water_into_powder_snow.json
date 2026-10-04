@@ -1,0 +1,7 @@
+{
+  "type": "grimeandgold:frosting",
+  "ingredient": "minecraft:water_bucket",
+  "result": {
+    "id": "minecraft:powder_snow_bucket"
+  }
+}

@@ -27,10 +27,16 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialCube(ModBlocks.COOLED_COPPER_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COOLED_IRON_SLAG);
         blockModelGenerators.createTrivialCube(ModBlocks.COOLED_GOLD_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.COPPER_SLAG);
         blockModelGenerators.createTrivialCube(ModBlocks.IRON_SLAG);blockModelGenerators.createTrivialCube(ModBlocks.GOLD_SLAG);
+        blockModelGenerators.createTrivialCube(ModBlocks.LAPIS_ROUGH);blockModelGenerators.createTrivialCube(ModBlocks.QUARTZ_ROUGH);
+        blockModelGenerators.createTrivialCube(ModBlocks.DIAMOND_ROUGH);blockModelGenerators.createTrivialCube(ModBlocks.EMERALD_ROUGH);
 
+        blockModelGenerators.family(ModBlocks.BENTHIC_PLANKS).slab(ModBlocks.BENTHIC_PLANKS_SLAB).stairs(ModBlocks.BENTHIC_PLANKS_STAIRS);
         blockModelGenerators.family(ModBlocks.HULL_PLATING).slab(ModBlocks.HULL_PLATING_SLAB).stairs(ModBlocks.HULL_PLATING_STAIRS);
 
+        blockModelGenerators.createDoor(ModBlocks.BENTHIC_DOOR);blockModelGenerators.createTrapdoor(ModBlocks.BENTHIC_TRAPDOOR);
+
         blockModelGenerators.createFurnace(ModBlocks.SLAG_FURNACE, TexturedModel.ORIENTABLE);
+        blockModelGenerators.createFurnace(ModBlocks.FROSTER, TexturedModel.ORIENTABLE);
 
         blockModelGenerators.createFlowerBed(ModBlocks.DESERT_POPPY);
 
@@ -74,5 +80,12 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerators.generateFlatItem(ModItems.SIFT_FLY_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_GRUB_BUCKET, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.SIFT_GRUB_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.ITEM_COPPER_NAILS, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.ITEM_COPPER_NAILS_EXPOSED, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.ITEM_COPPER_NAILS_WEATHERED, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.ITEM_COPPER_NAILS_OXIDIZED, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.CHARCOAL_MOTE, ModelTemplates.FLAT_ITEM);itemModelGenerators.generateFlatItem(ModItems.QUARTZ_SHARD, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(ModItems.LAPIS_MOTE, ModelTemplates.FLAT_ITEM);itemModelGenerators.generateFlatItem(ModItems.EMERALD_SHARD, ModelTemplates.FLAT_ITEM);
+
     }
 }

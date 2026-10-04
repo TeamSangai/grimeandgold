@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "grimeandgold:block/benthic_planks",
+    "side": "grimeandgold:block/benthic_planks",
+    "top": "grimeandgold:block/benthic_planks"
+  }
+}

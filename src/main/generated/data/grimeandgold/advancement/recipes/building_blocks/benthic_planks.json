@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_benthic_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "grimeandgold:benthic_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_benthic_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "grimeandgold:benthic_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "grimeandgold:benthic_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_benthic_log",
+      "has_benthic_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "grimeandgold:benthic_planks"
+    ]
+  }
+}

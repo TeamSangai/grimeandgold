@@ -5,6 +5,7 @@ import geoves.grimeandgold.blocks.custom.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffects;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -21,6 +23,16 @@ import java.util.function.Function;
 
 public class ModBlocks {
     public static final Block BIOMASS = registerBlock("biomass", properties -> new BiomassBlock(properties.sound(SoundType.WET_SPONGE)));
+
+    public static final Block COPPER_NAILS = registerBlock("copper_nails", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.UNAFFECTED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.COLOR_ORANGE).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+    public static final Block COPPER_NAILS_EXPOSED = registerBlock("copper_nails_exposed", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.EXPOSED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+    public static final Block COPPER_NAILS_WEATHERED = registerBlock("copper_nails_weathered", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.WEATHERED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.WARPED_STEM).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+    public static final Block COPPER_NAILS_OXIDIZED = registerBlock("copper_nails_oxidized", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.OXIDIZED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.WARPED_NYLIUM).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+
+    public static final Block COPPER_NAILS_WAXED = registerBlock("copper_nails_waxed", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.UNAFFECTED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.COLOR_ORANGE).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+    public static final Block COPPER_NAILS_WAXED_EXPOSED = registerBlock("copper_nails_waxed_exposed", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.EXPOSED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+    public static final Block COPPER_NAILS_WAXED_WEATHERED = registerBlock("copper_nails_waxed_weathered", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.WEATHERED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.WARPED_STEM).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
+    public static final Block COPPER_NAILS_WAXED_OXIDIZED = registerBlock("copper_nails_waxed_oxidized", properties -> new WeatheringCopperNailsBlock( WeatheringCopper.WeatherState.OXIDIZED, properties.sound(SoundType.COPPER_GRATE).mapColor(MapColor.WARPED_NYLIUM).strength(3.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion()));
 
 
     public static final Block GRIME = registerBlock("grime", properties -> new GrimeBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.5f, 0.5f)));
@@ -33,7 +45,6 @@ public class ModBlocks {
     public static final Block HULL_PLATING_SLAB = registerBlock("hull_plating_slab", properties -> new SlabBlock(properties.sound(SoundType.IRON).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
     public static final Block HULL_PLATING_STAIRS = registerBlock("hull_plating_stairs", properties -> new StairBlock(ModBlocks.HULL_PLATING.defaultBlockState(), properties.sound(SoundType.IRON).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(2.0F, 6.0F)));
 
-
     public static final Block GOLD_SLAG = registerBlock("gold_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
     public static final Block IRON_SLAG = registerBlock("iron_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
     public static final Block COPPER_SLAG = registerBlock("copper_slag", properties -> new MagmaBlock(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
@@ -41,9 +52,14 @@ public class ModBlocks {
     public static final Block COOLED_IRON_SLAG = registerBlock("cooled_iron_slag", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(3.0f, 3.5f)));
     public static final Block COOLED_COPPER_SLAG = registerBlock("cooled_copper_slag", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(3.0f, 3.5f)));
 
+    public static final Block DIAMOND_ROUGH = registerBlock("diamond_rough", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
+    public static final Block EMERALD_ROUGH = registerBlock("emerald_rough", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
+    public static final Block LAPIS_ROUGH = registerBlock("lapis_rough", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
+    public static final Block QUARTZ_ROUGH = registerBlock("quartz_rough", properties -> new Block(properties.sound(SoundType.GILDED_BLACKSTONE).requiresCorrectToolForDrops().strength(2.0f, 1.5f)));
 
     public static final Block DECOMPOSTER = registerBlock("decomposter", properties -> new DecomposterBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
-    public static final Block SLAG_FURNACE = registerBlock("slag_furnace", properties -> new SlagFurnaceBlock(properties.sound(SoundType.COPPER_GRATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
+    public static final Block SLAG_FURNACE = registerBlock("slag_furnace", properties -> new SlagFurnaceBlock(properties.sound(SoundType.POLISHED_DEEPSLATE).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
+    public static final Block FROSTER = registerBlock("froster", properties -> new FrosterBlock(properties.sound(SoundType.IRON).strength(0.6f, 0.75f).requiresCorrectToolForDrops()));
 
     public static final Block GRIMEBARREL = registerBlock("grimebarrel", properties -> new GrimeBarrelBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
     public static final Block MUD_BURROW = registerBlock("mud_burrow", properties -> new MudBurrowBlock(properties.sound(SoundType.MUD).mapColor(MapColor.TERRACOTTA_CYAN).strength(0.6f, 0.75f)));
@@ -63,9 +79,16 @@ public class ModBlocks {
 
     public static final Block BENTHIC_LOG = registerBlock("benthic_log", properties -> new RotatedPillarBlock(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_WOOD = registerBlock("benthic_wood", properties -> new RotatedPillarBlock(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+
+    public static final Block BENTHIC_PLANKS = registerBlock("benthic_planks", properties -> new Block(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block BENTHIC_PLANKS_SLAB = registerBlock("benthic_slab", properties -> new SlabBlock(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block BENTHIC_PLANKS_STAIRS = registerBlock("benthic_stairs", properties -> new StairBlock(ModBlocks.BENTHIC_PLANKS.defaultBlockState(), properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+
     public static final Block BENTHIC_BRANCH = registerBlock("benthic_branch", properties -> new BenthicBranchBlock(properties.mapColor(MapColor.STONE).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_WALL_BRANCH = registerBlock("benthic_wall_branch", properties -> new BenthicWallBranchBlock(properties.mapColor(MapColor.STONE).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_SAPLING = registerBlock("benthic_sapling", properties -> new BenthicSaplingBlock(TreeGrower.MANGROVE, properties.mapColor(MapColor.STONE).instabreak().noCollision().sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block BENTHIC_DOOR = registerBlock("benthic_door", properties -> new DoorBlock(BlockSetType.POPLAR, properties.mapColor(MapColor.STONE).noOcclusion().strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block BENTHIC_TRAPDOOR = registerBlock("benthic_trapdoor", properties -> new TrapDoorBlock(BlockSetType.POPLAR, properties.mapColor(MapColor.STONE).noOcclusion().strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
 
     public static final Block DESERT_LAVENDER = registerBlock("desert_lavender", properties -> new DryFlowerBlock(MobEffects.ABSORPTION, 60.0F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block GLOBE_THISTLE = registerBlock("globe_thistle", properties -> new DryFlowerBlock(MobEffects.INSTANT_HEALTH, 0.4F, properties.mapColor(MapColor.PLANT).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
@@ -74,6 +97,7 @@ public class ModBlocks {
     public static final Block DRY_BUSH = registerBlock("dry_bush", properties -> new DryBushBlock(properties.mapColor(MapColor.COLOR_YELLOW).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block DRY_FERN = registerBlock("dry_fern", properties -> new DryFernBlock(properties.mapColor(MapColor.COLOR_YELLOW).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
     public static final Block DRY_TALL_FERN = registerBlock("dry_tall_fern", properties -> new TallDryFernBlock(properties.mapColor(MapColor.COLOR_YELLOW).noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.POPPED)));;
+
 
     private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name))));
@@ -90,7 +114,6 @@ public class ModBlocks {
                 new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix()
                         .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name)))));
     }
-
     public static void registerModBlocks() {
         GrimeAndGold.LOGGER.info("Registering Mod Blocks for " + GrimeAndGold.MOD_ID);
     }

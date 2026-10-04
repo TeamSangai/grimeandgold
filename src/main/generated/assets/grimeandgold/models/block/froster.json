@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "grimeandgold:block/froster_bottom",
+    "front": "grimeandgold:block/froster_front",
+    "side": "grimeandgold:block/froster_side",
+    "top": "grimeandgold:block/froster_top"
+  }
+}

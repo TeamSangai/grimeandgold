@@ -1,5 +1,6 @@
 package geoves.grimeandgold.blocks.entities;
 
+import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.custom.SlagFurnaceBlock;
 import geoves.grimeandgold.menu.SlagFurnaceMenu;
 import geoves.grimeandgold.recipe.ModRecipes;
@@ -9,6 +10,7 @@ import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -47,8 +49,6 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
     private int cookingTimer;
     private int cookingTotalTime;
     private float speedMultiplier;
-    private int progress = 0;
-    private int maxProgress = 124;
     private final int INPUT_SLOT = 0;
     private final int FUEL_SLOT = 1;
     private final int OUTPUT_SLOT = 2;
@@ -125,8 +125,8 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
     @Override
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
-        output.putInt("slag_furnace.progress", progress);
-        output.putInt("slag_furnace.max_progress", maxProgress);
+        output.putInt("slag_furnace.progress", cookingTimer);
+        output.putInt("slag_furnace.max_progress", cookingTotalTime);
 
         ContainerHelper.saveAllItems(output, this.items);
     }
@@ -134,8 +134,8 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
     @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
-        progress = input.getIntOr("slag_furnace.progress", 0);
-        maxProgress = input.getIntOr("slag_furnace.max_progress", 124);
+        cookingTimer = input.getIntOr("slag_furnace.progress", 0);
+        cookingTotalTime = input.getIntOr("slag_furnace.max_progress", 124);
 
         ContainerHelper.loadAllItems(input, this.items);
     }
@@ -146,36 +146,6 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
         return new SlagFurnaceMenu(containerId, inventory, this, this.data);
     }
 
-    private boolean hasRecipe() {
-        Optional<RecipeHolder<SlagSmelting>> recipe = getCurrentRecipe();
-        if(recipe.isEmpty()) {
-            return false;
-        }
-
-        ItemStack output = recipe.get().value().assemble(new SlagSmeltingInput(this.items.get(INPUT_SLOT)));
-        boolean isItemOutputRight = canInsertItemIntoOutputSlot(output);
-        boolean isAmountRight = canInsertAmountIntoOutputSlot(output.getCount());
-
-        return isItemOutputRight && isAmountRight;
-    }
-
-    private boolean canInsertAmountIntoOutputSlot(int count) {
-        int maxCount = this.items.get(OUTPUT_SLOT).isEmpty() ? 64 : this.items.get(OUTPUT_SLOT).getMaxStackSize();
-        int currentCount = this.items.get(OUTPUT_SLOT).getCount();
-
-        return maxCount >= currentCount + count;
-    }
-
-    private boolean canInsertItemIntoOutputSlot(ItemStack output) {
-        return items.get(OUTPUT_SLOT).isEmpty() ||
-                items.get(OUTPUT_SLOT).is(output.getItem());
-    }
-
-
-    public void drops() {
-        assert this.level != null;
-        Containers.dropContents(this.level, this.worldPosition, this.items);
-    }
 
     private Optional<RecipeHolder<SlagSmelting>> getCurrentRecipe(){
         assert level != null;
@@ -206,7 +176,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                 RecipeHolder<SlagSmelting> recipe = quickCheck.getRecipeFor(SlagSmeltingInput, level).orElse(null);
                 if (recipe != null) {
                     int maxStackSize = this.getMaxStackSize();
-                    ItemStack burnResult = ((SlagSmelting)recipe.value()).assemble(SlagSmeltingInput);
+                    ItemStack burnResult = (recipe.value()).assemble(SlagSmeltingInput);
                     if (!burnResult.isEmpty() && canBurn(items, maxStackSize, burnResult)) {
                         if (!isLit) {
                             int newLitTime = this.getBurnDuration(level, fuel);
@@ -228,6 +198,7 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
                         if (isLit) {
                             ++cookingTimer;
                             if (cookingTimer >= cookingTotalTime) {
+                                GrimeAndGold.LOGGER.info(String.valueOf(cookingTimer));
                                 cookingTimer = 0;
                                 cookingTotalTime = this.getTotalCookTime(recipe, this);
                                 craftItem();
@@ -304,40 +275,18 @@ public class SlagFurnaceBlockEntity extends BaseContainerBlockEntity implements 
         return speedMultiplier > 0.0f ? (int)Math.ceil((float)cookingTotalTime / speedMultiplier) : cookingTotalTime;
     }
 
-    private int getTotalCookTime(ServerLevel level,SlagFurnaceBlockEntity entity) {
-        SlagSmeltingInput input = new SlagSmeltingInput(this.getItem(0));
-        return quickCheck.getRecipeFor(input, level).map(recipeHolder -> getTotalCookTime(recipeHolder, entity)).orElse(200);
-    }
-
 
 
     private void craftItem() {
         Optional<RecipeHolder<SlagSmelting>> recipe = getCurrentRecipe();
         ItemStack output = recipe.get().value().assemble(new SlagSmeltingInput(this.items.get(INPUT_SLOT)));
-        ItemStack byproduct = recipe.get().value().assemble(new SlagSmeltingInput(this.items.get(INPUT_SLOT)));
+        ItemStack byproduct = recipe.get().value().byproduct().apply(1, DataComponentPatch.EMPTY);
 
+        GrimeAndGold.LOGGER.info(String.valueOf(byproduct));
         this.items.set(INPUT_SLOT, this.items.get(INPUT_SLOT).copyWithCount(this.items.get(INPUT_SLOT).getCount() - 1));
         this.items.set(OUTPUT_SLOT, output.copyWithCount(this.items.get(OUTPUT_SLOT).getCount() + output.getCount()));
-        this.items.set(BYPRODUCT_SLOT, output.copyWithCount(this.items.get(BYPRODUCT_SLOT).getCount() + byproduct.getCount()));
+        this.items.set(BYPRODUCT_SLOT, byproduct.copyWithCount(this.items.get(BYPRODUCT_SLOT).getCount() + byproduct.getCount()));
 
-    }
-
-    private boolean isOutputSlotEmptyOrReceivable() {
-        return this.items.get(OUTPUT_SLOT).isEmpty() ||
-                this.items.get(OUTPUT_SLOT).getCount() < this.items.get(OUTPUT_SLOT).getMaxStackSize();
-    }
-
-    private void increaseCraftingProgress() {
-        progress++;
-    }
-
-    private boolean hasCraftingFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void resetProgress() {
-        progress = 0;
-        maxProgress = 124;
     }
 
     @Override

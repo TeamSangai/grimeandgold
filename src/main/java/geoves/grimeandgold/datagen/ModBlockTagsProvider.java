@@ -28,7 +28,11 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.IRON_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
-                .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG));
+                .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.EMERALD_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.QUARTZ_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.LAPIS_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.DIAMOND_ROUGH));
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.getRK(ModBlocks.COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.GOLD_SLAG))
@@ -36,6 +40,10 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG));
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.getRK(ModBlocks.EMERALD_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.QUARTZ_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.LAPIS_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.DIAMOND_ROUGH));
         tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.getRK(ModBlocks.HULL_PLATING)).add(ModBlocks.getRK(ModBlocks.HULL_PLATING_SLAB))
                 .add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS));
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.getRK(ModBlocks.HULL_PLATING)).add(ModBlocks.getRK(ModBlocks.HULL_PLATING_STAIRS))
@@ -47,5 +55,7 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(ModTags.Blocks.TURNS_INTO_GRIME_BURROW).add(ModBlocks.getRK(ModBlocks.GRIME));
         tag(ModTags.Blocks.AQUATIC_POLLINATOR_FLOWERS).add(ModBlocks.getRK(ModBlocks.AQUATIC_SPIN_ROSE)).add(ModBlocks.getRK(ModBlocks.GHOST_OF_THE_SEA))
                 .add(ModBlocks.getRK(ModBlocks.ANCHOR_BLOSSOM)).add(ModBlocks.getRK(ModBlocks.SPIRAL_DAFFODIL)).add(ModBlocks.getRK(ModBlocks.DEEP_SEA_ROCKET));
+        tag(ModTags.Blocks.BENTHIC_LOGS).add(ModBlocks.getRK(ModBlocks.BENTHIC_LOG)).add(ModBlocks.getRK(ModBlocks.BENTHIC_WOOD));
+
     }
 }

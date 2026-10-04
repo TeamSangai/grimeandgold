@@ -22,11 +22,16 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.function.Function;
 
 public class ModItems {
     public static final Item DIAMOND_SHARD = registerItem("diamond_shard", Item::new);
+    public static final Item QUARTZ_SHARD = registerItem("quartz_shard", Item::new);
+    public static final Item EMERALD_SHARD = registerItem("emerald_shard", Item::new);
+    public static final Item LAPIS_MOTE = registerItem("lapis_mote", Item::new);
+    public static final Item CHARCOAL_MOTE = registerItem("charcoal_mote", properties -> new Item(properties.cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_ITEMS_SMALL)));
     public static final Item FERROBEET_MELODY = registerItem("ferrobeet_melody", Item::new);
     public static final Item BEETROOT_PADDY = registerItem("beetroot_paddy", properties -> new Item(properties.food(new FoodProperties(3, 0.2f, false))));
     public static final Item COOKED_BEETROOT_PADDY = registerItem("cooked_beetroot_paddy", properties -> new Item(properties.food(new FoodProperties(5, 0.3f, false))));
@@ -40,6 +45,15 @@ public class ModItems {
     public static final Item BENTHIC_BRANCH_ITEM = registerItem("benthic_branch_item", properties -> new StandingAndWallBlockItem(ModBlocks.BENTHIC_BRANCH, ModBlocks.BENTHIC_WALL_BRANCH, Direction.DOWN, properties));
 
     public static final Item AQUATIC_MIXED_SEEDS = registerItem("aquatic_mixed_seeds", properties -> new BlockItem(ModBlocks.AQUATIC_MIXED_CROP, properties));
+
+    public static final Item ITEM_COPPER_NAILS = registerItem("copper_nails_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS, properties));
+    public static final Item ITEM_COPPER_NAILS_EXPOSED = registerItem("copper_nails_exposed_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_EXPOSED, properties));
+    public static final Item ITEM_COPPER_NAILS_WEATHERED = registerItem("copper_nails_weathered_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_WEATHERED, properties));
+    public static final Item ITEM_COPPER_NAILS_OXIDIZED = registerItem("copper_nails_oxidized_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_OXIDIZED, properties));
+    public static final Item ITEM_COPPER_NAILS_WAXED = registerItem("copper_nails_waxed_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_WAXED, properties));
+    public static final Item ITEM_COPPER_NAILS_WAXED_EXPOSED = registerItem("copper_nails_waxed_exposed_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_WAXED_EXPOSED, properties));
+    public static final Item ITEM_COPPER_NAILS_WAXED_WEATHERED = registerItem("copper_nails_waxed_weathered_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_WAXED_WEATHERED, properties));
+    public static final Item ITEM_COPPER_NAILS_WAXED_OXIDIZED = registerItem("copper_nails_waxed_oxidized_item", properties -> new BlockItem(ModBlocks.COPPER_NAILS_WAXED_OXIDIZED, properties));
 
     public static final Item SIFT_FLY_SPAWN_EGG = registerSpawnEgg(ModItemIds.SIFT_FLY_SPAWN_EGG, ModEntityTypes.SIFT_FLY);
     public static final Item SIFT_GRUB_SPAWN_EGG = registerSpawnEgg(ModItemIds.SIFT_GRUB_SPAWN_EGG, ModEntityTypes.SIFT_GRUB);

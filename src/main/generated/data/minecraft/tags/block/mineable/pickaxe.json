@@ -1,5 +1,9 @@
 {
   "values": [
+    "grimeandgold:emerald_rough",
+    "grimeandgold:quartz_rough",
+    "grimeandgold:lapis_rough",
+    "grimeandgold:diamond_rough",
     "grimeandgold:hull_plating",
     "grimeandgold:hull_plating_stairs",
     "grimeandgold:hull_plating_slab"

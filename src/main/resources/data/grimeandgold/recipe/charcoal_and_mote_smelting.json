@@ -1,0 +1,10 @@
+{
+  "type": "grimeandgold:slag_smelting",
+  "byproduct": {
+    "id": "grimeandgold:charcoal_mote"
+  },
+  "ingredient": "#minecraft:logs_that_burn",
+  "result": {
+    "id": "minecraft:charcoal"
+  }
+}

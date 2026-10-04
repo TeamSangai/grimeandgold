@@ -7,6 +7,7 @@ import geoves.grimeandgold.client.renderers.mobs.SiftFlyRenderer;
 import geoves.grimeandgold.client.renderers.mobs.SiftGrubRenderer;
 import geoves.grimeandgold.client.renderstates.SiftGrubRenderState;
 import geoves.grimeandgold.entities.ModEntityTypes;
+import geoves.grimeandgold.menu.FrosterScreen;
 import geoves.grimeandgold.menu.GrimeBarrelScreen;
 import geoves.grimeandgold.menu.ModMenuTypes;
 import geoves.grimeandgold.menu.SlagFurnaceScreen;
@@ -21,6 +22,7 @@ public class GrimeAndGoldClient implements ClientModInitializer {
     public void onInitializeClient() {
         MenuScreens.register(ModMenuTypes.GRIME_BARREL_MENU, GrimeBarrelScreen::new);
         MenuScreens.register(ModMenuTypes.SLAG_FURNACE_MENU, SlagFurnaceScreen::new);
+        MenuScreens.register(ModMenuTypes.FROSTER_MENU, FrosterScreen::new);
         ModelLayers.registerModelLayers();
 
         this.registerEntityRenderers();

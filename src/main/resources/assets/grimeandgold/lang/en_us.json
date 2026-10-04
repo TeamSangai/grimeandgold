@@ -2,7 +2,12 @@
   "entity.grimeandgold.sift_fly": "Sift Fly",
   "entity.grimeandgold.sift_grub": "Sift Grub",
 
-  "item.grimeandgold.diamond_shard": "Diamond Shard", "item.grimeandgold.sift_grub_bucket": "Bucket Of Sift-Grub Maggot",
+
+  "item.grimeandgold.diamond_shard": "Diamond Shard", "item.grimeandgold.emerald_shard": "Emerald Shard",
+  "item.grimeandgold.quartz_shard": "Quartz Shard","item.grimeandgold.charcoal_mote": "Charcoal Mote",
+  "item.grimeandgold.lapis_mote": "Lapis Mote",
+
+  "item.grimeandgold.sift_grub_bucket": "Bucket Of Sift-Grub Maggot",
   "item.grimeandgold.copper_sift": "Copper Sift", "item.grimeandgold.copper_sift_filled_grime": "Grime Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_ferrisoil": "Ferrisoil Filled Copper Sift", "item.grimeandgold.copper_sift_filled_goldrust": "Goldrust Filled Copper Sift",
   "item.grimeandgold.copper_sift_filled_paydirt": "Paydirt Filled Copper Sift",
@@ -10,6 +15,11 @@
   "item.grimeandgold.aquatic_mixed_seeds": "Mixed Aquatic Flower Seeds",
 
   "item.grimeandgold.sift_fly_spawn_egg": "Sift Fly Spawn Egg", "item.grimeandgold.sift_grub_spawn_egg": "Sift Grub Spawn Egg",
+
+  "item.grimeandgold.copper_nails_item": "Copper Nails", "item.grimeandgold.copper_nails_waxed_item": "Waxed Copper Nails",
+  "item.grimeandgold.copper_nails_exposed_item": "Exposed Copper Nails", "item.grimeandgold.copper_nails_waxed_exposed_item": "Waxed Exposed Copper Nails",
+  "item.grimeandgold.copper_nails_weathered_item": "Weathered Copper Nails", "item.grimeandgold.copper_nails_waxed_weathered_item": "Waxed Weathered Copper Nails",
+  "item.grimeandgold.copper_nails_oxidized_item": "Oxidized Copper Nails", "item.grimeandgold.copper_nails_waxed_oxidized_item": "Waxed Oxidized Copper Nails",
 
   "block.grimeandgold.grime": "Grime", "block.grimeandgold.paydirt": "Paydirt",
   "block.grimeandgold.goldrust": "Goldrust", "block.grimeandgold.ferrisoil": "Ferrisoil",
@@ -19,8 +29,10 @@
 
   "block.grimeandgold.hull_plating": "Hull Plate Metal",
 
-  "block.grimeandgold.gold_slag": "Gold Slag","block.grimeandgold.iron_slag": "Iron Slag","block.grimeandgold.copper_slag": "Copper Slag",
-  "block.grimeandgold.cooled_gold_slag": "Cooled Gold Slag","block.grimeandgold.cooled_iron_slag": "Cooled Iron Slag","block.grimeandgold.cooled_copper_slag": "Cooled Copper Slag",
+  "block.grimeandgold.gold_slag": "Gold Slag", "block.grimeandgold.iron_slag": "Iron Slag", "block.grimeandgold.copper_slag": "Copper Slag",
+  "block.grimeandgold.cooled_gold_slag": "Cooled Gold Slag", "block.grimeandgold.cooled_iron_slag": "Cooled Iron Slag", "block.grimeandgold.cooled_copper_slag": "Cooled Copper Slag",
+  "block.grimeandgold.diamond_rough": "Diamond Rough", "block.grimeandgold.emerald_rough": "Emerald Rough",
+  "block.grimeandgold.lapis_rough": "Lapis Rough", "block.grimeandgold.quartz_rough": "Quartz Rough",
 
   "block.grimeandgold.grimebarrel": "Grime Burrow","block.grimeandgold.fly_nest": "Sift-Fly Nest",
   "block.grimeandgold.sift_larva_egg": "Sift-Grub Egg","block.grimeandgold.grime_bricks": "Grime Bricks",
@@ -45,6 +57,10 @@
   "container.slag_furnace": "Slag Furnace",
   "container.grimeandgold.mud_burrow": "Mud Burrow",
   "container.grimeandgold.snow_burrow": "Snow Burrow",
-  "container.grimeandgold.clay_burrow": "Clay Burrow"
+  "container.grimeandgold.clay_burrow": "Clay Burrow",
+  "block.grimeandgold.froster": "Froster",
+
+  "death.attack.sharp_floor": "%s discovered the floor was sharp!",
+  "death.attack.sharp_floor.player": "%s discovered how sharp the floor was thanks to %s"
 
 }

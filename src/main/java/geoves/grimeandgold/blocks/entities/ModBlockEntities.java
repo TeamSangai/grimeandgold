@@ -29,9 +29,13 @@ public class ModBlockEntities {
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "snow_burrow_be"),
                     FabricBlockEntityTypeBuilder.create(SnowBurrowBlockEntity::new, ModBlocks.SNOW_BURROW).build());
 
+    public static final BlockEntityType<FrosterBlockEntity> FROSTER_BE =
+            Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "froster_be"),
+                    FabricBlockEntityTypeBuilder.create(FrosterBlockEntity::new, ModBlocks.FROSTER).build());
+
     public static final BlockEntityType<SlagFurnaceBlockEntity> SLAG_FURNACE_BE =
             Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "slag_furnace_be"),
-                    FabricBlockEntityTypeBuilder.create((BlockPos worldPosition, BlockState blockState) -> new SlagFurnaceBlockEntity(worldPosition, blockState), ModBlocks.SLAG_FURNACE).build());
+                    FabricBlockEntityTypeBuilder.create(SlagFurnaceBlockEntity::new, ModBlocks.SLAG_FURNACE).build());
 
     public static void registerBlockEntities() {
         GrimeAndGold.LOGGER.info("Registering ModBlockEntities for " + GrimeAndGold.MOD_ID);

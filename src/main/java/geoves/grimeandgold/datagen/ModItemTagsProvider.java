@@ -1,5 +1,6 @@
 package geoves.grimeandgold.datagen;
 
+import geoves.grimeandgold.blocks.ModBlocks;
 import geoves.grimeandgold.items.ModItems;
 import geoves.grimeandgold.tags.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -31,6 +32,7 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
 
         tag(ModTags.Items.DECOMPOSTABLE_CALCIUM_HIGH).add(BlockItemIds.BONE_BLOCK.item());
+
 
         tag(ModTags.Items.SIFT_LARVA_STORES).add(BlockItemIds.CARROT_CROP.item()).add(BlockItemIds.POTATO_CROP.item()).add(ModItems.getRK(ModItems.AQUATIC_MIXED_SEEDS));
 

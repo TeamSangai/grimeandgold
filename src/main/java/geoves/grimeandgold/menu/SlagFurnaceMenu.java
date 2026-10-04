@@ -15,16 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class SlagFurnaceMenu extends AbstractContainerMenu {
-    public static final int INGREDIENT_SLOT = 0;
-    public static final int FUEL_SLOT = 1;
-    public static final int RESULT_SLOT = 2;
-    public static final int BYPRODUCT_SLOT = 3;
-    public static final int SLOT_COUNT = 4;
-    public static final int DATA_COUNT = 5;
-    private static final int INV_SLOT_START = 3;
-    private static final int INV_SLOT_END = 30;
-    private static final int USE_ROW_SLOT_START = 30;
-    private static final int USE_ROW_SLOT_END = 39;
     public final SlagFurnaceBlockEntity blockEntity;
     private final Container inventory;
     private final ContainerData data;

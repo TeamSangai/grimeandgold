@@ -20,6 +20,7 @@ public class ModTags {
         public static final TagKey<Block> TURNS_INTO_SNOW_BURROW = createTag("turns_into_snow_burrow");
         public static final TagKey<Block> BURROWS = createTag("burrows");
         public static final TagKey<Block> AQUATIC_POLLINATOR_FLOWERS = createTag("aquatic_pollinator_flowers");
+        public static final TagKey<Block> BENTHIC_LOGS = createTag("benthic_logs");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));
@@ -40,6 +41,9 @@ public class ModTags {
         public static final TagKey<Item> DECOMPOSTABLE_CALCIUM_AVERAGEINBUCKET = createTag("decompostable_calcium_average_inbucket");
         public static final TagKey<Item> DECOMPOSTABLE_CALCIUM_HIGH = createTag("decompostable_calcium_high");
         public static final TagKey<Item> SIFT_LARVA_STORES = createTag("sift_larva_stores");
+        public static final TagKey<Item> BENTHIC_LOGS = createTag("benthic_logs");
+        public static final TagKey<Item> ALL_COPPER_NAILS_ITEMS = createTag("all_copper_nails_items");
+
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));

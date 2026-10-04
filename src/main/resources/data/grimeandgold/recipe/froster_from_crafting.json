@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:polished_deepslate",
+    "B": "minecraft:iron_ingot",
+    "C": "minecraft:redstone",
+    "D": "minecraft:breeze_rod"
+  },
+  "pattern": [
+    "BAB",
+    "ADA",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "grimeandgold:froster"
+  }
+}

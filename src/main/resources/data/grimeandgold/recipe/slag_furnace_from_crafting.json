@@ -4,10 +4,11 @@
   "key": {
     "A": "minecraft:cobbled_deepslate",
     "B": "minecraft:copper_ingot",
-    "C": "minecraft:furnace"
+    "C": "minecraft:furnace",
+    "D": "grimeandgold:copper_nails"
   },
   "pattern": [
-    "BAB",
+    "DAD",
     "BCB",
     "BAB"
   ],

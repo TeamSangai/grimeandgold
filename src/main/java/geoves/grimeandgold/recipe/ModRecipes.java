@@ -1,6 +1,7 @@
 package geoves.grimeandgold.recipe;
 
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.recipe.custom.FrostingRecipe;
 import geoves.grimeandgold.recipe.custom.SlagSmelting;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +16,17 @@ public class ModRecipes {
     public static final RecipeType<SlagSmelting> SLAG_SMELTING_RECIPE_TYPE = Registry.register(
             BuiltInRegistries.RECIPE_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "slag_smelting"),
             new RecipeType<SlagSmelting>() {
+                @Override
+                public String toString() {
+                    return "slag_smelting";
+                }
+            });
+    public static final RecipeSerializer<FrostingRecipe> FROSTING_RECIPE_SERIALIZER = Registry.register(
+            BuiltInRegistries.RECIPE_SERIALIZER, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "frosting"),
+            new RecipeSerializer<>(FrostingRecipe.CODEC, FrostingRecipe.STREAM_CODEC));
+    public static final RecipeType<FrostingRecipe> FROSTING_RECIPE_TYPE = Registry.register(
+            BuiltInRegistries.RECIPE_TYPE, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "frosting"),
+            new RecipeType<FrostingRecipe>() {
                 @Override
                 public String toString() {
                     return "slag_smelting";

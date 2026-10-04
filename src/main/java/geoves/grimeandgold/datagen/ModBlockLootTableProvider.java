@@ -42,6 +42,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         add(ModBlocks.COOLED_GOLD_SLAG, createMultipleOreDrops(ModBlocks.COOLED_GOLD_SLAG, Items.GOLD_NUGGET, 2, 8));
         add(ModBlocks.COOLED_IRON_SLAG, createMultipleOreDrops(ModBlocks.COOLED_IRON_SLAG, Items.IRON_NUGGET, 1, 5));
         add(ModBlocks.COOLED_COPPER_SLAG, createMultipleOreDrops(ModBlocks.COOLED_COPPER_SLAG, Items.COPPER_NUGGET, 2, 11));
+        add(ModBlocks.LAPIS_ROUGH, createMultipleOreDrops(ModBlocks.LAPIS_ROUGH, ModItems.LAPIS_MOTE, 3, 11));
+        add(ModBlocks.EMERALD_ROUGH, createMultipleOreDrops(ModBlocks.EMERALD_ROUGH, ModItems.EMERALD_SHARD, 2, 6));
+        add(ModBlocks.DIAMOND_ROUGH, createMultipleOreDrops(ModBlocks.DIAMOND_ROUGH, ModItems.DIAMOND_SHARD, 1, 4));
+        add(ModBlocks.QUARTZ_ROUGH, createMultipleOreDrops(ModBlocks.QUARTZ_ROUGH, ModItems.QUARTZ_SHARD, 2, 8));
 
     }
     public LootTable.Builder createMultipleOreDrops(final Block block, Item item, int minDrops, int maxDrops) {

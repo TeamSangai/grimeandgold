@@ -15,6 +15,9 @@ public class ModMenuTypes {
     public static final MenuType<SlagFurnaceMenu> SLAG_FURNACE_MENU =
             Registry.register(BuiltInRegistries.MENU, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "slag_furnace_menu"),
                     new ExtendedMenuType<>(SlagFurnaceMenu::new, BlockPos.STREAM_CODEC));
+    public static final MenuType<FrosterMenu> FROSTER_MENU =
+            Registry.register(BuiltInRegistries.MENU, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, "froster_menu"),
+                    new ExtendedMenuType<>(FrosterMenu::new, BlockPos.STREAM_CODEC));
 
     public static void registerModMenuTypes() {
         GrimeAndGold.LOGGER.info("Registering ModMenuTypes for " + GrimeAndGold.MOD_ID);

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "grimeandgold:block/benthic_slab"
+    },
+    "type=double": {
+      "model": "grimeandgold:block/benthic_planks"
+    },
+    "type=top": {
+      "model": "grimeandgold:block/benthic_slab_top"
+    }
+  }
+}

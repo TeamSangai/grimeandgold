@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "": [{
+      "model": "grimeandgold:block/copper_nails"
+    },{
+      "model": "grimeandgold:block/copper_nails",
+      "y": 90
+    },{
+      "model": "grimeandgold:block/copper_nails",
+      "y": 180
+    },{
+      "model": "grimeandgold:block/copper_nails",
+      "y": 270
+    }]
+  }
+}

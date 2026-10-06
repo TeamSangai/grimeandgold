@@ -1,0 +1,10 @@
+{
+  "type": "grimeandgold:slag_smelting",
+  "byproduct": {
+    "id": "grimeandgold:charcoal_mote"
+  },
+  "ingredient": "minecraft:salmon",
+  "result": {
+    "id": "minecraft:cooked_salmon"
+  }
+}

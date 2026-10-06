@@ -11,11 +11,13 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 public class ModWorldGeneration {
 
     public static void generateModWorldGen() {
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_SNOWY_MOUNTAIN), GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_SNOWY_MOUNTAIN), GenerationStep.Decoration.UNDERGROUND_ORES,
                 ModPlacedFeatures.OVERWORLD_COOLED_COPPER_SLAG_PLACED_KEY);
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_SNOWY_MOUNTAIN), GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_SNOWY_MOUNTAIN), GenerationStep.Decoration.UNDERGROUND_ORES,
                 ModPlacedFeatures.OVERWORLD_COOLED_IRON_SLAG_PLACED_KEY);
-        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_SNOWY_MOUNTAIN), GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+        BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.Biomes.IS_SNOWY_MOUNTAIN), GenerationStep.Decoration.UNDERGROUND_ORES,
                 ModPlacedFeatures.OVERWORLD_COOLED_GOLD_SLAG_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.HAS_VILLAGE_DESERT), GenerationStep.Decoration.UNDERGROUND_ORES,
+                ModPlacedFeatures.PAYDIRT_PLACED);
     }
 }

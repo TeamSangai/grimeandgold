@@ -1,0 +1,22 @@
+{
+  "type": "grimeandgold:slag_smelting",
+  "byproduct": {
+    "id": "grimeandgold:copper_slag"
+  },
+  "ingredient": [
+    "minecraft:copper_axe",
+    "minecraft:copper_boots",
+    "minecraft:copper_chestplate",
+    "minecraft:copper_hoe",
+    "minecraft:copper_pickaxe",
+    "minecraft:copper_nautilus_armor",
+    "minecraft:copper_helmet",
+    "minecraft:copper_leggings",
+    "minecraft:copper_spear",
+    "minecraft:copper_sword",
+    "minecraft:copper_shovel"
+  ],
+  "result": {
+    "id": "grimeandgold:copper_slag"
+  }
+}

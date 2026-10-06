@@ -90,7 +90,6 @@ public class DrySproutCropBlock extends CropBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        this.growCrops(level, pos, state);
         if (getMaxAge()==this.getAge(state)){
             int seed = random.nextInt(5);
             GrimeAndGold.LOGGER.info(String.valueOf(seed));

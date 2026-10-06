@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_desert_lavender": {
+      "conditions": {
+        "items": [
+          {
+            "items": "grimeandgold:desert_lavender"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "grimeandgold:magenta_dye_from_desert_lavender"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_desert_lavender"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "grimeandgold:magenta_dye_from_desert_lavender"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:bread",
+    "minecraft:apple",
+    "grimeandgold:cooked_beetroot_paddy",
+    "grimeandgold:aquatic_spin_rose"
+  ],
+  "result": {
+    "id": "grimeandgold:beetroot_burger"
+  }
+}

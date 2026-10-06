@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 
@@ -62,6 +63,10 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(Objects.requireNonNull(Blocks.POWDER_SNOW.properties().blockId()));
         tag(ModTags.Blocks.NETHER_SLAG_REPLACEABLE).add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId()))
                 .add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId())).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()));
+        tag(ModTags.Blocks.PAYDIRT_REPLACEABLE).add(Objects.requireNonNull(Blocks.SAND.properties().blockId()));
+        tag(ModTags.Blocks.FERRISOIL_REPLACEABLE).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()))
+                .add(Objects.requireNonNull(Blocks.TUFF.properties().blockId()));
+
 
     }
 }

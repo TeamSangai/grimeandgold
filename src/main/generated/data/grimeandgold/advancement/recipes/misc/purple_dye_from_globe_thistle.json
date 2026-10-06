@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_globe_thistle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "grimeandgold:globe_thistle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "grimeandgold:purple_dye_from_globe_thistle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_globe_thistle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "grimeandgold:purple_dye_from_globe_thistle"
+    ]
+  }
+}

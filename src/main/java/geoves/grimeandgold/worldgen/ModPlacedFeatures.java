@@ -27,6 +27,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> NETHER_IRON_SLAG_PLACED_KEY = registerKey("nether_iron_slag_placed");
     public static final ResourceKey<PlacedFeature> NETHER_GOLD_SLAG_PLACED_KEY = registerKey("nether_gold_slag_placed");
     public static final ResourceKey<PlacedFeature> NETHER_COPPER_SLAG_PLACED_KEY = registerKey("nether_copper_slag_placed");
+    public static final ResourceKey<PlacedFeature> PAYDIRT_PLACED = registerKey("paydirt_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var features = context.lookup(Registries.FEATURE);
@@ -40,6 +41,9 @@ public class ModPlacedFeatures {
         register(context, OVERWORLD_COOLED_GOLD_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_GOLD_SLAG),
                 OrePlacements.commonOrePlacement(9,
                         HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(250))));
+        register(context, PAYDIRT_PLACED, features.getOrThrow(ModFeatures.PAYDIRT),
+                OrePlacements.commonOrePlacement(25,
+                        HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(250))));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

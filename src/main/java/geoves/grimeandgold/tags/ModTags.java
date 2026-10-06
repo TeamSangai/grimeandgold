@@ -24,7 +24,10 @@ public class ModTags {
         public static final TagKey<Block> AQUATIC_POLLINATOR_FLOWERS = createTag("aquatic_pollinator_flowers");
         public static final TagKey<Block> BENTHIC_LOGS = createTag("benthic_logs");
         public static final TagKey<Block> OVERWORLD_COOLED_SLAG_REPLACEABLE = createTag("overworld_cooled_slag_replaceable");
-        public static final TagKey<Block> NETHER_SLAG_REPLACEABLE = createTag("overworld_cooled_slag_replaceable");
+        public static final TagKey<Block> NETHER_SLAG_REPLACEABLE = createTag("nether_slag_replaceable");
+        public static final TagKey<Block> PAYDIRT_REPLACEABLE = createTag("paydirt_replaceable");
+        public static final TagKey<Block> FERRISOIL_REPLACEABLE = createTag("ferrisoil_replaceable");
+        public static final TagKey<Block> GOLDRUST_REPLACEABLE = createTag("goldrust_replaceable");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));

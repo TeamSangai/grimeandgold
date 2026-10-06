@@ -1,0 +1,7 @@
+{
+  "type": "grimeandgold:frosting",
+  "ingredient": "grimeandgold:gold_slag",
+  "result": {
+    "id": "grimeandgold:cooled_gold_slag"
+  }
+}

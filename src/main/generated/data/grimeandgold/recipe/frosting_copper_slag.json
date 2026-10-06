@@ -1,0 +1,7 @@
+{
+  "type": "grimeandgold:frosting",
+  "ingredient": "grimeandgold:copper_slag",
+  "result": {
+    "id": "grimeandgold:cooled_copper_slag"
+  }
+}

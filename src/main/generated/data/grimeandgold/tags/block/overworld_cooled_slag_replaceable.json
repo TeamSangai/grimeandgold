@@ -1,9 +1,6 @@
 {
   "values": [
     "minecraft:snow_block",
-    "minecraft:powder_snow",
-    "minecraft:soul_sand",
-    "minecraft:soul_sand",
-    "minecraft:gravel"
+    "minecraft:powder_snow"
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glacier_holly": {
+      "conditions": {
+        "items": [
+          {
+            "items": "grimeandgold:glacier_holly"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "grimeandgold:red_dye_from_glacier_holly"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glacier_holly"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "grimeandgold:red_dye_from_glacier_holly"
+    ]
+  }
+}

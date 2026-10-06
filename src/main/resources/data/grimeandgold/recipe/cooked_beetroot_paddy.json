@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": "grimeandgold:beetroot_paddy",
+  "result": {
+    "id": "grimeandgold:cooked_beetroot_paddy"
+  }
+}

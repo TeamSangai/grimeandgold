@@ -1,0 +1,10 @@
+{
+  "type": "grimeandgold:slag_smelting",
+  "byproduct": {
+    "id": "grimeandgold:copper_slag"
+  },
+  "ingredient": "minecraft:raw_copper",
+  "result": {
+    "id": "minecraft:copper_ingot"
+  }
+}

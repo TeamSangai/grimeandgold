@@ -73,50 +73,61 @@ public class AquaticSproutCropBlock extends CropBlock implements LiquidBlockCont
         if (getMaxAge()==this.getAge(state)){
             int seed = random.nextInt(7);
             GrimeAndGold.LOGGER.info(String.valueOf(seed));
-            if (seed == 1){
-                level.setBlock(pos, ModBlocks.AQUATIC_SPIN_ROSE.defaultBlockState(), 11);
-            } else if (seed == 2 && level.getBlockState(pos.above()).is(Blocks.WATER)) {
-                level.setBlock(pos, ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
-                level.setBlock(pos.above(), ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
-            } else if (seed == 0 && level.getBlockState(pos.above()).is(Blocks.WATER)) {
-                level.setBlock(pos, ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
-                level.setBlock(pos.above(), ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
-            } else if (seed == 3) {
-                level.setBlock(pos, ModBlocks.GHOST_OF_THE_SEA.defaultBlockState(), 11);
-            } else if (seed == 4) {
-                level.setBlock(pos, ModBlocks.DEEP_SEA_ROCKET.defaultBlockState(), 11);
-            } else if (seed == 5 && level.getBlockState(pos.above()).is(Blocks.WATER)) {
-                level.setBlock(pos, ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
-                level.setBlock(pos.above(), ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
-            } else if (seed == 6) {
-                level.setBlock(pos, ModBlocks.GLACIER_HOLLY.defaultBlockState(), 11);
+            switch (seed) {
+                case 0 -> {
+                    if (level.getBlockState(pos.above()).is(Blocks.WATER)) {
+                        level.setBlock(pos, ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
+                        level.setBlock(pos.above(), ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
+                    } else {level.setBlock(pos, ModBlocks.AQUATIC_SPIN_ROSE.defaultBlockState(), 11);}
+                }
+                case 1 -> level.setBlock(pos, ModBlocks.AQUATIC_SPIN_ROSE.defaultBlockState(), 11);
+                case 2 -> {
+                    if (level.getBlockState(pos.above()).is(Blocks.WATER)) {
+                        level.setBlock(pos, ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
+                        level.setBlock(pos.above(), ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
+                    } else {level.setBlock(pos, ModBlocks.GHOST_OF_THE_SEA.defaultBlockState(), 11);}
+                }
+                case 3 -> level.setBlock(pos, ModBlocks.GHOST_OF_THE_SEA.defaultBlockState(), 11);
+                case 4 -> level.setBlock(pos, ModBlocks.DEEP_SEA_ROCKET.defaultBlockState(), 11);
+                case 5 -> {
+                    if (level.getBlockState(pos.above()).is(Blocks.WATER)) {
+                        level.setBlock(pos, ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
+                        level.setBlock(pos.above(), ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
+                    } else {level.setBlock(pos, ModBlocks.GLACIER_HOLLY.defaultBlockState(), 11);}
+                }
+                case 6 -> level.setBlock(pos, ModBlocks.GLACIER_HOLLY.defaultBlockState(), 11);
             }
         }
     }
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        this.growCrops(level, pos, state);
         if (getMaxAge()==this.getAge(state)){
             int seed = random.nextInt(7);
             GrimeAndGold.LOGGER.info(String.valueOf(seed));
-            if (seed == 1){
-                level.setBlock(pos, ModBlocks.AQUATIC_SPIN_ROSE.defaultBlockState(), 11);
-            } else if (seed == 2 && level.getBlockState(pos.above()).is(Blocks.WATER)) {
-                level.setBlock(pos, ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
-                level.setBlock(pos.above(), ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
-            } else if (seed == 5 && level.getBlockState(pos.above()).is(Blocks.WATER)) {
-                level.setBlock(pos, ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
-                level.setBlock(pos.above(), ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
-            } else if (seed == 3) {
-                level.setBlock(pos, ModBlocks.GHOST_OF_THE_SEA.defaultBlockState(), 11);
-            } else if (seed == 4) {
-                level.setBlock(pos, ModBlocks.DEEP_SEA_ROCKET.defaultBlockState(), 11);
-            } else if (seed == 0 && level.getBlockState(pos.above()).is(Blocks.WATER)) {
-                level.setBlock(pos, ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
-                level.setBlock(pos.above(), ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
-            } else if (seed == 6) {
-                level.setBlock(pos, ModBlocks.GLACIER_HOLLY.defaultBlockState(), 11);
+            switch (seed) {
+                case 0 -> {
+                    if (level.getBlockState(pos.above()).is(Blocks.WATER)) {
+                        level.setBlock(pos, ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
+                        level.setBlock(pos.above(), ModBlocks.ANCHOR_BLOSSOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
+                    } else {level.setBlock(pos, ModBlocks.AQUATIC_SPIN_ROSE.defaultBlockState(), 11);}
+                }
+                case 1 -> level.setBlock(pos, ModBlocks.AQUATIC_SPIN_ROSE.defaultBlockState(), 11);
+                case 2 -> {
+                    if (level.getBlockState(pos.above()).is(Blocks.WATER)) {
+                        level.setBlock(pos, ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
+                        level.setBlock(pos.above(), ModBlocks.SPIRAL_DAFFODIL.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
+                    } else {level.setBlock(pos, ModBlocks.GHOST_OF_THE_SEA.defaultBlockState(), 11);}
+                }
+                case 3 -> level.setBlock(pos, ModBlocks.GHOST_OF_THE_SEA.defaultBlockState(), 11);
+                case 4 -> level.setBlock(pos, ModBlocks.DEEP_SEA_ROCKET.defaultBlockState(), 11);
+                case 5 -> {
+                    if (level.getBlockState(pos.above()).is(Blocks.WATER)) {
+                        level.setBlock(pos, ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), 11);
+                        level.setBlock(pos.above(), ModBlocks.COCOA_BLOOM.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 11);
+                    } else {level.setBlock(pos, ModBlocks.GLACIER_HOLLY.defaultBlockState(), 11);}
+                }
+                case 6 -> level.setBlock(pos, ModBlocks.GLACIER_HOLLY.defaultBlockState(), 11);
             }
         }
     }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_spiral_daffodil": {
+      "conditions": {
+        "items": [
+          {
+            "items": "grimeandgold:spiral_daffodil"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "grimeandgold:white_dye_from_spiral_daffodil"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_spiral_daffodil"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "grimeandgold:white_dye_from_spiral_daffodil"
+    ]
+  }
+}

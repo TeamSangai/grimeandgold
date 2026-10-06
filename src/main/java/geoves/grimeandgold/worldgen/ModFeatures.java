@@ -32,16 +32,23 @@ public class ModFeatures {
     public static final ResourceKey<Feature> OVERWORLD_COPPER_SLAG = registerKey("overworld_copper_slag");
     public static final ResourceKey<Feature> NETHER_COPPER_SLAG = registerKey("nether_copper_slag");
     public static final ResourceKey<Feature> END_COPPER_SLAG = registerKey("end_copper_slag");
+    public static final ResourceKey<Feature> PAYDIRT = registerKey("paydirt");
+    public static final ResourceKey<Feature> GOLDRUST = registerKey("goldrust");
+    public static final ResourceKey<Feature> FERRISOIL = registerKey("ferrisoil");
 
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         RuleTest overworldCooledSlagReplaceables = new TagMatchTest(ModTags.Blocks.OVERWORLD_COOLED_SLAG_REPLACEABLE);
+        RuleTest paydirtReplaceables = new TagMatchTest(ModTags.Blocks.PAYDIRT_REPLACEABLE);
+        RuleTest goldrustReplaceables = new TagMatchTest(ModTags.Blocks.GOLDRUST_REPLACEABLE);
+        RuleTest ferrisoilReplaceables = new TagMatchTest(ModTags.Blocks.FERRISOIL_REPLACEABLE);
         RuleTest netherReplaceables = new TagMatchTest(ModTags.Blocks.NETHER_SLAG_REPLACEABLE);
         RuleTest endReplaceables = new BlockMatchTest(Blocks.END_STONE);
 
         context.register(OVERWORLD_COPPER_SLAG, new OreFeature(List.of(BlockReplacement.replace(overworldCooledSlagReplaceables, ModBlocks.COOLED_COPPER_SLAG.defaultBlockState())), 6));
         context.register(OVERWORLD_IRON_SLAG, new OreFeature(List.of(BlockReplacement.replace(overworldCooledSlagReplaceables, ModBlocks.COOLED_IRON_SLAG.defaultBlockState())), 4));
         context.register(OVERWORLD_GOLD_SLAG, new OreFeature(List.of(BlockReplacement.replace(overworldCooledSlagReplaceables, ModBlocks.COOLED_GOLD_SLAG.defaultBlockState())), 5));
+        context.register(PAYDIRT, new OreFeature(List.of(BlockReplacement.replace(paydirtReplaceables, ModBlocks.PAYDIRT.defaultBlockState())), 3));
 
     }
 

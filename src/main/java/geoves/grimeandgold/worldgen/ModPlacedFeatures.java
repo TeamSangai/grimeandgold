@@ -10,9 +10,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.heightproviders.BiasedToBottomHeight;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +32,29 @@ public class ModPlacedFeatures {
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var features = context.lookup(Registries.FEATURE);
 
-        register(context, OVERWORLD_COOLED_COPPER_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_COPPER_SLAG),
-                OrePlacements.commonOrePlacement(12,
-                        HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(250))));
-        register(context, OVERWORLD_COOLED_IRON_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_IRON_SLAG),
-                OrePlacements.commonOrePlacement(7,
-                        HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(250))));
-        register(context, OVERWORLD_COOLED_GOLD_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_GOLD_SLAG),
-                OrePlacements.commonOrePlacement(9,
-                        HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(250))));
-        register(context, PAYDIRT_PLACED, features.getOrThrow(ModFeatures.PAYDIRT),
-                OrePlacements.commonOrePlacement(25,
-                        HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(250))));
+        List<PlacementModifier> commonSlagVeinModifiers = List.of(
+                CountPlacement.of(50),
+                BiomeFilter.biome(),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.relativeToSeaLevel(24), VerticalAnchor.belowTop(0)))
+        );
+        List<PlacementModifier> uncommonSlagVeinModifiers = List.of(
+                CountPlacement.of(40),
+                BiomeFilter.biome(),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.relativeToSeaLevel(24), VerticalAnchor.belowTop(0)))
+        );
+        List<PlacementModifier> paydirtVeinModifiers = List.of(
+                CountPlacement.of(30),
+                BiomeFilter.biome(),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.belowTop(0)))
+        );
+
+        register(context, OVERWORLD_COOLED_COPPER_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_COPPER_SLAG), commonSlagVeinModifiers);
+        register(context, OVERWORLD_COOLED_IRON_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_IRON_SLAG), uncommonSlagVeinModifiers);
+        register(context, OVERWORLD_COOLED_GOLD_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.OVERWORLD_GOLD_SLAG), commonSlagVeinModifiers);
+        register(context, PAYDIRT_PLACED, features.getOrThrow(ModFeatures.PAYDIRT), paydirtVeinModifiers);
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

@@ -21,6 +21,7 @@ public class GrimeAndGoldDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModEntityTagsProvider::new);
 		pack.addProvider(ModRegistryDataProvider::new);
+
 	}
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {

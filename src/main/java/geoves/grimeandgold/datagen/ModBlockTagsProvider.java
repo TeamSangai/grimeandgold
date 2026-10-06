@@ -60,7 +60,8 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(ModTags.Blocks.BENTHIC_LOGS).add(ModBlocks.getRK(ModBlocks.BENTHIC_LOG)).add(ModBlocks.getRK(ModBlocks.BENTHIC_WOOD));
 
         tag(ModTags.Blocks.OVERWORLD_COOLED_SLAG_REPLACEABLE).add(Objects.requireNonNull(Blocks.SNOW_BLOCK.properties().blockId()))
-                .add(Objects.requireNonNull(Blocks.POWDER_SNOW.properties().blockId()));
+                .add(Objects.requireNonNull(Blocks.POWDER_SNOW.properties().blockId())).add(Objects.requireNonNull(Blocks.PACKED_ICE.properties().blockId()))
+                .add(Objects.requireNonNull(Blocks.ICE.properties().blockId()));
         tag(ModTags.Blocks.NETHER_SLAG_REPLACEABLE).add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId()))
                 .add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId())).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()));
         tag(ModTags.Blocks.PAYDIRT_REPLACEABLE).add(Objects.requireNonNull(Blocks.SAND.properties().blockId()));

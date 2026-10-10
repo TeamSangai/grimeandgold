@@ -1,9 +1,9 @@
 {
-  "feature": "grimeandgold:paydirt",
+  "feature": "grimeandgold:end_diamond_rough",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 30
+      "count": 6
     },
     {
       "type": "minecraft:in_square"
@@ -16,7 +16,7 @@
           "below_top": 0
         },
         "min_inclusive": {
-          "above_bottom": 32
+          "above_bottom": 0
         }
       }
     },

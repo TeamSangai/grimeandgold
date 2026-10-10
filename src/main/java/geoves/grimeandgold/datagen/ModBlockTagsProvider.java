@@ -24,7 +24,7 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
-        tag(BlockTags.NEEDS_STONE_TOOL)
+        tag(BlockTags.NEEDS_STONE_TOOL, false)
                 .add(ModBlocks.getRK(ModBlocks.COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.GOLD_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.IRON_SLAG))
@@ -35,14 +35,14 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.QUARTZ_ROUGH))
                 .add(ModBlocks.getRK(ModBlocks.LAPIS_ROUGH))
                 .add(ModBlocks.getRK(ModBlocks.DIAMOND_ROUGH));
-        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+        tag(BlockTags.MINEABLE_WITH_SHOVEL, false)
                 .add(ModBlocks.getRK(ModBlocks.COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.GOLD_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.IRON_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG));
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.getRK(ModBlocks.EMERALD_ROUGH))
+        tag(BlockTags.MINEABLE_WITH_PICKAXE, false).add(ModBlocks.getRK(ModBlocks.EMERALD_ROUGH))
                 .add(ModBlocks.getRK(ModBlocks.QUARTZ_ROUGH))
                 .add(ModBlocks.getRK(ModBlocks.LAPIS_ROUGH))
                 .add(ModBlocks.getRK(ModBlocks.DIAMOND_ROUGH));
@@ -63,11 +63,14 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(Objects.requireNonNull(Blocks.POWDER_SNOW.properties().blockId())).add(Objects.requireNonNull(Blocks.PACKED_ICE.properties().blockId()))
                 .add(Objects.requireNonNull(Blocks.ICE.properties().blockId()));
         tag(ModTags.Blocks.NETHER_SLAG_REPLACEABLE).add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId()))
-                .add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId())).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()));
+                .add(Objects.requireNonNull(Blocks.SOUL_SAND.properties().blockId())).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()))
+                .add(Objects.requireNonNull(Blocks.BASALT.properties().blockId())).add(Objects.requireNonNull(Blocks.BLACKSTONE.properties().blockId()));
         tag(ModTags.Blocks.PAYDIRT_REPLACEABLE).add(Objects.requireNonNull(Blocks.SAND.properties().blockId()));
         tag(ModTags.Blocks.FERRISOIL_REPLACEABLE).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()))
                 .add(Objects.requireNonNull(Blocks.TUFF.properties().blockId()));
-
+        tag(BlockTags.DRAGON_IMMUNE, false).add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG)).add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
+                .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG)).add(ModBlocks.getRK(ModBlocks.EMERALD_ROUGH)).add(ModBlocks.getRK(ModBlocks.QUARTZ_ROUGH))
+                .add(ModBlocks.getRK(ModBlocks.LAPIS_ROUGH)).add(ModBlocks.getRK(ModBlocks.DIAMOND_ROUGH));
 
     }
 }

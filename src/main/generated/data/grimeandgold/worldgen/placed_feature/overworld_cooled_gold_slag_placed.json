@@ -6,9 +6,6 @@
       "count": 50
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:in_square"
     },
     {
@@ -22,6 +19,9 @@
           "relative_to_sea_level": 24
         }
       }
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }

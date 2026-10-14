@@ -1,9 +1,12 @@
 package geoves.grimeandgold.worldgen;
 
 import geoves.grimeandgold.GrimeAndGold;
+import geoves.grimeandgold.blocks.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -17,6 +20,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> OVERWORLD_COOLED_IRON_SLAG_PLACED_KEY = registerKey("overworld_cooled_iron_slag_placed");
     public static final ResourceKey<PlacedFeature> OVERWORLD_COOLED_GOLD_SLAG_PLACED_KEY = registerKey("overworld_cooled_gold_slag_placed");
     public static final ResourceKey<PlacedFeature> OVERWORLD_COOLED_COPPER_SLAG_PLACED_KEY = registerKey("overworld_cooled_copper_slag_placed");
+
     public static final ResourceKey<PlacedFeature> END_COOLED_IRON_SLAG_PLACED_KEY = registerKey("end_cooled_iron_slag_placed");
     public static final ResourceKey<PlacedFeature> END_COOLED_GOLD_SLAG_PLACED_KEY = registerKey("end_cooled_gold_slag_placed");
     public static final ResourceKey<PlacedFeature> END_COOLED_COPPER_SLAG_PLACED_KEY = registerKey("end_cooled_copper_slag_placed");
@@ -24,12 +28,19 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> END_EMERALD_ROUGH_PLACED_KEY = registerKey("end_emerald_rough_placed");
     public static final ResourceKey<PlacedFeature> END_LAPIS_ROUGH_PLACED_KEY = registerKey("end_lapis_rough_placed");
     public static final ResourceKey<PlacedFeature> END_QUARTZ_ROUGH_PLACED_KEY = registerKey("end_quartz_rough_placed");
+
     public static final ResourceKey<PlacedFeature> NETHER_IRON_SLAG_PLACED_KEY = registerKey("nether_iron_slag_placed");
     public static final ResourceKey<PlacedFeature> NETHER_GOLD_SLAG_PLACED_KEY = registerKey("nether_gold_slag_placed");
     public static final ResourceKey<PlacedFeature> NETHER_COPPER_SLAG_PLACED_KEY = registerKey("nether_copper_slag_placed");
+
     public static final ResourceKey<PlacedFeature> PAYDIRT_PLACED = registerKey("paydirt_placed");
     public static final ResourceKey<PlacedFeature> GOLDRUST_PLACED = registerKey("goldrust_placed");
     public static final ResourceKey<PlacedFeature> FERRISOIL_PLACED = registerKey("ferrisoil_placed");
+
+    public static final ResourceKey<PlacedFeature> BENTHIC_TREE_PLACED_KEY = registerKey("benthic_tree_placed");
+    public static final ResourceKey<PlacedFeature> GRIME_PLACED_FEATURE_KEY = registerKey("grime_placed_feature");
+    public static final ResourceKey<PlacedFeature> WARM_OCEAN_GRAVEL_PLACED_KEY = registerKey("warm_ocean_gravel_placed");
+
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var features = context.lookup(Registries.FEATURE);
@@ -77,9 +88,15 @@ public class ModPlacedFeatures {
                 BiomeFilter.biome()
         );
         List<PlacementModifier> grimeVeinModifiers = List.of(
-                CountPlacement.of(30),
+                CountPlacement.of(14),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.belowTop(0))),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(64), VerticalAnchor.relativeToSeaLevel(0))),
+                BiomeFilter.biome()
+        );
+        List<PlacementModifier> warmOceanGravelVeinModifiers = List.of(
+                CountPlacement.of(20),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(64), VerticalAnchor.relativeToSeaLevel(0))),
                 BiomeFilter.biome()
         );
 
@@ -89,6 +106,11 @@ public class ModPlacedFeatures {
         register(context, PAYDIRT_PLACED, features.getOrThrow(ModFeatures.PAYDIRT), paydirtVeinModifiers);
         register(context, GOLDRUST_PLACED, features.getOrThrow(ModFeatures.GOLDRUST), paydirtVeinModifiers);
         register(context, FERRISOIL_PLACED, features.getOrThrow(ModFeatures.FERRISOIL), ferrisoilVeinModifiers);
+
+        register(context, GRIME_PLACED_FEATURE_KEY, features.getOrThrow(ModFeatures.GRIME_FEATURE_KEY), grimeVeinModifiers);
+        register(context, WARM_OCEAN_GRAVEL_PLACED_KEY, features.getOrThrow(ModFeatures.WARM_OCEAN_GRAVEL_FEATURE_KEY), warmOceanGravelVeinModifiers);
+
+        register(context, BENTHIC_TREE_PLACED_KEY, features.getOrThrow(ModFeatures.BENTHIC_TREE_KEY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 1), ModBlocks.BENTHIC_SAPLING));
 
         register(context, NETHER_COPPER_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.NETHER_COPPER_SLAG), unCommonEndVeinModifiers);
         register(context, NETHER_GOLD_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.NETHER_GOLD_SLAG), commonEndVeinModifiers);
@@ -101,6 +123,7 @@ public class ModPlacedFeatures {
         register(context, END_COOLED_COPPER_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.END_COPPER_SLAG), commonEndVeinModifiers);
         register(context, END_COOLED_GOLD_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.END_GOLD_SLAG), unCommonEndVeinModifiers);
         register(context, END_COOLED_IRON_SLAG_PLACED_KEY, features.getOrThrow(ModFeatures.END_IRON_SLAG), rareEndVeinModifiers);
+
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

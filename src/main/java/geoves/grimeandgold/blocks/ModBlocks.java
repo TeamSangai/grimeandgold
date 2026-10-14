@@ -3,6 +3,7 @@ package geoves.grimeandgold.blocks;
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.custom.*;
 import geoves.grimeandgold.effects.ModEffects;
+import geoves.grimeandgold.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -84,10 +85,10 @@ public class ModBlocks {
     public static final Block BENTHIC_PLANKS = registerBlock("benthic_planks", properties -> new Block(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_PLANKS_SLAB = registerBlock("benthic_slab", properties -> new SlabBlock(properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_PLANKS_STAIRS = registerBlock("benthic_stairs", properties -> new StairBlock(ModBlocks.BENTHIC_PLANKS.defaultBlockState(), properties.mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
-
     public static final Block BENTHIC_BRANCH = registerBlock("benthic_branch", properties -> new BenthicBranchBlock(properties.mapColor(MapColor.STONE).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_WALL_BRANCH = registerBlock("benthic_wall_branch", properties -> new BenthicWallBranchBlock(properties.mapColor(MapColor.STONE).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block BENTHIC_SAPLING = registerBlock("benthic_sapling", properties -> new BenthicSaplingBlock(TreeGrower.MANGROVE, properties.mapColor(MapColor.STONE).instabreak().noCollision().sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block BENTHIC_BRAMBLES = registerBlock("benthic_brambles", properties -> new BenthicBrambleBlock(properties.mapColor(MapColor.STONE).strength(0.75F).noOcclusion().noCollision().sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block BENTHIC_SAPLING = registerBlock("benthic_sapling", properties -> new BenthicSaplingBlock(ModTreeGrowers.BENTHIC, properties.mapColor(MapColor.STONE).instabreak().noCollision().sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_DOOR = registerBlock("benthic_door", properties -> new DoorBlock(BlockSetType.POPLAR, properties.mapColor(MapColor.STONE).noOcclusion().strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block BENTHIC_TRAPDOOR = registerBlock("benthic_trapdoor", properties -> new TrapDoorBlock(BlockSetType.POPLAR, properties.mapColor(MapColor.STONE).noOcclusion().strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
 

@@ -44,5 +44,13 @@ public class ModWorldGeneration {
         BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(), GenerationStep.Decoration.UNDERGROUND_ORES,
                 ModPlacedFeatures.NETHER_IRON_SLAG_PLACED_KEY);
 
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.WARM_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN),
+                GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.WARM_OCEAN_GRAVEL_PLACED_KEY);
+        BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.IS_OCEAN),
+                GenerationStep.Decoration.UNDERGROUND_DECORATION, ModPlacedFeatures.GRIME_PLACED_FEATURE_KEY);
+
+        BiomeModifications.addFeature(BiomeSelectors.tag(BiomeTags.IS_OCEAN),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.BENTHIC_TREE_PLACED_KEY);
+
     }
 }

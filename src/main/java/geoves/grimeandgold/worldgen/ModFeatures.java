@@ -2,22 +2,43 @@ package geoves.grimeandgold.worldgen;
 
 import geoves.grimeandgold.GrimeAndGold;
 import geoves.grimeandgold.blocks.ModBlocks;
+import geoves.grimeandgold.blocks.custom.BenthicBranchBlock;
+import geoves.grimeandgold.blocks.custom.BenthicWallBranchBlock;
 import geoves.grimeandgold.tags.ModTags;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.BaseCoralWallFanBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.*;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.PoplarTrunkPlacer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import org.lwjgl.system.ffm.mapping.Mapping;
 
 import java.util.List;
 
+import static net.minecraft.core.Direction.*;
+
 public class ModFeatures {
 
-    public static final ResourceKey<Feature> BENTHIC_TREE_KEY = registerKey("benthic");
+    public static final ResourceKey<Feature> BENTHIC_TREE_KEY = registerKey("benthic_fallen_tree");
+    public static final ResourceKey<Feature> GRIME_FEATURE_KEY = registerKey("grime_feature");
+    public static final ResourceKey<Feature> WARM_OCEAN_GRAVEL_FEATURE_KEY = registerKey("warm_ocean_gravel_feature");
+
     public static final ResourceKey<Feature> OVERWORLD_IRON_SLAG = registerKey("overworld_iron_slag");
     public static final ResourceKey<Feature> NETHER_IRON_SLAG = registerKey("nether_iron_slag");
     public static final ResourceKey<Feature> END_IRON_SLAG = registerKey("end_iron_slag");
@@ -44,7 +65,17 @@ public class ModFeatures {
         RuleTest goldrustReplaceables = new TagMatchTest(ModTags.Blocks.GOLDRUST_REPLACEABLE);
         RuleTest ferrisoilReplaceables = new TagMatchTest(ModTags.Blocks.FERRISOIL_REPLACEABLE);
         RuleTest netherSlagReplaceables = new TagMatchTest(ModTags.Blocks.NETHER_SLAG_REPLACEABLE);
+        RuleTest grimeReplaceables = new TagMatchTest(ModTags.Blocks.GRIME_REPLACEABLE);
+        RuleTest warmOceanGravelReplaceables = new TagMatchTest(ModTags.Blocks.WARM_OCEAN_GRAVEL_REPLACEABLE);
         RuleTest endReplaceables = new BlockMatchTest(Blocks.END_STONE);
+
+
+        context.register(BENTHIC_TREE_KEY, new TreeFeature.Builder(BlockStateProvider.of(ModBlocks.BENTHIC_LOG),
+                new PoplarTrunkPlacer(4, 2, 4, UniformInt.of(4,6), UniformInt.of(1,3)), BlockStateProvider.of(ModBlocks.BENTHIC_BRAMBLES),
+                new CherryFoliagePlacer(UniformInt.of(0, 3), UniformInt.of(0, 3), UniformInt.of(4, 6), 0.4f, 0.4f, 0.3f, 0.3f),
+                new TwoLayersFeatureSize(1,0,2), BlockStateProvider.holderOf(ModBlocks.GRIME)).build());
+        context.register(WARM_OCEAN_GRAVEL_FEATURE_KEY, new OreFeature(List.of(BlockReplacement.replace(warmOceanGravelReplaceables, Blocks.GRAVEL.defaultBlockState())), 24));
+        context.register(GRIME_FEATURE_KEY, new OreFeature(List.of(BlockReplacement.replace(grimeReplaceables, ModBlocks.GRIME.defaultBlockState())), 18));
 
         context.register(OVERWORLD_COPPER_SLAG, new OreFeature(List.of(BlockReplacement.replace(overworldCooledSlagReplaceables, ModBlocks.COOLED_COPPER_SLAG.defaultBlockState())), 6));
         context.register(OVERWORLD_IRON_SLAG, new OreFeature(List.of(BlockReplacement.replace(overworldCooledSlagReplaceables, ModBlocks.COOLED_IRON_SLAG.defaultBlockState())), 4));

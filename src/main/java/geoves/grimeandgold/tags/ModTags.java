@@ -28,6 +28,8 @@ public class ModTags {
         public static final TagKey<Block> PAYDIRT_REPLACEABLE = createTag("paydirt_replaceable");
         public static final TagKey<Block> FERRISOIL_REPLACEABLE = createTag("ferrisoil_replaceable");
         public static final TagKey<Block> GOLDRUST_REPLACEABLE = createTag("goldrust_replaceable");
+        public static final TagKey<Block> GRIME_REPLACEABLE = createTag("grime_replaceable");
+        public static final TagKey<Block> WARM_OCEAN_GRAVEL_REPLACEABLE = createTag("warm_ocean_gravel_replaceable");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(GrimeAndGold.MOD_ID, name));

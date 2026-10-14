@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:tree",
+  "below_trunk_provider": {
+    "id": "grimeandgold:grime"
+  },
+  "decorators": [],
+  "foliage_placer": {
+    "type": "minecraft:cherry_foliage_placer",
+    "corner_hole_chance": 0.4,
+    "hanging_leaves_chance": 0.3,
+    "hanging_leaves_extension_chance": 0.3,
+    "height": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 4
+    },
+    "offset": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 0
+    },
+    "radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 0
+    },
+    "wide_bottom_layer_hole_chance": 0.4
+  },
+  "foliage_provider": {
+    "id": "grimeandgold:benthic_brambles",
+    "properties": {
+      "waterlogged": "false"
+    }
+  },
+  "ignore_vines": false,
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "upper_size": 2
+  },
+  "trunk_placer": {
+    "type": "minecraft:poplar_trunk_placer",
+    "base_height": 4,
+    "branch_amount": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    },
+    "height_rand_a": 2,
+    "height_rand_b": 4,
+    "trunk_height_above_branches": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 4
+    }
+  },
+  "trunk_provider": {
+    "id": "grimeandgold:benthic_log",
+    "properties": {
+      "axis": "y"
+    }
+  }
+}

@@ -68,6 +68,11 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(ModTags.Blocks.PAYDIRT_REPLACEABLE).add(Objects.requireNonNull(Blocks.SAND.properties().blockId()));
         tag(ModTags.Blocks.FERRISOIL_REPLACEABLE).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId()))
                 .add(Objects.requireNonNull(Blocks.TUFF.properties().blockId()));
+
+        tag(ModTags.Blocks.GRIME_REPLACEABLE).add(Objects.requireNonNull(Blocks.GRAVEL.properties().blockId())).add(Objects.requireNonNull(Blocks.CLAY.properties().blockId()))
+                .add(Objects.requireNonNull(Blocks.DIRT.properties().blockId()));
+        tag(ModTags.Blocks.WARM_OCEAN_GRAVEL_REPLACEABLE).add(Objects.requireNonNull(Blocks.SAND.properties().blockId()));
+
         tag(BlockTags.DRAGON_IMMUNE, false).add(ModBlocks.getRK(ModBlocks.COOLED_COPPER_SLAG)).add(ModBlocks.getRK(ModBlocks.COOLED_IRON_SLAG))
                 .add(ModBlocks.getRK(ModBlocks.COOLED_GOLD_SLAG)).add(ModBlocks.getRK(ModBlocks.EMERALD_ROUGH)).add(ModBlocks.getRK(ModBlocks.QUARTZ_ROUGH))
                 .add(ModBlocks.getRK(ModBlocks.LAPIS_ROUGH)).add(ModBlocks.getRK(ModBlocks.DIAMOND_ROUGH));
